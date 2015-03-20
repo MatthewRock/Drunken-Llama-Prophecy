@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Drunken-Llama-Prophecy" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="include/CollisionChecker.hpp" />
+		<Unit filename="include/Command.hpp" />
+		<Unit filename="include/GameEngine.hpp" />
+		<Unit filename="include/GameState.hpp" />
+		<Unit filename="include/Initializer.hpp" />
+		<Unit filename="include/ItemParser.hpp" />
+		<Unit filename="include/LocationParser.hpp" />
+		<Unit filename="include/Logger.hpp" />
+		<Unit filename="include/MenuState.hpp" />
+		<Unit filename="include/Printable.hpp" />
+		<Unit filename="include/Texture.hpp" />
+		<Unit filename="include/Timer.hpp" />
+		<Unit filename="include/Window.hpp" />
+		<Unit filename="include/World.hpp" />
+		<Unit filename="src/CollisionChecker.cpp" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/GameEngine.cpp" />
+		<Unit filename="src/GameState.cpp" />
+		<Unit filename="src/Initializer.cpp" />
+		<Unit filename="src/ItemParser.cpp" />
+		<Unit filename="src/LocationParser.cpp" />
+		<Unit filename="src/Logger.cpp" />
+		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/Printable.cpp" />
+		<Unit filename="src/Texture.cpp" />
+		<Unit filename="src/Window.cpp" />
+		<Unit filename="src/World.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
