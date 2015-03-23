@@ -8,8 +8,7 @@
             is available for C++11 standard, generic.
  */
 
-
-namespace Taverner
+namespace Llama
 {
     typedef std::chrono::high_resolution_clock  Timer_Clock_Precise;
     typedef std::chrono::steady_clock           Timer_Clock_Steady;

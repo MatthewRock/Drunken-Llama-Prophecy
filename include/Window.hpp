@@ -14,51 +14,54 @@
   * Window is intended to be used as a ready object; it does not have to be used as pointer.
   *
   */
-class Window
+namespace Llama
 {
-    //WindowException class. Shows SDL_Error. Declaration of class + creation of private instance
-    class WindowException : public std::exception
+
+    class Window
     {
-        virtual const char* what() const throw()
+        //WindowException class. Shows SDL_Error. Declaration of class + creation of private instance
+        class WindowException : public std::exception
         {
-            //Save the information to log
-            Logger::Get()->Log("Window has thrown an exception:");
+            virtual const char* what() const throw()
+            {
+                //Save the information to log
+                Logger::Get()->Log("Window has thrown an exception:");
 
-            std::string returned = "Initialization of Window failed! SDL_Error: ";
-            returned = returned + SDL_GetError();
+                std::string returned = "Initialization of Window failed! SDL_Error: ";
+                returned = returned + SDL_GetError();
 
-            Logger::Get()->Log(returned);
+                Logger::Get()->Log(returned);
 
-            return returned.c_str();
-        }
-    }WinException;
+                return returned.c_str();
+            }
+        }WinException;
 
-public:
-    Window();
-    Window(const char* name, int w, int h);
+    public:
+        Window();
+        Window(const char* name, int w, int h);
 
-    ~Window();
-    //Create window
-    void Init(const char*, int, int );
-    //Clear renderer
-    void ClearScreen();
-    //Render all to window
-    void DrawEverything();
+        ~Window();
+        //Create window
+        void Init(const char*, int, int );
+        //Clear renderer
+        void ClearScreen();
+        //Render all to window
+        void DrawEverything();
 
-    SDL_Renderer* getRenderer() { return m_renderer; }
-    //Automatic conversion to SDL_Window*
-    operator SDL_Window*() { return m_window; }
+        SDL_Renderer* getRenderer() { return m_renderer; }
+        //Automatic conversion to SDL_Window*
+        operator SDL_Window*() { return m_window; }
 
-    int GetW() {return screenWidth; }
-    int GetH() {return screenHeight; }
+        int GetW() {return screenWidth; }
+        int GetH() {return screenHeight; }
 
-private:
-    SDL_Window* m_window;
-    SDL_Renderer* m_renderer;
+    private:
+        SDL_Window* m_window;
+        SDL_Renderer* m_renderer;
 
-    int screenWidth;
-    int screenHeight;
-};
-
+        int screenWidth;
+        int screenHeight;
+    };
+}
 #endif // WINDOW_H
 

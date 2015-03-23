@@ -5,9 +5,8 @@
 #include <vector>
 #include <utility> //std::pair
 #include <regex>
-#include "NPC.hpp"
 #include <algorithm> //find_if
-namespace Taverner
+namespace Llama
 {
     LocationParser::LocationParser(std::string filepath) : m_filepath(filepath)
     {

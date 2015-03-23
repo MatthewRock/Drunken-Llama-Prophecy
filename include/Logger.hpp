@@ -10,7 +10,7 @@
 
 #define LOG_STRING Logger::Get()->Log
 
-namespace Taverner
+namespace Llama
 {
     class Logger
     {

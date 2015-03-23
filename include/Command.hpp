@@ -3,7 +3,7 @@
 
 #include "csout.hpp"
 
-namespace Taverner
+namespace Llama
 {
     class Player;
 

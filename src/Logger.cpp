@@ -1,7 +1,7 @@
 #include "Logger.hpp"
 
 #include "Timer.hpp"
-namespace Taverner
+namespace Llama
 {
 
     Logger* Logger::m_instance = nullptr;

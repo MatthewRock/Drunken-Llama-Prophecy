@@ -2,7 +2,7 @@
 
 #include "GameEngine.hpp"
 
-namespace Taverner
+namespace Llama
 {
     void GameState::Pause()
     {

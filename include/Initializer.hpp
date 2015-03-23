@@ -2,7 +2,7 @@
 #define INITIALIZER_HPP
 
 
-namespace Taverner
+namespace Llama
 {
     /** \brief Class that will be either created once, or inherited privately. This will allow to use RAII to initialize and close systems.
                Voila! No WTFs when encountering some strange functions!

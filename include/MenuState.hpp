@@ -7,7 +7,7 @@
 #include <vector>
 #include "World.hpp"
 
-namespace Taverner
+namespace Llama
 {
     class MenuState : public GameState
     {
