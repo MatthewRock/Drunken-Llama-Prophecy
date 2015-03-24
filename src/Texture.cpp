@@ -1,5 +1,6 @@
 #include "Texture.hpp"
 #include "Window.hpp"
+
 namespace Llama
 {
     Texture::Texture()
@@ -10,7 +11,7 @@ namespace Llama
 
     Texture::Texture(const char* path, Window& win) : m_win(&win)
     {
-        loadTexture(path, win.getRenderer() );
+        loadTexture(path, win.getRenderer());
     }
 
     Texture::Texture(const Texture& source)
@@ -22,7 +23,7 @@ namespace Llama
     void Texture::loadTexture( const char* path, SDL_Renderer* renderer )
     {
         //Wrong argument passed
-        if(nullptr == renderer )
+        if(nullptr == renderer)
         {
             m_texture = nullptr;
         }
@@ -39,7 +40,7 @@ namespace Llama
             else
             {
                 //Now create texture from this surface
-                m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface );
+                m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
                 //Always check for null
                 if( nullptr == m_texture )
                 {
@@ -63,7 +64,8 @@ namespace Llama
 
     void Texture::Init(const char* path, Window& win)
     {
-        loadTexture(path, win.getRenderer() );
+        loadTexture(path, win.getRenderer());
+        m_win = &win;
     }
 
     void Texture::Draw(Window& win, int x, int y )

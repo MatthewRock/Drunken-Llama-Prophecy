@@ -26,6 +26,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -36,6 +37,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/Command.hpp" />
+		<Unit filename="include/DummyButton.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
 		<Unit filename="include/Initializer.hpp" />
@@ -47,6 +49,7 @@
 		<Unit filename="include/Window.hpp" />
 		<Unit filename="include/World.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/DummyButton.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Initializer.cpp" />
