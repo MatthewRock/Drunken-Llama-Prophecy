@@ -7,7 +7,6 @@
 namespace Llama
 {
     class GameEngine;
-    class Csout;
 
     class GameState
     {

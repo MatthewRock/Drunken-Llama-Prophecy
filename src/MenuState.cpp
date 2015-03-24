@@ -35,7 +35,6 @@ namespace Llama
                 {
                     event.type = SDL_QUIT;
 // TODO (malice#1#): Fix this ugly hack
-
                 }
             }
         }
