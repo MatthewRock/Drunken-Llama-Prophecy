@@ -1,8 +1,7 @@
 #ifndef PRINTABLE_HPP
 #define PRINTABLE_HPP
 
-#include "SDL.h"
-
+#include <SDL2/SDL.h>
 
 namespace Llama
 {

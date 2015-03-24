@@ -1,7 +1,6 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-#include "csout.hpp"
 
 namespace Llama
 {
@@ -12,7 +11,7 @@ namespace Llama
         public:
             virtual ~Command() = default;
             virtual void Execute() = 0;
-            virtual void Draw(Csout& csout) = 0;
+            virtual void Draw() = 0;
         protected:
         private:
     };

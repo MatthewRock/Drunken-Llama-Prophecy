@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
@@ -34,7 +35,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/CollisionChecker.hpp" />
 		<Unit filename="include/Command.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
@@ -47,11 +47,9 @@
 		<Unit filename="include/Window.hpp" />
 		<Unit filename="include/World.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/CollisionChecker.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Initializer.cpp" />
-		<Unit filename="src/LocationParser.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/Printable.cpp" />

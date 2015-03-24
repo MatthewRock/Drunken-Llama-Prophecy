@@ -1,8 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <exception>
 #include <string>
 #include "Logger.hpp"
@@ -16,7 +16,6 @@
   */
 namespace Llama
 {
-
     class Window
     {
         //WindowException class. Shows SDL_Error. Declaration of class + creation of private instance

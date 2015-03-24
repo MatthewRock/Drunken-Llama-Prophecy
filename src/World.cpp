@@ -4,7 +4,7 @@
 #include "GameEngine.hpp"
 namespace Llama
 {
-    World::World(Csout& csout)
+    World::World()
     {
     }
     void World::Pause()
@@ -15,13 +15,13 @@ namespace Llama
     {
         GameState::Resume();
     }
-    void World::HandleEvents(std::string command)
+    void World::HandleEvents(SDL_Event& event)
     {
     }
     void World::Update(GameEngine* eng)
     {
     }
-    void World::Draw(Csout& csout)
+    void World::Draw()
     {
     }
 }

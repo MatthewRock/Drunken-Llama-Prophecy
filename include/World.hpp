@@ -6,8 +6,7 @@
  */
 
 #include <memory>
-#include "Player.hpp"
-#include "GameState.h"
+#include "GameState.hpp"
 
 #include <map>
 #include <utility> // std::pair
@@ -19,11 +18,12 @@ namespace Llama
     class World : public GameState
     {
         public:
-            World(Csout& csout);
+            World();
             void Pause();
             void Resume();
             void Update(GameEngine* eng);
-            void Draw(Csout& csout);
+            void Draw();
+            void HandleEvents(SDL_Event& event);
 
         protected:
         private:

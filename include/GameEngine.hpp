@@ -5,7 +5,7 @@
 
 #include <vector> // For stack of states
 #include <memory> // unique_ptr
-#include "GameState.h"
+#include "GameState.hpp"
 
 /// \brief Main engine class.
 
@@ -35,7 +35,7 @@ namespace Llama
 
         private:
             void Update();
-            void HandleEngineEvents(std::string ch);
+            void HandleEngineEvents();
             void HandleEvents();
             void Draw();
 
@@ -43,6 +43,7 @@ namespace Llama
 
             std::vector<std::unique_ptr<GameState> > m_states;
             bool m_running;
+            SDL_Event m_gameEvent;
             //A vector of pairs: regex, and code (enum) for matching option.
     };
 }

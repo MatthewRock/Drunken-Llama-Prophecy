@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1427157251 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/main.cpp
+	"GameEngine.hpp"
+
+1427156935 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameEngine.cpp
+	"GameEngine.hpp"
+	"MenuState.hpp"
+
+1427156928 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameEngine.hpp
+	"Initializer.hpp"
+	<vector>
+	<memory>
+	"GameState.hpp"
+
+1427155275 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Initializer.hpp
+	<exception>
+	"Logger.hpp"
+	<string>
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+
+1427038105 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Logger.hpp
+	<fstream>
+	<string>
+
+1427156958 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameState.hpp
+	<string>
+	<SDL2/SDL.h>
+
+1427157394 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/MenuState.hpp
+	"GameState.hpp"
+	<string>
+	<vector>
+	"World.hpp"
+	"Window.hpp"
+
+1427157175 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/World.hpp
+	<memory>
+	"GameState.hpp"
+	<map>
+	<utility>
+	"Command.hpp"
+
+1427156713 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Command.hpp
+
+1427156945 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameState.cpp
+	"GameState.hpp"
+	"GameEngine.hpp"
+
+1427156968 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Initializer.cpp
+	"Initializer.hpp"
+
+1427039170 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Logger.cpp
+	"Logger.hpp"
+	"Timer.hpp"
+
+1427039267 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Timer.hpp
+	<chrono>
+
+1427157005 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/MenuState.cpp
+	"MenuState.hpp"
+
+1427157044 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Printable.cpp
+	"Printable.hpp"
+
+1427157016 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Printable.hpp
+	<SDL2/SDL.h>
+
+1427157098 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Texture.cpp
+	"Texture.hpp"
+	"Window.hpp"
+
+1427157052 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Texture.hpp
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<exception>
+	<string>
+	"Logger.hpp"
+
+1427157311 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Window.hpp
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<exception>
+	<string>
+	"Logger.hpp"
+
+1427157123 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Window.cpp
+	"Window.hpp"
+	<cstdio>
+
+1427157147 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/World.cpp
+	"World.hpp"
+	"Logger.hpp"
+	"GameEngine.hpp"
+

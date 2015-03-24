@@ -1,12 +1,12 @@
 #include "GameEngine.hpp"
+#include "MenuState.hpp"
 
 namespace Llama
 {
     GameEngine::GameEngine()
     {
         m_running = true;
-        m_states.emplace_back(new World(m_csout));
-        // Regex matching "exit", with anything before and after. Case-insensitive.
+        m_states.emplace_back(new MenuState);
     }
 
     void GameEngine::Update()
@@ -19,24 +19,40 @@ namespace Llama
 
     void GameEngine::HandleEvents()
     {
-        HandleEngineEvents(ch);
-        for(auto& x : m_states)
+        while(SDL_PollEvent(&m_gameEvent))
         {
-            x->HandleEvents(ch);
+            HandleEngineEvents();
+            for(auto& x : m_states)
+            {
+                x->HandleEvents(m_gameEvent);
+            }
         }
+
     }
 
     void GameEngine::Draw()
     {
         for(auto& x : m_states)
         {
-            x->Draw(m_csout);
+            x->Draw();
         }
     }
 
-    void GameEngine::HandleEngineEvents(std::string ch)
+    void GameEngine::HandleEngineEvents()
     {
-
+        //If x'd out
+        if( m_gameEvent.type == SDL_QUIT)
+        {
+            m_running = false;
+        }
+        else if( m_gameEvent.type == SDL_KEYDOWN && m_gameEvent.key.repeat == 0 )
+        {
+        //If player pressed escape
+            if( m_gameEvent.key.keysym.sym == SDLK_ESCAPE )
+            {
+                m_running = false;
+            }
+        }
     }
     void GameEngine::ChangeState(GameState* state)
     {

@@ -2,6 +2,7 @@
 #define GAMESTATE_HPP
 
 #include <string>
+#include <SDL2/SDL.h>
 
 namespace Llama
 {
@@ -17,9 +18,9 @@ namespace Llama
             virtual void Pause() = 0;
             virtual void Resume() = 0;
 
-            virtual void HandleEvents(std::string command) = 0;
+            virtual void HandleEvents(SDL_Event& event) = 0;
             virtual void Update(GameEngine* eng) = 0;
-            virtual void Draw(Csout& csout) = 0;
+            virtual void Draw() = 0;
 
             GameState() = default;
             virtual ~GameState() = default;
@@ -28,7 +29,7 @@ namespace Llama
             //Allowing this would create possibility to break it.
 
             GameState(const GameState& other) = delete;
-            GameState(GameState&&) = delete;
+            GameState(GameState&& other) = delete;
             GameState& operator=(const GameState& other) = delete;
             GameState& operator=(GameState&&) = delete;
 
