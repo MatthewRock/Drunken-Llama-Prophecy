@@ -35,18 +35,19 @@ namespace Llama
                 {
                     event.type = SDL_QUIT;
 // TODO (malice#1#): Fix this ugly hack
+// TODO (malice#1#): Implement Observer to deal with distributed event handling
                 }
             }
         }
     }
     void MenuState::Update(GameEngine* eng)
     {
-        m_win.ClearScreen();
-        m_image.Draw(imgX, imgY);
-        m_win.DrawEverything();
+
     }
     void MenuState::Draw()
     {
-
+        m_win.ClearScreen();
+        m_image.Draw(imgX, imgY);
+        m_win.DrawEverything();
     }
 }

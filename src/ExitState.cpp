@@ -1,11 +1,28 @@
 #include "ExitState.hpp"
-
-ExitState::ExitState()
+namespace Llama
 {
-    //ctor
-}
+    ExitState::ExitState(Window& win) : m_win(&win)
+    {
+    }
 
-ExitState::~ExitState()
-{
-    //dtor
+    void ExitState::Pause()
+    {
+        GameState::Pause();
+    }
+    void ExitState::Resume()
+    {
+        GameState::Resume();
+    }
+    void ExitState::HandleEvents(SDL_Event& event)
+    {
+        event.type = SDL_QUIT;
+    }
+    void ExitState::Draw()
+    {
+
+    }
+    void ExitState::Update(GameEngine* eng)
+    {
+
+    }
 }

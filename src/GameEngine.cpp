@@ -21,7 +21,6 @@ namespace Llama
     {
         while(SDL_PollEvent(&m_gameEvent))
         {
-            HandleEngineEvents();
             for(auto& x : m_states)
             {
                 x->HandleEvents(m_gameEvent);

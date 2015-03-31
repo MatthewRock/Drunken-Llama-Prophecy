@@ -21,7 +21,17 @@ namespace Llama
             virtual void Update(GameEngine* eng) = 0;
             virtual void Draw() = 0;
 
-            GameState() = default;
+            bool WantsToExit()
+            {
+                return m_WillToExit;
+            }
+
+            GameState()
+            {
+                m_paused = false;
+                m_WillToExit = false;
+            }
+
             virtual ~GameState() = default;
 
             //We shouldn't be able to copy nor move state. Each state has specified role and fits on stack.
@@ -34,12 +44,17 @@ namespace Llama
 
             void ChangeState(GameEngine* game, GameState* state);
             inline bool IsPaused() { return m_paused; }
-
         protected:
+
+        void Exit()
+        {
+            m_WillToExit = true;
+        }
+
         private:
             int m_paused;
+            bool m_WillToExit;
 
     };
-
 }
 #endif // GAMESTATE_HPP
