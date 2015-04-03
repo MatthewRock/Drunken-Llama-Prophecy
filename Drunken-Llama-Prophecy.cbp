@@ -45,6 +45,7 @@
 		<Unit filename="include/Manager.hpp" />
 		<Unit filename="include/MenuState.hpp" />
 		<Unit filename="include/Printable.hpp" />
+		<Unit filename="include/Sounds.hpp" />
 		<Unit filename="include/Texture.hpp" />
 		<Unit filename="include/Timer.hpp" />
 		<Unit filename="include/Window.hpp" />
@@ -57,6 +58,7 @@
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/Printable.cpp" />
+		<Unit filename="src/Sounds.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Window.cpp" />
 		<Unit filename="src/World.cpp" />
