@@ -1,8 +1,9 @@
 #include "ExitState.hpp"
 namespace Llama
 {
-    ExitState::ExitState(Window& win) : m_win(&win)
+    ExitState::ExitState(GameEngine* eng, Window& win, GameState* parent) : m_win(&win), m_parent(parent)
     {
+        m_engine = eng;
     }
 
     void ExitState::Pause()
@@ -15,14 +16,16 @@ namespace Llama
     }
     void ExitState::HandleEvents(SDL_Event& event)
     {
-        event.type = SDL_QUIT;
+        //event.type = SDL_QUIT;
+
     }
     void ExitState::Draw()
     {
 
     }
-    void ExitState::Update(GameEngine* eng)
+    void ExitState::Update()
     {
-
+        m_parent->Exit();
+        Exit();
     }
 }

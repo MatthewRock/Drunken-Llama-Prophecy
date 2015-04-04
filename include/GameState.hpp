@@ -18,9 +18,13 @@ namespace Llama
             virtual void Resume() = 0;
 
             virtual void HandleEvents(SDL_Event& event) = 0;
-            virtual void Update(GameEngine* eng) = 0;
+            virtual void Update() = 0;
             virtual void Draw() = 0;
 
+            void Exit()
+            {
+                m_WillToExit = true;
+            }
             bool WantsToExit()
             {
                 return m_WillToExit;
@@ -30,6 +34,7 @@ namespace Llama
             {
                 m_paused = false;
                 m_WillToExit = false;
+                m_engine = nullptr;
             }
 
             virtual ~GameState() = default;
@@ -42,19 +47,14 @@ namespace Llama
             GameState& operator=(const GameState& other) = delete;
             GameState& operator=(GameState&&) = delete;
 
-            void ChangeState(GameEngine* game, GameState* state);
+            void ChangeState(GameState* state);
             inline bool IsPaused() { return m_paused; }
         protected:
-
-        void Exit()
-        {
-            m_WillToExit = true;
-        }
+            GameEngine* m_engine;
 
         private:
             int m_paused;
             bool m_WillToExit;
-
     };
 }
 #endif // GAMESTATE_HPP

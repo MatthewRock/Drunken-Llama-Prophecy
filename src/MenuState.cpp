@@ -1,10 +1,13 @@
 #include "MenuState.hpp"
 #include "Printable.hpp"
 
+#include "ExitState.hpp"
+
 namespace Llama
 {
-    MenuState::MenuState()
+    MenuState::MenuState(GameEngine* eng)
     {
+        m_engine = eng;
         m_win.Init("Drunken Llama Prophecy v.0.0.1", 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_image.Init("ludek.png", m_win);
@@ -33,14 +36,13 @@ namespace Llama
                 }
                 else
                 {
-                    event.type = SDL_QUIT;
-// TODO (malice#1#): Fix this ugly hack
+                    ChangeState(new ExitState(m_engine, m_win, this));
 // TODO (malice#1#): Implement Observer to deal with distributed event handling
                 }
             }
         }
     }
-    void MenuState::Update(GameEngine* eng)
+    void MenuState::Update()
     {
 
     }

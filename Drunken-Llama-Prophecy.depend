@@ -2,11 +2,11 @@
 1427194469 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/main.cpp
 	"GameEngine.hpp"
 
-1427156935 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameEngine.cpp
+1427969697 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameEngine.cpp
 	"GameEngine.hpp"
 	"MenuState.hpp"
 
-1427156928 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameEngine.hpp
+1427933732 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameEngine.hpp
 	"Initializer.hpp"
 	<vector>
 	<memory>
@@ -23,11 +23,11 @@
 	<fstream>
 	<string>
 
-1427232619 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameState.hpp
+1427932905 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/GameState.hpp
 	<string>
 	<SDL2/SDL.h>
 
-1427195553 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/MenuState.hpp
+1427932582 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/MenuState.hpp
 	"GameState.hpp"
 	<string>
 	<vector>
@@ -44,7 +44,7 @@
 
 1427156713 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Command.hpp
 
-1427156945 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameState.cpp
+1427933924 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/GameState.cpp
 	"GameState.hpp"
 	"GameEngine.hpp"
 
@@ -58,9 +58,10 @@
 1427039267 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/Timer.hpp
 	<chrono>
 
-1427157633 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/MenuState.cpp
+1427933937 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/MenuState.cpp
 	"MenuState.hpp"
 	"Printable.hpp"
+	"ExitState.hpp"
 
 1427157044 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/Printable.cpp
 	"Printable.hpp"
@@ -100,4 +101,11 @@
 
 1427195510 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/DummyButton.hpp
 	"Texture.hpp"
+
+1427932872 source:/home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/src/ExitState.cpp
+	"ExitState.hpp"
+
+1427932081 /home/malice/Programming/C++/uniwerek/Drunken-Llama-Prophecy/include/ExitState.hpp
+	"GameState.hpp"
+	"Window.hpp"
 

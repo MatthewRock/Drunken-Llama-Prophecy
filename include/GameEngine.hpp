@@ -39,7 +39,7 @@ namespace Llama
             void HandleEvents();
             void Draw();
 
-            inline bool IsRunning() { return m_running; }
+            inline bool IsRunning() { return (m_running && !m_states.empty()); }
 
             std::vector<std::unique_ptr<GameState> > m_states;
             bool m_running;

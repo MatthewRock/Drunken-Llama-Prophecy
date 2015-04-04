@@ -13,9 +13,8 @@ namespace Llama
         m_paused = false;
     }
 
-    void GameState::ChangeState(GameEngine* game, GameState* state)
+    void GameState::ChangeState(GameState* state)
     {
-        game->ChangeState(state);
+        m_engine->ChangeState(state);
     }
-
 }

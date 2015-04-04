@@ -14,13 +14,13 @@ namespace Llama
     class MenuState : public GameState
     {
         public:
-            MenuState();
+            MenuState(GameEngine* eng);
             ~MenuState() = default;
 
             void Pause();
             void Resume();
             void HandleEvents(SDL_Event& event);
-            void Update(GameEngine* eng);
+            void Update();
             void Draw();
 
         protected:

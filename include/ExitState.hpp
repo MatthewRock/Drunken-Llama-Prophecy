@@ -11,12 +11,12 @@ namespace Llama
     class ExitState : public GameState
     {
         public:
-            ExitState(Window& win);
+            ExitState(GameEngine* eng, Window& win, GameState* parent);
 
             void Pause();
             void Resume();
 
-            void Update(GameEngine* engine);
+            void Update();
             void HandleEvents(SDL_Event& event);
             void Draw();
 
@@ -24,6 +24,7 @@ namespace Llama
         protected:
         private:
             Window* m_win;
+            GameState* m_parent;
 // TODO (malice#1#): Add: "Are you sure you want to exit?" And two buttons: Yes|No
 
     };
