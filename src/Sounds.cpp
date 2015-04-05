@@ -67,16 +67,6 @@ namespace Llama
                 Load(filename);
         }
 
-        void SetBGMVolume(int volume)
-        {
-            Mix_VolumeMusic(volume);
-        }
-
-        int GetBGMVolume()
-        {
-            return Mix_VolumeMusic(-1);
-        }
-
         bool Init()
         {
             return Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048);

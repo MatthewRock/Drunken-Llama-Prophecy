@@ -9,6 +9,7 @@
 #include "Window.hpp"
 #include "Texture.hpp"
 #include "Sounds.hpp"
+#include "Manager.hpp"
 
 namespace Llama
 {
@@ -28,7 +29,8 @@ namespace Llama
         private:
             Window m_win;
             Texture m_image;
-            Sounds::BGM reallyNiceMusic;
+            Manager<std::string, Sounds::BGM> m_musicManager;
+            decltype(m_musicManager.Beginning()) m_musicIterator;
             int imgX = 100, imgY = 100;
     };
 }

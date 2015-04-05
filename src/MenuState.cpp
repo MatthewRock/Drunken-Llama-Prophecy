@@ -5,14 +5,19 @@
 
 namespace Llama
 {
-    MenuState::MenuState(GameEngine* eng) : reallyNiceMusic("media/beatdown.ogg")
+    MenuState::MenuState(GameEngine* eng)
     {
         m_engine = eng; // If I ever get tempted to move this to parameter list: you can't if it's inherited slot. This one is... -.-
 
         m_win.Init("Drunken Llama Prophecy v.0.0.1", 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_image.Init("ludek.png", m_win);
-        reallyNiceMusic.Play();
+
+        m_musicManager.Insert("MenuMusic1", new Sounds::BGM("media/MainMenu.ogg"));
+        m_musicManager.Insert("MenuMusic2", new Sounds::BGM("media/beatdown.ogg"));
+        m_musicManager.Insert("MenuMusic3", new Sounds::BGM("media/fanfare-1.ogg"));
+        m_musicIterator = m_musicManager.Beginning();
+        m_musicIterator->second->Play();
     }
 
     void MenuState::Pause()
@@ -38,8 +43,13 @@ namespace Llama
                 }
                 else
                 {
-                    ChangeState(new ExitState(m_engine, m_win, this));
-// TODO (malice#1#): Implement Observer to deal with distributed event handling
+                    //ChangeState(new ExitState(m_engine, m_win, this));
+                    ++m_musicIterator;
+                    if(m_musicIterator == m_musicManager.End())
+                    {
+                        m_musicIterator = m_musicManager.Beginning();
+                    }
+                    m_musicIterator->second->Play();
                 }
             }
         }
