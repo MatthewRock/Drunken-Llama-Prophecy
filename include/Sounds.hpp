@@ -41,18 +41,17 @@ namespace Llama
         {
 
         private:
-            Mix_Music* m_music;     //Pointer to music data for SDL_Mixer
+            Mix_Music* m_music;
 
         public:
-            void Load(const char* filename);    //Loads sound file. Supports *.ogg and *.wmv files.
-            void Play(int loops);               //Plays loops number of times sound loaded with Load.
-                                                    //loops - defines how many times music will be played (default - 0 loops indefinitely).
-            void Stop();                        //Stops playing music.  (duh)
-            void Pause();                       //Pauses music.  (duh)
-            void Resume();                      //If paused resumes music from where it has been paused. (duh)
+            void Load(const char* filename);
+            void Play(int loops);
+            void Stop();
+            void Pause();
+            void Resume();
 
             BGM();
-            BGM(const char* filename);          //constructor loading sound data from file.
+            BGM(const char* filename);
             ~BGM();
 
         };
@@ -62,12 +61,11 @@ namespace Llama
         private:
             Mix_Chunk* m_sound;
         public:
-            void Load(const char* filename);    //Loads sound file. Supports *.wmv files.
-            void Play(int channel, int repeats);//Plays file loaded with Load. (duh)
-                                                    //Channel - selects mixer channel on which sound will be played (default - -1 assigns first free channel).
-                                                    //Repeats - decides how many times sound will be repeated (default - 0 plays sound one time).
+            void Load(const char* filename);
+            void Play(int channel, int repeats);
+
             SFX();
-            SFX(const char* filename);          //constructor loading sound data from file.
+            SFX(const char* filename);
             ~SFX();
         };
 
