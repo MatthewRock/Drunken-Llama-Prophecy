@@ -50,6 +50,8 @@ namespace Llama
             void Pause();
             void Resume();
             BGM(const char* filename = nullptr);
+            BGM(const BGM& other) = delete;
+            BGM(BGM&& other) = delete;
             ~BGM() = default;
         };
 
@@ -62,6 +64,8 @@ namespace Llama
             void Play(int channel = -1, int repeats = 0);
 
             SFX(const char* filename = nullptr);
+            SFX(const SFX& other) = delete;
+            SFX(SFX&& other) = delete;
             ~SFX() = default;
         };
 
