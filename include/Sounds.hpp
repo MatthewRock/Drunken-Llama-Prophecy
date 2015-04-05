@@ -5,12 +5,12 @@
 #include "Logger.hpp"
 #include <exception>
 #include <string>
+#include <memory>
 
 namespace Llama
 {
     namespace Sounds
     {
-
         class PlayException : public std::exception
         {
             virtual const char* what() const throw()
@@ -26,7 +26,7 @@ namespace Llama
             std::string filename;
             virtual const char* what() const throw()
             {
-                std::string errormsg = "Sound module error: Couldn't load file: "+filename;
+                std::string errormsg = "Sound module error: Couldn't load file: " + filename;
                 LOG_STRING(errormsg);
                 return errormsg.c_str();
             }
@@ -41,36 +41,33 @@ namespace Llama
         {
 
         private:
-            Mix_Music* m_music;
+            std::unique_ptr<Mix_Music, decltype(&Mix_FreeMusic)> m_music;
 
         public:
             void Load(const char* filename);
-            void Play(int loops);
+            void Play(int loops = -1);
             void Stop();
             void Pause();
             void Resume();
-
-            BGM();
-            BGM(const char* filename);
-            ~BGM();
-
+            BGM(const char* filename = nullptr);
+            ~BGM() = default;
         };
 
         class SFX
         {
         private:
-            Mix_Chunk* m_sound;
+            std::unique_ptr<Mix_Chunk, decltype(&Mix_FreeChunk)> m_sound;
         public:
             void Load(const char* filename);
-            void Play(int channel, int repeats);
+            void Play(int channel = -1, int repeats = 0);
 
-            SFX();
-            SFX(const char* filename);
-            ~SFX();
+            SFX(const char* filename = nullptr);
+            ~SFX() = default;
         };
 
-        void Init();
+        bool Init();
         void Close();
+
         void SetBGMVolume(int volume);
         int GetBGMVolume();
     }

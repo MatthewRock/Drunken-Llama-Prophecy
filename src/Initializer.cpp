@@ -15,7 +15,7 @@ namespace Llama
         {
             throw InitException;
         }
-        if(!(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 )))
+        if(!Sounds::Init())
         {
             LOG_STRING("Warning! Sound disabled!");
         }
@@ -34,7 +34,7 @@ namespace Llama
     {
         LOG_STRING("Initializer shutting down.");
         IMG_Quit();
-        Mix_Quit();
+        Sounds::Close();
         SDL_Quit();
     }
 

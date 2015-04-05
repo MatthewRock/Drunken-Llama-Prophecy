@@ -8,6 +8,7 @@
 #include "World.hpp"
 #include "Window.hpp"
 #include "Texture.hpp"
+#include "Sounds.hpp"
 
 namespace Llama
 {
@@ -27,6 +28,7 @@ namespace Llama
         private:
             Window m_win;
             Texture m_image;
+            Sounds::BGM reallyNiceMusic;
             int imgX = 100, imgY = 100;
     };
 }

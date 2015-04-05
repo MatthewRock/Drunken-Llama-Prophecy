@@ -1,4 +1,6 @@
 #include "ExitState.hpp"
+#include "Sounds.hpp"
+
 namespace Llama
 {
     ExitState::ExitState(GameEngine* eng, Window& win, GameState* parent) : m_win(&win), m_parent(parent)
@@ -27,5 +29,8 @@ namespace Llama
     {
         m_parent->Exit();
         Exit();
+        Sounds::SFX tempmus("media/xplod.wav");
+        tempmus.Play();
+        SDL_Delay(500);
     }
 }

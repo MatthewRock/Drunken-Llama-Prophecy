@@ -6,7 +6,8 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
+#include "Sounds.hpp"
+
 namespace Llama
 {
     /** \brief Class that will be either created once, or inherited privately. This will allow to use RAII to initialize and close systems.

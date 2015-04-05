@@ -5,12 +5,14 @@
 
 namespace Llama
 {
-    MenuState::MenuState(GameEngine* eng)
+    MenuState::MenuState(GameEngine* eng) : reallyNiceMusic("media/beatdown.ogg")
     {
-        m_engine = eng;
+        m_engine = eng; // If I ever get tempted to move this to parameter list: you can't if it's inherited slot. This one is... -.-
+
         m_win.Init("Drunken Llama Prophecy v.0.0.1", 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_image.Init("ludek.png", m_win);
+        reallyNiceMusic.Play();
     }
 
     void MenuState::Pause()
