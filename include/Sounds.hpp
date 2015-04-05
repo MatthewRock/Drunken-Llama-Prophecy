@@ -37,7 +37,7 @@ namespace Llama
             }
         };
 
-        class BGM                   //Object class to store and play background music
+        class BGM
         {
 
         private:
