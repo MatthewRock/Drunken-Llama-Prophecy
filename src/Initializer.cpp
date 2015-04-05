@@ -15,6 +15,10 @@ namespace Llama
         {
             throw InitException;
         }
+        if(!(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 )))
+        {
+            LOG_STRING("Warning! Sound disabled!");
+        }
         if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
         {
             LOG_STRING("Warning! Linear texture filtering disabled!");
@@ -30,6 +34,7 @@ namespace Llama
     {
         LOG_STRING("Initializer shutting down.");
         IMG_Quit();
+        Mix_Quit();
         SDL_Quit();
     }
 
