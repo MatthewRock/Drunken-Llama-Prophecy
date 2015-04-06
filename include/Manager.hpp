@@ -4,6 +4,7 @@
 #include <map>
 #include <utility>
 #include <memory>
+#include <type_traits>
 
 namespace Llama
 {
@@ -14,9 +15,13 @@ namespace Llama
             std::map<KeyType, std::unique_ptr<ElementType> > m_container;
 
         public:
-            Manager() = default;
+            Manager()
+            {
+                //static_assert(std::is_move_constructible<ElementType>::value,
+                //"The element must be moveable in order to be used with Manager!");
+            }
             Manager(const Manager& other) = delete;
-
+            Manager(Manager&& other) = delete;
             ~Manager() = default;
 
             void Insert(KeyType key, ElementType* elem)

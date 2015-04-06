@@ -29,6 +29,7 @@ namespace Llama
             }
 
             void ChangeState(GameState* state);
+            void ChangeStateDestructively(GameState* state);
             void PushState(GameState* state);
             void PopState();
             inline void Quit() { m_running = false; }

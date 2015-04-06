@@ -48,6 +48,7 @@ namespace Llama
             GameState& operator=(GameState&&) = delete;
 
             void ChangeState(GameState* state);
+            void ChangeStateDestructively(GameState* state);
             inline bool IsPaused() { return m_paused; }
         protected:
             GameEngine* m_engine;

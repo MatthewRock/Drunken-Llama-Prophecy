@@ -17,4 +17,8 @@ namespace Llama
     {
         m_engine->ChangeState(state);
     }
+    void GameState::ChangeStateDestructively(GameState* state)
+    {
+        m_engine->ChangeStateDestructively(state);
+    }
 }

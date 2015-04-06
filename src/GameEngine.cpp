@@ -70,6 +70,12 @@ namespace Llama
     {
         m_states.push_back(std::unique_ptr<GameState>(state));
     }
+
+    void GameEngine::ChangeStateDestructively(GameState* state)
+    {
+        PopState();
+        ChangeState(state);
+    }
     void GameEngine::PushState(GameState* state)
     {
         if(!m_states.empty())
@@ -90,10 +96,10 @@ namespace Llama
         {
             m_states.back()->Resume();
         }
-        //If last element happened to be the only element, "send signal" to close program.
-        else
-        {
-            Quit();
-        }
+//        //If last element happened to be the only element, "send signal" to close program.
+//        else
+//        {
+//            Quit();
+//        }
     }
 }
