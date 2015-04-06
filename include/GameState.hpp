@@ -51,6 +51,7 @@ namespace Llama
             void ChangeStateDestructively(GameState* state);
             inline bool IsPaused() { return m_paused; }
         protected:
+            // read-only
             GameEngine* m_engine;
 
         private:

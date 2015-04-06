@@ -1,15 +1,10 @@
 #include "Logger.hpp"
-
 #include "Timer.hpp"
+
 namespace Llama
 {
-
     Logger* Logger::m_instance = nullptr;
-
-    Logger::Logger()
-    {
-    }
-
+    /// \brief Returns pointer to Logger.
     Logger* Logger::Get()
     {
         //Ensure single instance of Logger
@@ -20,7 +15,9 @@ namespace Llama
         }
         return m_instance;
     }
-
+    /// \brief Logs string to output file, with date and time when logging ocurred.
+    /// \param logText std::string : string that will be logged to file.
+    /// For logging, use macro LOG_STRING. Makes better code.
     void Logger::Log(std::string logText)
     {
         //Get current time
@@ -36,12 +33,12 @@ namespace Llama
         //Print. At last!
         log  << logText << std::endl;
     }
-
     Logger::~Logger()
     {
         log.flush();
         log.close();
         delete m_instance;
+        // You can never be sure
         m_instance = nullptr;
     }
 

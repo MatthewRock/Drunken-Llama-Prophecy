@@ -4,6 +4,7 @@
 
 namespace Llama
 {
+    /// \brief Initializes SDL systems.
     Initializer::Initializer()
     {
         LOG_STRING("Initializer commenced");
@@ -11,11 +12,14 @@ namespace Llama
         {
             throw InitException;
         }
+        LOG_STRING("SDL systems loaded.");
         if(!(IMG_Init(IMG_INIT_FLAGS) & IMG_INIT_FLAGS))
         {
             throw InitException;
         }
-        if(!Sounds::Init())
+        LOG_STRING("Images system loaded.");
+
+        if(Sounds::Init())
         {
             LOG_STRING("Warning! Sound disabled!");
         }
@@ -28,8 +32,7 @@ namespace Llama
             LOG_STRING("Warning! Vertical synchronization disabled!");
         }
     }
-
-
+    /// \brief Closes all SDL systems.
     Initializer::~Initializer()
     {
         LOG_STRING("Initializer shutting down.");

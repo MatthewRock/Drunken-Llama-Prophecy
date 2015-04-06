@@ -46,16 +46,16 @@ namespace Llama
         public:
             void Load(const char* filename);
             void Play(int loops = -1);
-            void Stop();
-            void Pause();
-            void Resume();
-            void Rewind()
-            {
-                Mix_RewindMusic();
-            }
+
+            static void Stop();
+            static void Pause();
+            static void Resume();
+            static void Rewind();
+            static void Toggle();
+
             BGM(const char* filename = nullptr);
             BGM(const BGM& other) = delete;
-            BGM(BGM&& other) = delete;//: m_music(std::move(other.m_music)) {};
+            BGM(BGM&& other) = delete; //: m_music(std::move(other.m_music)) {};
             ~BGM() = default;
         };
 
@@ -66,7 +66,7 @@ namespace Llama
             std::unique_ptr<Mix_Chunk, decltype(&Mix_FreeChunk)> m_sound;
         public:
             void Load(const char* filename);
-            void Play(int channel = -1, int repeats = 0);
+            void Play(int repeats = 0, int channel = -1);
 
             SFX(const char* filename = nullptr);
             SFX(const SFX& other) = delete;
@@ -75,6 +75,10 @@ namespace Llama
             static int GetVolume()
             {
                 return __volume;
+            }
+            static void SetVolume(int volume = 128)
+            {
+                __volume = volume;
             }
 
             ~SFX() = default;
@@ -87,7 +91,7 @@ namespace Llama
         {
             return Mix_VolumeMusic(-1);
         }
-        inline void BGM_SetVolume(int volume)
+        inline void BGM_SetVolume(int volume = 128)
         {
             Mix_VolumeMusic(volume);
         }

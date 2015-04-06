@@ -39,7 +39,7 @@ namespace Llama
 
                 if( (mX < imgX) || (mX > imgX + m_image.GetW()) || (mY < imgY) || (mY > imgY + m_image.GetH()))
                 {
-                    //Do nothing, no collision
+                    Sounds::BGM::Toggle();
                 }
                 else
                 {

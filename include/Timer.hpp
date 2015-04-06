@@ -32,28 +32,28 @@ namespace Llama
         bool paused;
 
     public:
-        //Default constructor of Timer. Setting everything to 0 and false.
+        /// \brief Default constructor of Timer. Setting everything to 0 and false.
         Timer() : pauseTime(0), started(false), paused(false) {}
-        //Start counting time. It basically sets startTicks to current ticks from SDL_GetTicks(), and sets started to true.
-        void start();
-        //Set flags to false.
-        void stop();
-        //Keeps value of ticks when timer has stopped. Will be used to resume timer.
-        void pause();
-        //starts counting time from the stopped time.
-        void unpause();
-        //Return startTicks(if running), pausedTicks(if paused), or 0 if timer isn't started
-        int getTicks();
+        /// \brief Start counting time. It basically sets startTicks to current ticks from SDL_GetTicks(), and sets started to true.
+        void Start();
+        /// \brief Set flags to false.
+        void Stop();
+        /// \brief Keeps value of ticks when timer has stopped. Will be used to resume timer.
+        void Pause();
+        /// \brief starts counting time from the stopped time.
+        void Unpause();
+        /// \brief Return startTicks(if running), pausedTicks(if paused), or 0 if timer isn't started
+        int GetTicks();
 
-        inline bool isPaused() { return paused;};
-        inline bool isStarted() { return started;};
-        inline int seconds(int s) { return s*1000;}
-        inline int seconds(double s) { return s*1000;}
-        static inline auto getCurrentTime() -> decltype(Clock_Type::now()) { return Clock_Type::now(); }
+        inline bool IsPaused() { return paused;};
+        inline bool IsStarted() { return started;};
+        inline int Seconds(int s) { return s*1000;}
+        inline int Seconds(double s) { return s*1000;}
+        static inline auto GetCurrentTime() -> decltype(Clock_Type::now()) { return Clock_Type::now(); }
     };
 
     template <typename Clock_Type, typename Time_Precision>
-    void Timer<Clock_Type, Time_Precision>::start()
+    void Timer<Clock_Type, Time_Precision>::Start()
     {
         //Set flags
         started = true;
@@ -64,7 +64,7 @@ namespace Llama
         startTime = Clock_Type::now();
     }
     template <typename Clock_Type, typename Time_Precision>
-    void Timer<Clock_Type, Time_Precision>::stop()
+    void Timer<Clock_Type, Time_Precision>::Stop()
     {
         //Zero flags. Everything else will be cleaned up in proper starting functions
         //Also, since we've stopped, now there is no sense to check time from clock.
@@ -72,10 +72,10 @@ namespace Llama
         paused = false;
     }
     template <typename Clock_Type, typename Time_Precision>
-    void Timer<Clock_Type, Time_Precision>::pause()
+    void Timer<Clock_Type, Time_Precision>::Pause()
     {
         //If timer isn't paused, and is running
-        if( started && (!paused) )
+        if(started && (!paused))
         {
             //Pause it
             paused = true;
@@ -88,10 +88,10 @@ namespace Llama
 
     }
     template <typename Clock_Type, typename Time_Precision>
-    void Timer<Clock_Type, Time_Precision>::unpause()
+    void Timer<Clock_Type, Time_Precision>::Unpause()
     {
         //If program is paused(can only be paused when running)
-        if( paused )
+        if(paused)
         {
             //Start from now.
             //We don't have to set
@@ -101,11 +101,11 @@ namespace Llama
         }
     }
     template <typename Clock_Type, typename Time_Precision>
-    int Timer<Clock_Type, Time_Precision>::getTicks()
+    int Timer<Clock_Type, Time_Precision>::GetTicks()
     {
         if(started)
         {
-            if( paused )
+            if(paused)
             {
                 return pauseTime;
             }
@@ -118,8 +118,6 @@ namespace Llama
             }
         }
         return 0;
-
     }
 };
-
 #endif // TIMER_HPP

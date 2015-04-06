@@ -6,13 +6,13 @@
 #include <exception>
 #include <string>
 #include "Logger.hpp"
+#include <memory> // std::unique_ptr
 /**
   * Window is a wrapper class for SDL_Window and its SDL_Renderer.
   * Window makes it easy to use Renderer specific for window.
   * It also holds its width and height.
   * If Window can not be allocated, a WindowException is thrown.
-  * Window is intended to be used as a ready object; it does not have to be used as pointer.
-  *
+  * Window is intended to be used as automatic object; it does not have to be used as pointer.
   */
 namespace Llama
 {
@@ -36,31 +36,31 @@ namespace Llama
         }WinException;
 
     public:
-        Window();
+        Window() : m_window(nullptr, SDL_DestroyWindow), m_renderer(nullptr, SDL_DestroyRenderer){};
         Window(const char* name, int w, int h);
 
-        ~Window();
-        //Create window
-        void Init(const char*, int, int );
-        //Clear renderer
+        ~Window() = default;
+        /// \brief Creates window with top-left text from \name, and \width and \height.
+        void Init(const char* name, int width, int height);
+        /// \brief After this function call, renderer(buffer) is clear.
         void ClearScreen();
-        //Render all to window
+        /// \brief Pushes changes to Window and draws it.
         void DrawEverything();
+        /// \brief Changes background color to given RGBA values
+        void ChangeBackgroundColor(int r, int g, int b, int a);
+        /// \brief No idea why you'd want to use it.
+        SDL_Renderer* getRenderer() { return m_renderer.get(); }
+        /// \brief Automatic conversion to SDL_Window* . Only for SDL functions purposes.
+        operator SDL_Window*() { return m_window.get(); }
 
-        SDL_Renderer* getRenderer() { return m_renderer; }
-        //Automatic conversion to SDL_Window*
-        operator SDL_Window*() { return m_window; }
-
-        int GetW() {return screenWidth; }
-        int GetH() {return screenHeight; }
-
+        int GetW(){return screenWidth;}
+        int GetH(){return screenHeight;}
     private:
-        SDL_Window* m_window;
-        SDL_Renderer* m_renderer;
+        std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_window;
+        std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_renderer;
 
         int screenWidth;
         int screenHeight;
     };
 }
 #endif // WINDOW_H
-

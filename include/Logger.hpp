@@ -4,18 +4,17 @@
 #include <fstream>
 #include <string>
 
-/// \brief A logger class made as Singleton. Prints all logs into a single log file. Each program run will clear log file.
-
-//Macro so that logging is easier
-
+//Macro making logging easier, and code more readable.
 #define LOG_STRING Logger::Get()->Log
 
 namespace Llama
 {
+    /// \brief A logger class made as Singleton. Prints all logs into a single log file. Each program run will clear log file.
     class Logger
     {
     protected:
-        Logger();
+        Logger() = default;
+
         std::ofstream log;
         static Logger* m_instance;
     public:
@@ -25,5 +24,4 @@ namespace Llama
         void Log(std::string logText);
     };
 }
-
 #endif //LOGGER_HPP

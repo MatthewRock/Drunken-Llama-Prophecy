@@ -8,6 +8,7 @@
 
 namespace Llama
 {
+    /// \brief Allows storing pointers to \ElementType, and accessing them with \KeyType, or iterating through Manager.
     template <class KeyType, class ElementType>
     class Manager
     {
@@ -28,33 +29,29 @@ namespace Llama
             {
                 m_container.insert(std::pair<KeyType, std::unique_ptr<ElementType> >(key, std::unique_ptr<ElementType>(elem)));
             }
-
+            /// \brief Deletes all elements stored under \key.
             void Erase(KeyType key)
             {
                 m_container.erase(key);
             }
-
             ElementType& GetElement(KeyType key)
             {
                 return m_container[key];
             }
-
             ElementType& operator[](KeyType key)
             {
                 return m_container[key];
             }
-
+            /// \brief Returns iterator to first element of Manager.
             inline auto Beginning() -> decltype( m_container.begin())
             {
                 return m_container.begin();
             }
-
+            /// \brief Returns const iterator to place past last element of Manager.
             inline auto End() -> decltype( m_container.end())
             {
                 return m_container.end();
             }
-
     };
 }
 #endif //MANAGER_HPP
-

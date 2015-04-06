@@ -6,6 +6,7 @@
 #include <exception>
 #include <string>
 #include "Logger.hpp"
+#include <memory>
 
 namespace Llama
 {
@@ -36,32 +37,31 @@ namespace Llama
     public:
         Texture();
         Texture(const char*, Window&);
-        Texture(const Texture& );
 
-        ~Texture();
-        //Load texture from file.
+        ~Texture() = default;
+        /// \brief Load texture from file.
         void Init(const char*, Window& );
         //Draw texture on screen using Window's renderer, at coordinates of x and y
         void Draw(Window& win, int x = 0, int y = 0);
         void Draw(int x = 0, int y = 0);
 
         //Converter. It's going to be used in Draw(), it is natural that Texture should be able to take form of ordinary SDL_Texture*.
-        operator SDL_Texture*() { return m_texture; }
+        operator SDL_Texture*() {return m_texture.get();}
 
         //Getters
-        inline int GetW() { return m_rect.w; }
-        inline int GetH() { return m_rect.h; }
-        inline bool IsNull() { return (m_texture == nullptr); }
+        inline int GetW() {return m_rect.w;}
+        inline int GetH() {return m_rect.h;}
+        inline bool IsNull() {return (m_texture == nullptr);}
 
     private:
         //Load texture from file.
-        void loadTexture( const char* path, SDL_Renderer* );
+        void loadTexture(const char* path, SDL_Renderer*);
 
-
-        //Our texture that we will be using
-        SDL_Texture* m_texture;
+        std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> m_texture;
+        //Pointer to window that we will draw to. Read-only.
         Window* m_win;
-        SDL_Rect m_rect;//Width and height.
+        //Width and height.
+        SDL_Rect m_rect;
     };
 }
 #endif // TEXTURE_H

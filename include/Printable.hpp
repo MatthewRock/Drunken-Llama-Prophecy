@@ -8,7 +8,7 @@ namespace Llama
 
     class Window;
 
-    /// \brief blueprint(abstract) class for everything that can be printed to screen.
+    /// \brief Blueprint(abstract) class for everything that can be printed to screen.
     class Printable
     {
     protected:

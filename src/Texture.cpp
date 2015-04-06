@@ -3,27 +3,22 @@
 
 namespace Llama
 {
-    Texture::Texture()
-    {
-        m_texture = nullptr;
-        m_win = nullptr;
-    }
-
-    Texture::Texture(const char* path, Window& win) : m_win(&win)
+    Texture::Texture() : m_texture(nullptr, SDL_DestroyTexture), m_win(nullptr)
+    {}
+    Texture::Texture(const char* path, Window& win) : m_texture(nullptr, SDL_DestroyTexture), m_win(&win)
     {
         loadTexture(path, win.getRenderer());
     }
+//    Texture::Texture(const Texture& source)
+//    {
+//        m_texture = source.m_texture;
+//        m_win = source.m_win;
+//    }
 
-    Texture::Texture(const Texture& source)
-    {
-        m_texture = source.m_texture;
-        m_win = source.m_win;
-    }
-
-    void Texture::loadTexture( const char* path, SDL_Renderer* renderer )
+    void Texture::loadTexture(const char* path, SDL_Renderer* renderer)
     {
         //Wrong argument passed
-        if(nullptr == renderer)
+        if(!renderer)
         {
             m_texture = nullptr;
         }
@@ -33,16 +28,16 @@ namespace Llama
             SDL_Surface* loadedSurface = IMG_Load(path);
 
             //Always check for null
-            if( nullptr == loadedSurface )
+            if(!loadedSurface)
             {
                 throw TexException;
             }
             else
             {
                 //Now create texture from this surface
-                m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+                m_texture = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>(SDL_CreateTextureFromSurface(renderer, loadedSurface), SDL_DestroyTexture);
                 //Always check for null
-                if( nullptr == m_texture )
+                if(!m_texture)
                 {
                     throw TexException;
                 }
@@ -52,16 +47,10 @@ namespace Llama
                     m_rect = loadedSurface->clip_rect;
                 }
                 //Clean up
-                SDL_FreeSurface( loadedSurface );
+                SDL_FreeSurface(loadedSurface);
             }
         }
     }
-
-    Texture::~Texture()
-    {
-        SDL_DestroyTexture( m_texture );
-    }
-
     void Texture::Init(const char* path, Window& win)
     {
         loadTexture(path, win.getRenderer());
@@ -77,7 +66,7 @@ namespace Llama
         dest.h = m_rect.h;
         dest.w = m_rect.w;
         //Render using Window's renderer.
-        SDL_RenderCopy(win.getRenderer(), m_texture, &m_rect, &dest );
+        SDL_RenderCopy(win.getRenderer(), m_texture.get(), &m_rect, &dest);
     }
 
     void Texture::Draw(int x, int y)
@@ -89,6 +78,6 @@ namespace Llama
         dest.h = m_rect.h;
         dest.w = m_rect.w;
         //Render using Window's renderer.
-        SDL_RenderCopy(m_win->getRenderer(), m_texture, &m_rect, &dest );
+        SDL_RenderCopy(m_win->getRenderer(), m_texture.get(), &m_rect, &dest );
     }
 }
