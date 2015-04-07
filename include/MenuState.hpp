@@ -22,9 +22,10 @@ namespace Llama
             void Draw();                                                //Duh
             void DrawHighlighted();                                     //Draws highlight texture (meant to be called when cursor is over the button)
             bool IsInBoundary(int x, int y);                            //Checks if specified location is in boundary of button
+            operator const char*()  {return m_identifier;}
 
             Button() = default;
-            Button(Window&,const char*, const char*, int, int);
+            Button(Window&,const char*, const char*, const char*, int, int);
             ~Button() = default;
 
             inline void Light() { m_lit = true;}
@@ -35,6 +36,7 @@ namespace Llama
             Texture m_tex;
             Texture m_texh;
             bool m_lit;
+            const char* m_identifier;
     };
     class MenuState : public GameState
     {
@@ -49,12 +51,17 @@ namespace Llama
             void Draw();
 
         protected:
+            void HandleKeyboardInput(Uint32 keysym);
+            void HighlightUp();
+            void HighlightDown();
+
         private:
             Window m_win;
             Texture m_menu;
-            std::vector<std::unique_ptr<Button>> m_buttons;         //container for buttons in menu
-            Manager<std::string, Sounds::BGM> m_musicManager;
-            decltype(m_musicManager.Beginning()) m_musicIterator;
+            std::vector<std::unique_ptr<Button>>    m_buttons;         //container for buttons in menu
+            Manager<std::string, Sounds::BGM>       m_musicManager;
+            decltype(m_buttons.begin())             m_highlightedButton;
+            decltype(m_musicManager.Beginning())    m_musicIterator;
     };
 }
 #endif // MENUSTATE_HPP

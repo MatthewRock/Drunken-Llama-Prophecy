@@ -5,7 +5,7 @@
 
 namespace Llama
 {
-    Button::Button(Window& window,const char* filename, const char* filenameh, int x, int y) : m_x(x), m_y(y), m_tex(filename, window), m_texh(filenameh, window), m_lit(false)
+    Button::Button(Window& window,const char* identifier, const char* filename, const char* filenameh, int x, int y) : m_x(x), m_y(y), m_tex(filename, window), m_texh(filenameh, window), m_lit(false), m_identifier(identifier)
     {
     }
 
@@ -42,10 +42,11 @@ namespace Llama
         m_musicIterator = m_musicManager.Beginning();
         m_musicIterator->second->Play();
 
-        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "media/Button1.png", "media/Button1h.png", 276, 150)));
-        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "media/Button2.png", "media/Button2h.png", 276, 200)));
-        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "media/CreditsButton.png", "media/Creditsh.png", 276, 250)));
-        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "media/EndButton.png", "media/EndButtonh.png", 276, 300)));
+        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "NewGame", "media/Button1.png", "media/Button1h.png", 276, 150)));
+        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "LoadGame", "media/Button2.png", "media/Button2h.png", 276, 200)));
+        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "Credits", "media/CreditsButton.png", "media/Creditsh.png", 276, 250)));
+        m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "Exit", "media/EndButton.png", "media/EndButtonh.png", 276, 300)));
+        m_highlightedButton = m_buttons.begin();
     }
 
     void MenuState::Pause()
@@ -56,20 +57,50 @@ namespace Llama
     {
         GameState::Resume();
     }
+
+    void MenuState::HighlightUp()
+    {
+        if(m_highlightedButton > m_buttons.begin())
+            m_highlightedButton--;
+        else
+            m_highlightedButton = m_buttons.end()-1;
+    }
+    void MenuState::HighlightDown()
+    {
+        if(m_highlightedButton < m_buttons.end()-1)
+            m_highlightedButton++;
+        else
+            m_highlightedButton = m_buttons.begin();
+    }
+    void MenuState::HandleKeyboardInput(Uint32 keysym)
+    {
+        if(keysym == SDLK_UP)
+        {
+            HighlightUp();
+        }
+        else
+            if(keysym == SDLK_DOWN)
+            {
+                HighlightDown();
+            }
+            //else
+            //    if(event.key.keysym ==)
+    }
     void MenuState::HandleEvents(SDL_Event& event)
     {
-        if(event.type == SDL_MOUSEMOTION)
-        {
-            int mX = event.button.x;
-            int mY = event.button.y;
-            for(auto& i : m_buttons)
+        if(event.type == SDL_KEYDOWN)
+            HandleKeyboardInput(event.key.keysym.sym);
+        else
+            if(event.type == SDL_MOUSEMOTION)
             {
-                if(i->IsInBoundary(mX, mY))
-                    i->Light();
-                else
-                    i->BindInDarkness();
+                int mX = event.button.x;
+                int mY = event.button.y;
+                for(auto i = m_buttons.begin(); i < m_buttons.end(); i++)
+                {
+                    if((*i)->IsInBoundary(mX, mY))
+                        m_highlightedButton = i;
+                }
             }
-        }
        /* if(event.type == SDL_MOUSEBUTTONDOWN)
         {
             if(event.button.button == SDL_BUTTON_LEFT)
@@ -102,9 +133,12 @@ namespace Llama
     {
         m_win.ClearScreen();
         m_menu.Draw(0, 0);
-        for(auto& i : m_buttons)
+        for(auto i = m_buttons.begin(); i < m_buttons.end(); i++)
         {
-                i->Draw();
+            if(i == m_highlightedButton)
+                (*i)->DrawHighlighted();
+            else
+                (*i)->Draw();
         }
         m_win.DrawEverything();
     }
