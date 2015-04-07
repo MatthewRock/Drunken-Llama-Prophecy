@@ -7,6 +7,5 @@ int main(int argc, char* args[])
     DrunkenLlamaProphecy.Run();
     return 0;
 }
-
 // TODO (malice#2#): Rewrite World so that it contains Llama's things, not Taverner's
 // TODO (malice#1#): Create main menu, with buttons
