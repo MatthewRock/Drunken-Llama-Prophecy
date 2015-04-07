@@ -26,11 +26,15 @@ namespace Llama
             Button() = default;
             Button(Window&,const char*, const char*, int, int);
             ~Button() = default;
+
+            inline void Light() { m_lit = true;}
+            inline void BindInDarkness() { m_lit = false;}
         private:
             int m_x;
             int m_y;
             Texture m_tex;
             Texture m_texh;
+            bool m_lit;
     };
     class MenuState : public GameState
     {
@@ -49,7 +53,6 @@ namespace Llama
             Window m_win;
             Texture m_menu;
             std::vector<std::unique_ptr<Button>> m_buttons;         //container for buttons in menu
-            decltype(m_buttons.begin()) m_highlightedButton;        //highlight for selection
             Manager<std::string, Sounds::BGM> m_musicManager;
             decltype(m_musicManager.Beginning()) m_musicIterator;
     };
