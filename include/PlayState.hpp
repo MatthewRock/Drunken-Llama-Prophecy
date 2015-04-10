@@ -5,6 +5,7 @@
 #include "Window.hpp"
 #include "Manager.hpp"
 #include "Texture.hpp"
+#include <utility>
 
 namespace Llama
 {
@@ -22,8 +23,10 @@ namespace Llama
 
         protected:
         private:
+            std::pair<int, int> CalculateXY(int, int);
             Window m_win;
             Manager<int,Texture> m_TileManager;
+
             int m_hexWidth;
             int m_hexHeight;
     };

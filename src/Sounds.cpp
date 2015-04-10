@@ -1,5 +1,5 @@
 #include "Sounds.hpp"
-
+#include <sstream> //stringstream
 namespace Llama
 {
     namespace Sounds
@@ -108,14 +108,24 @@ namespace Llama
 
             SDL_version compile_version;
             SDL_MIXER_VERSION(&compile_version);
-            std::string compiled = "Compiled with SDL_Mixer ";
-            compiled += compile_version.major; compiled += "."; compiled += compile_version.minor; compiled += "."; compiled += compile_version.patch;
-            LOG_STRING(compiled);
+            std::stringstream compiled;
+            compiled << "Compiled with SDL_Mixer ";
+            compiled << static_cast<int>(compile_version.major);
+            compiled << ".";
+            compiled << static_cast<int>(compile_version.minor);
+            compiled << ".";
+            compiled << static_cast<int>(compile_version.patch);
+            LOG_STRING(compiled.str());
 
             const SDL_version* linkedVersion = Mix_Linked_Version();
-            std::string linked = "Linked with SDL_Mixer ";
-            linked += linkedVersion->major; linked += "."; linked += linkedVersion->minor; linked += "."; linked += linkedVersion->patch;
-            LOG_STRING(linked);
+            std::stringstream linked;
+            linked << "Linked with SDL_Mixer ";
+            linked << static_cast<int>(linkedVersion->major);
+            linked << ".";
+            linked << static_cast<int>(linkedVersion->minor);
+            linked << ".";
+            linked << static_cast<int>(linkedVersion->patch);
+            LOG_STRING(linked.str());
 
             return Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
