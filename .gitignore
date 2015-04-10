@@ -31,3 +31,5 @@
 *.layout
 *.depend
 
+# Binaries dir
+bin
