@@ -152,7 +152,7 @@ namespace Llama
     {
         m_win.ClearScreen();
         m_menu.Draw(0, 0);
-        for(auto i = 0; i < m_buttons.size(); i++)
+        for(unsigned i = 0; i < m_buttons.size(); i++)
         {
             if(i == m_highlightedButton)
                 m_buttons.at(i)->DrawHighlighted();

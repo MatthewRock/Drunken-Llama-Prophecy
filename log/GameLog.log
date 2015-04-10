@@ -1,8 +1,7 @@
-Fri Apr 10 13:56:16 2015 : Initializer commenced
-Fri Apr 10 13:56:17 2015 : SDL systems loaded.
-Fri Apr 10 13:56:17 2015 : Images system loaded.
-Fri Apr 10 13:56:17 2015 : Music systems initialized.
-Fri Apr 10 13:56:17 2015 : Compiled with SDL_Mixer 2.0.0
-Fri Apr 10 13:56:17 2015 : Linked with SDL_Mixer 2.0.0
-Fri Apr 10 13:56:17 2015 : Entered PlayState
-Fri Apr 10 13:56:20 2015 : Initializer shutting down.
+Fri Apr 10 16:25:34 2015 : Initializer commenced
+Fri Apr 10 16:25:34 2015 : SDL systems loaded.
+Fri Apr 10 16:25:34 2015 : Images system loaded.
+Fri Apr 10 16:25:34 2015 : Music systems initialized.
+Fri Apr 10 16:25:34 2015 : Compiled with SDL_Mixer 2.0.0
+Fri Apr 10 16:25:34 2015 : Linked with SDL_Mixer 2.0.0
+Fri Apr 10 16:25:40 2015 : Initializer shutting down.

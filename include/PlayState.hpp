@@ -5,7 +5,8 @@
 #include "Window.hpp"
 #include "Manager.hpp"
 #include "Texture.hpp"
-#include <utility>
+#include <utility> // std::pair
+#include "Sounds.hpp"
 
 namespace Llama
 {
@@ -17,8 +18,8 @@ namespace Llama
             void Pause(){};
             void Resume(){};
 
-            void HandleEvents(SDL_Event& event){};
-            void Update(){};
+            void HandleEvents(SDL_Event& event);
+            void Update();
             void Draw();
 
         protected:
@@ -26,9 +27,11 @@ namespace Llama
             std::pair<int, int> CalculateXY(int, int);
             Window m_win;
             Manager<int,Texture> m_TileManager;
+            Manager<int,Sounds::BGM> m_MusicManager;
 
             int m_hexWidth;
             int m_hexHeight;
+            decltype(m_MusicManager.Beginning()) m_musIterator;
     };
 }
 #endif // PLAYSTATE_HPP

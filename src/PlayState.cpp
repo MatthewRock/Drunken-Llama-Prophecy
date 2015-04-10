@@ -7,13 +7,18 @@ namespace Llama
     PlayState::PlayState(GameEngine* eng, Window&& win) : m_win(std::move(win))
     {
         m_engine = eng;
-        LOG_STRING("Entered PlayState");
+
+        m_MusicManager.Insert(0, new Sounds::BGM("media/MainMenu.ogg"));//("media/music/Desire.mp3"));
+        m_MusicManager.Insert(1, new Sounds::BGM("media/music/BlueOcean.mp3"));
+        m_MusicManager.Insert(2, new Sounds::BGM("media/music/Sun.mp3"));
+
         m_TileManager.Insert(0, new Texture("media/Tile/tileLava_tile.png", m_win));
         m_TileManager.Insert(1, new Texture("media/Tile/tileMagic_tile.png", m_win));
         m_TileManager.Insert(2, new Texture("media/Tile/tileWater_tile.png", m_win));
         m_TileManager.Insert(3, new Texture("media/Tile/tileRock_tile.png", m_win));
         m_hexWidth = m_TileManager[0]->GetW() - 9;
         m_hexHeight = m_TileManager[0]->GetH() - 6;
+        m_musIterator = m_MusicManager.Beginning();
     }
     std::pair<int, int> PlayState::CalculateXY(int x, int y)
     {
@@ -28,6 +33,26 @@ namespace Llama
                 result.second -= 1;
             else break;
         return result;
+    }
+    void PlayState::HandleEvents(SDL_Event& event)
+    {
+        if(event.type == SDL_KEYDOWN)
+        {
+            if(event.key.keysym.sym == SDLK_n)
+            {
+                m_musIterator++;
+                if(m_musIterator == m_MusicManager.End())
+                {
+                    m_musIterator = m_MusicManager.Beginning();
+                }
+                m_musIterator->second->Play();
+            }
+        }
+    }
+    void PlayState::Update()
+    {
+        if(!Sounds::BGM::Playing())
+            m_musIterator->second->Play();
     }
     void PlayState::Draw()
     {

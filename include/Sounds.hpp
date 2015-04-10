@@ -52,6 +52,7 @@ namespace Llama
             static void Resume();
             static void Rewind();
             static void Toggle();
+            static bool Playing(){return Mix_PlayingMusic();}
 
             BGM(const char* filename = nullptr);
             BGM(const BGM& other) = delete;
