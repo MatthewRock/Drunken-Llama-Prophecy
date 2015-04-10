@@ -2,10 +2,12 @@
 #include "Printable.hpp"
 
 #include "ExitState.hpp"
+#include "PlayState.hpp" // For "New game"
 
 namespace Llama
 {
-    Button::Button(Window& window,const char* identifier, const char* filename, const char* filenameh, int x, int y) : m_x(x), m_y(y), m_tex(filename, window), m_texh(filenameh, window), m_lit(false), m_identifier(identifier)
+    Button::Button(Window& window,const char* identifier, const char* filename, const char* filenameh, int x, int y)
+                  : m_x(x), m_y(y), m_tex(filename, window), m_texh(filenameh, window), m_lit(false), m_identifier(identifier)
     {
     }
 
@@ -46,7 +48,13 @@ namespace Llama
         m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "LoadGame", "media/Button2.png", "media/Button2h.png", 276, 200)));
         m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "Credits", "media/CreditsButton.png", "media/Creditsh.png", 276, 250)));
         m_buttons.push_back(std::unique_ptr<Button>(new Button(m_win, "Exit", "media/EndButton.png", "media/EndButtonh.png", 276, 300)));
-        m_highlightedButton = m_buttons.begin();
+
+        m_highlightedButton = 0;
+    }
+
+    MenuState::~MenuState()
+    {
+        m_musicIterator->second->Stop();
     }
 
     void MenuState::Pause()
@@ -60,30 +68,40 @@ namespace Llama
 
     void MenuState::HighlightUp()
     {
-        if(m_highlightedButton > m_buttons.begin())
-            m_highlightedButton--;
-        else
-            m_highlightedButton = m_buttons.end()-1;
+        m_highlightedButton = (++m_highlightedButton) % HighlightedOptions::OPTION_N;
     }
     void MenuState::HighlightDown()
     {
-        if(m_highlightedButton < m_buttons.end()-1)
-            m_highlightedButton++;
-        else
-            m_highlightedButton = m_buttons.begin();
+        --m_highlightedButton;
+        if(0 > m_highlightedButton)
+            m_highlightedButton = OPTION_N - 1;
     }
     void MenuState::HandleKeyboardInput(Uint32 keysym)
     {
+        //Highlighting based on arrow movement(kbd)
         if(keysym == SDLK_UP)
         {
+            //Inverted gravity! Woohoo!
+            HighlightDown();
+        }
+        else if(keysym == SDLK_DOWN)
+        {
+            //It doesn't have to make sense if it works.
             HighlightUp();
         }
-        else
-            if(keysym == SDLK_DOWN)
+        else if(keysym == SDLK_RETURN)
+        {
+            switch(m_highlightedButton)
             {
-                HighlightDown();
+                case OPTION_MAIN_MENU:
+                    ChangeStateDestructively(new PlayState(m_engine, std::move(m_win)));
+                    break;
+                default:
+                    //DoNothing
+                    break;
             }
-            //else
+        }
+        //else
             //    if(event.key.keysym ==)
     }
     void MenuState::HandleEvents(SDL_Event& event)
@@ -92,12 +110,13 @@ namespace Llama
             HandleKeyboardInput(event.key.keysym.sym);
         else
             if(event.type == SDL_MOUSEMOTION)
+            //Highlighting buttons on mouse hover
             {
-                int mX = event.button.x;
-                int mY = event.button.y;
-                for(auto i = m_buttons.begin(); i < m_buttons.end(); i++)
+                unsigned mX = event.button.x;
+                unsigned mY = event.button.y;
+                for(unsigned i = 0; i < m_buttons.size(); ++i)
                 {
-                    if((*i)->IsInBoundary(mX, mY))
+                    if(m_buttons.at(i)->IsInBoundary(mX, mY))
                         m_highlightedButton = i;
                 }
             }
@@ -133,12 +152,12 @@ namespace Llama
     {
         m_win.ClearScreen();
         m_menu.Draw(0, 0);
-        for(auto i = m_buttons.begin(); i < m_buttons.end(); i++)
+        for(auto i = 0; i < m_buttons.size(); i++)
         {
             if(i == m_highlightedButton)
-                (*i)->DrawHighlighted();
+                m_buttons.at(i)->DrawHighlighted();
             else
-                (*i)->Draw();
+                m_buttons.at(i)->Draw();
         }
         m_win.DrawEverything();
     }

@@ -38,6 +38,8 @@ namespace Llama
     public:
         Window() : m_window(nullptr, SDL_DestroyWindow), m_renderer(nullptr, SDL_DestroyRenderer){};
         Window(const char* name, int w, int h);
+        Window(Window& other) = delete;
+        Window(Window&& other);
 
         ~Window() = default;
         /// \brief Creates window with top-left text from \name, and \width and \height.

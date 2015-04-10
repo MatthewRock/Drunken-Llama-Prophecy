@@ -6,6 +6,10 @@ namespace Llama
     {
         Init(name, w, h);
     }
+    Window::Window(Window&& other) : m_window(std::move(other.m_window)), m_renderer(std::move(other.m_renderer)), screenWidth(other.screenWidth), screenHeight(other.screenHeight)
+    {}
+
+
     void Window::Init(const char* name, int w, int h )
     {
         // Set screen dimensions

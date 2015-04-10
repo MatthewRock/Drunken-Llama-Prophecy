@@ -34,13 +34,13 @@ namespace Llama
             {
                 m_container.erase(key);
             }
-            ElementType& GetElement(KeyType key)
+            ElementType* GetElement(KeyType key)
             {
-                return m_container[key];
+                return m_container[key].get();
             }
-            ElementType& operator[](KeyType key)
+            ElementType* operator[](KeyType key)
             {
-                return m_container[key];
+                return m_container[key].get();
             }
             /// \brief Returns iterator to first element of Manager.
             inline auto Beginning() -> decltype( m_container.begin())

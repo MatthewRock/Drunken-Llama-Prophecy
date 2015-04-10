@@ -40,9 +40,18 @@ namespace Llama
     };
     class MenuState : public GameState
     {
+        enum HighlightedOptions
+        {
+            OPTION_MAIN_MENU,
+            OPTION_LOADGAME,
+            //OPTION_SETTINGS,
+            OPTION_CREDITS,
+            OPTION_EXIT,
+            OPTION_N,
+        };
         public:
             MenuState(GameEngine* eng);
-            ~MenuState() = default;
+            ~MenuState();
 
             void Pause();
             void Resume();
@@ -60,7 +69,7 @@ namespace Llama
             Texture m_menu;
             std::vector<std::unique_ptr<Button>>    m_buttons;         //container for buttons in menu
             Manager<std::string, Sounds::BGM>       m_musicManager;
-            decltype(m_buttons.begin())             m_highlightedButton;
+            int                                     m_highlightedButton;
             decltype(m_musicManager.Beginning())    m_musicIterator;
     };
 }
