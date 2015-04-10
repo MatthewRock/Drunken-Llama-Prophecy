@@ -96,6 +96,17 @@ namespace Llama
                 case OPTION_MAIN_MENU:
                     ChangeStateDestructively(new PlayState(m_engine, std::move(m_win)));
                     break;
+                case OPTION_EXIT:
+                    Exit();
+                    break;
+                case OPTION_LOADGAME:
+                    m_musicIterator++;
+                    if(m_musicIterator == m_musicManager.End())
+                    {
+                        m_musicIterator = m_musicManager.Beginning();
+                    }
+                    m_musicIterator->second->Play();
+                    break;
                 default:
                     //DoNothing
                     break;

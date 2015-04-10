@@ -1,6 +1,5 @@
 #include "Texture.hpp"
 #include "Window.hpp"
-
 namespace Llama
 {
     Texture::Texture() : m_texture(nullptr, SDL_DestroyTexture), m_win(nullptr)

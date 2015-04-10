@@ -36,6 +36,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/Camera.hpp" />
 		<Unit filename="include/Command.hpp" />
 		<Unit filename="include/ExitState.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
@@ -52,6 +53,7 @@
 		<Unit filename="include/Window.hpp" />
 		<Unit filename="include/World.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/ExitState.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
