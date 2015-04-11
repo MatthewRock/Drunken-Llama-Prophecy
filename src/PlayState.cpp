@@ -104,7 +104,6 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        m_win->ClearScreen();
         //m_TileManager.GetElement(3)->Draw(CalculateX(0), CalculateY(1));
         auto tempCords = CalculateXY(0, 0);
         for(int i = 0; i < 20;++i)
@@ -130,6 +129,5 @@ namespace Llama
         tempCords = CalculateXY(m_charX, m_charY);
         CorrectForChar(tempCords);
         m_TileManager.GetElement(4)->Draw(tempCords.first, tempCords.second);
-        m_win->DrawEverything();
     }
 }

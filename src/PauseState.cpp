@@ -50,6 +50,5 @@ namespace Llama
     {
         m_menu.Draw(182, 133);
         DrawButtons();
-        m_win->DrawEverything();
     }
 }

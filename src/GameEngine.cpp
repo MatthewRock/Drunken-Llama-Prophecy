@@ -47,13 +47,15 @@ namespace Llama
 
     void GameEngine::Draw()
     {
-        auto top = m_states.end();
-        --top;
-        (*top)->Draw();
-        //for(auto& x : m_states)
-        //{
-        //    x->Draw();
-        //}
+//        auto top = m_states.end();
+//        --top;
+//        (*top)->Draw();
+        m_win.ClearScreen();
+        for(auto& x : m_states)
+        {
+            x->Draw();
+        }
+        m_win.DrawEverything();
     }
 
     void GameEngine::HandleEngineEvents()

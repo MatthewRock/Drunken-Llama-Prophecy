@@ -1,5 +1,6 @@
 #ifndef PAUSESTATE_HPP_INCLUDED
 #define PAUSESTATE_HPP_INCLUDED
+
 #include "GameEngine.hpp"
 #include "MenuState.hpp"
 #include <SDL2/SDL.h>

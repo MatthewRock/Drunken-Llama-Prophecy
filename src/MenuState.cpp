@@ -73,7 +73,7 @@ namespace Llama
     {
         --m_highlightedButton;
         if(0 > m_highlightedButton)
-            m_highlightedButton = OPTION_N - 1;
+            m_highlightedButton = m_buttons.size() - 1;
     }
     void MenuState::AddButton(const char* identifier, const char* filename, const char* filenameh, int x, int y)
     {

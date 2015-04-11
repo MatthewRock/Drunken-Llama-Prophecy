@@ -26,7 +26,7 @@ namespace Llama
         private:
             void CorrectForChar(std::pair<int, int>& pr);
             std::pair<int, int> CalculateXY(int, int);
-            Window* m_win;
+            Window* m_win; // Non-owning Window ptr.
             Manager<int,Texture> m_TileManager;
             Manager<int,Sounds::BGM> m_MusicManager;
 

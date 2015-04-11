@@ -32,8 +32,4 @@ namespace Llama
         virtual int GetH() = 0;
     };
 }
-#endif // PRINTABLE_HPP// TODO (malice#1#): Add class Button: ...
-//Implemented as something that will inherit from Printable and Clickable
-//Create Clickable
-//Clickable will be pure virtual class requiring definition of IsPressed(SDL_Event&) and IsHovered(), or something like that.
-
+#endif // PRINTABLE_HPP

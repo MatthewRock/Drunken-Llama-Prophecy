@@ -41,6 +41,7 @@
 		<Unit filename="include/ExitState.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
+		<Unit filename="include/Hex.hpp" />
 		<Unit filename="include/Initializer.hpp" />
 		<Unit filename="include/Logger.hpp" />
 		<Unit filename="include/Manager.hpp" />
@@ -57,6 +58,7 @@
 		<Unit filename="src/ExitState.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
+		<Unit filename="src/Hex.cpp" />
 		<Unit filename="src/Initializer.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />

@@ -7,7 +7,7 @@
 #include <memory> // unique_ptr
 #include "GameState.hpp"
 #include "Window.hpp"
-
+#include "Timer.hpp"
 /// \brief Main engine class.
 
 //Private inheritance of Initializer ensures initialization of systems before game starts
@@ -23,9 +23,12 @@ namespace Llama
             {
                 while(IsRunning())
                 {
+                    //m_fpsCapTimer.Start();
                     HandleEvents();
                     Update();
                     Draw();
+//                    if(m_fpsCapTimer.GetTicks() < 1000 / MAX_FPS)
+//                        SDL_Delay((1000 / MAX_FPS) - m_fpsCapTimer.GetTicks());
                 }
             }
 
@@ -47,6 +50,9 @@ namespace Llama
             std::vector<std::unique_ptr<GameState> > m_states;
             bool m_running;
             SDL_Event m_gameEvent;
+            const int MAX_FPS = 30;
+            Timer<> m_fpsCapTimer;
+
             //A vector of pairs: regex, and code (enum) for matching option.
     };
 }

@@ -13,7 +13,8 @@ namespace Llama
     class Manager
     {
         private:
-            std::map<KeyType, std::unique_ptr<ElementType> > m_container;
+            typedef std::map<KeyType, std::unique_ptr<ElementType> > ManagerMap;
+            ManagerMap m_container;
 
         public:
             Manager()
@@ -51,6 +52,11 @@ namespace Llama
             inline auto End() -> decltype( m_container.end())
             {
                 return m_container.end();
+            }
+
+            static auto GetIteratorType() -> decltype( m_container.begin())
+            {
+                return ManagerMap().begin();
             }
     };
 }
