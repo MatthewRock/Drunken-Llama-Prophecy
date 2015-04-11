@@ -9,7 +9,7 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -38,6 +38,7 @@
 		</Compiler>
 		<Unit filename="include/Camera.hpp" />
 		<Unit filename="include/Command.hpp" />
+		<Unit filename="include/Credits.hpp" />
 		<Unit filename="include/ExitState.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
@@ -46,6 +47,7 @@
 		<Unit filename="include/Logger.hpp" />
 		<Unit filename="include/Manager.hpp" />
 		<Unit filename="include/MenuState.hpp" />
+		<Unit filename="include/PauseState.hpp" />
 		<Unit filename="include/PlayState.hpp" />
 		<Unit filename="include/Printable.hpp" />
 		<Unit filename="include/Sounds.hpp" />
@@ -55,6 +57,7 @@
 		<Unit filename="include/World.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/ExitState.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
@@ -62,6 +65,7 @@
 		<Unit filename="src/Initializer.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
 		<Unit filename="src/Printable.cpp" />
 		<Unit filename="src/Sounds.cpp" />
