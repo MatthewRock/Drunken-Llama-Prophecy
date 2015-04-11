@@ -2,25 +2,25 @@
 #include "Logger.hpp"
 #include <sstream>
 #include <cmath>
-
+#include "PauseState.hpp"
 namespace Llama
 {
-    PlayState::PlayState(GameEngine* eng, Window&& win) : m_win(std::move(win))
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer())
     {
         m_engine = eng;
 
         m_MusicManager.Insert(0, new Sounds::BGM("media/MainMenu.ogg"));//("media/music/Desire.mp3"));
-        m_MusicManager.Insert(1, new Sounds::BGM("media/music/BlueOcean.mp3"));
-        m_MusicManager.Insert(2, new Sounds::BGM("media/music/Sun.mp3"));
+        //m_MusicManager.Insert(1, new Sounds::BGM("media/music/BlueOcean.mp3"));
+        //m_MusicManager.Insert(2, new Sounds::BGM("media/music/Sun.mp3"));
 
-        m_TileManager.Insert(0, new Texture("media/Tile/tileLava_tile.png", m_win));
-        m_TileManager.Insert(1, new Texture("media/Tile/tileMagic_tile.png", m_win));
-        m_TileManager.Insert(2, new Texture("media/Tile/tileWater_tile.png", m_win));
-        m_TileManager.Insert(3, new Texture("media/Tile/tileRock_tile.png", m_win));
-        m_TileManager.Insert(4, new Texture("media/Tile/alienBeige.png", m_win));
-        m_TileManager.Insert(5, new Texture("media/Tile/Tiles/treeCactus_1.png", m_win));
-        m_TileManager.Insert(6, new Texture("media/Tile/Tiles/treeCactus_3.png", m_win));
-        m_TileManager.Insert(7, new Texture("media/Tile/Tiles/hillGrass.png", m_win));
+        m_TileManager.Insert(0, new Texture("media/Tile/tileLava_tile.png", *m_win));
+        m_TileManager.Insert(1, new Texture("media/Tile/tileMagic_tile.png", *m_win));
+        m_TileManager.Insert(2, new Texture("media/Tile/tileWater_tile.png", *m_win));
+        m_TileManager.Insert(3, new Texture("media/Tile/tileRock_tile.png", *m_win));
+        m_TileManager.Insert(4, new Texture("media/Tile/alienBeige.png", *m_win));
+        m_TileManager.Insert(5, new Texture("media/Tile/Tiles/treeCactus_1.png", *m_win));
+        m_TileManager.Insert(6, new Texture("media/Tile/Tiles/treeCactus_3.png", *m_win));
+        m_TileManager.Insert(7, new Texture("media/Tile/Tiles/hillGrass.png", *m_win));
 
         m_hexWidth = m_TileManager[0]->GetW() - 9;
         m_hexHeight = m_TileManager[0]->GetH() - 7;
@@ -89,6 +89,9 @@ namespace Llama
                     }
                     m_musIterator->second->Play();
                 break;
+                case SDLK_ESCAPE:
+                    ChangeState(new PauseState(m_engine));
+                break;
                 default:
                 break;
             }
@@ -101,7 +104,7 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        m_win.ClearScreen();
+        m_win->ClearScreen();
         //m_TileManager.GetElement(3)->Draw(CalculateX(0), CalculateY(1));
         auto tempCords = CalculateXY(0, 0);
         for(int i = 0; i < 20;++i)
@@ -127,6 +130,6 @@ namespace Llama
         tempCords = CalculateXY(m_charX, m_charY);
         CorrectForChar(tempCords);
         m_TileManager.GetElement(4)->Draw(tempCords.first, tempCords.second);
-        m_win.DrawEverything();
+        m_win->DrawEverything();
     }
 }

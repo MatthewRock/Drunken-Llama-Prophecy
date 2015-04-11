@@ -13,7 +13,7 @@ namespace Llama
     class PlayState : public GameState
     {
         public:
-            PlayState(GameEngine* eng, Window&& win);
+            PlayState(GameEngine* eng);
             ~PlayState() = default;
             void Pause(){};
             void Resume(){};
@@ -26,7 +26,7 @@ namespace Llama
         private:
             void CorrectForChar(std::pair<int, int>& pr);
             std::pair<int, int> CalculateXY(int, int);
-            Window m_win;
+            Window* m_win;
             Manager<int,Texture> m_TileManager;
             Manager<int,Sounds::BGM> m_MusicManager;
 

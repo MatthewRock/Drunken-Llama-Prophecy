@@ -14,6 +14,7 @@
 
 namespace Llama
 {
+
     class Button
     {
         public:
@@ -44,12 +45,13 @@ namespace Llama
         {
             OPTION_MAIN_MENU,
             OPTION_LOADGAME,
-            //OPTION_SETTINGS,
+            OPTION_SETTINGS,
             OPTION_CREDITS,
             OPTION_EXIT,
             OPTION_N,
         };
         public:
+            MenuState() = default;
             MenuState(GameEngine* eng);
             ~MenuState();
 
@@ -60,16 +62,21 @@ namespace Llama
             void Draw();
 
         protected:
+            void AddButton(const char* identifier, const char* filename, const char* filenameh, int x, int y);
+            virtual void SelectionSwitch(int selection);
+            virtual void Close();
             void HandleKeyboardInput(Uint32 keysym);
+            void HandleMouseInput(SDL_Event& event);
             void HighlightUp();
             void HighlightDown();
+            void DrawButtons();
+            Texture m_menu;
+            Window* m_win;
+            int                                     m_highlightedButton;
 
         private:
-            Window m_win;
-            Texture m_menu;
             std::vector<std::unique_ptr<Button>>    m_buttons;         //container for buttons in menu
             Manager<std::string, Sounds::BGM>       m_musicManager;
-            int                                     m_highlightedButton;
             decltype(m_musicManager.Beginning())    m_musicIterator;
     };
 }

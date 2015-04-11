@@ -1,12 +1,15 @@
 #include "GameEngine.hpp"
 #include "MenuState.hpp"
-
+#include "Printable.hpp"
 namespace Llama
 {
     GameEngine::GameEngine()
     {
         m_running = true;
+        m_win.Init("Drunken Llama Prophecy v.0.0.1a", 1024, 768);
+        Printable::SetWindowDimensions(1024, 768);
         m_states.emplace_back(new MenuState(this));
+
     }
 
     void GameEngine::Update()
@@ -44,10 +47,13 @@ namespace Llama
 
     void GameEngine::Draw()
     {
-        for(auto& x : m_states)
-        {
-            x->Draw();
-        }
+        auto top = m_states.end();
+        --top;
+        (*top)->Draw();
+        //for(auto& x : m_states)
+        //{
+        //    x->Draw();
+        //}
     }
 
     void GameEngine::HandleEngineEvents()
@@ -59,11 +65,11 @@ namespace Llama
         }
         else if( m_gameEvent.type == SDL_KEYDOWN && m_gameEvent.key.repeat == 0 )
         {
-        //If player pressed escape
-            if( m_gameEvent.key.keysym.sym == SDLK_ESCAPE )
-            {
-                m_running = false;
-            }
+        //If player pressed escape  (commenting for now because it annoys me ;x)
+        //    if( m_gameEvent.key.keysym.sym == SDLK_ESCAPE )
+        //    {
+        //        m_running = false;
+        //    }
         }
     }
     void GameEngine::ChangeState(GameState* state)

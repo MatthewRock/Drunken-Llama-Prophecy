@@ -6,6 +6,7 @@
 #include <vector> // For stack of states
 #include <memory> // unique_ptr
 #include "GameState.hpp"
+#include "Window.hpp"
 
 /// \brief Main engine class.
 
@@ -32,6 +33,7 @@ namespace Llama
             void ChangeStateDestructively(GameState* state);
             void PushState(GameState* state);
             void PopState();
+            Window* GetWindowPointer() { return &m_win; }
             inline void Quit() { m_running = false; }
 
         private:
@@ -41,7 +43,7 @@ namespace Llama
             void Draw();
 
             inline bool IsRunning() { return (m_running && !m_states.empty()); }
-
+            Window m_win;
             std::vector<std::unique_ptr<GameState> > m_states;
             bool m_running;
             SDL_Event m_gameEvent;

@@ -31,5 +31,8 @@
 *.layout
 *.depend
 
+# Log dir
+log
+
 # Binaries dir
 bin
