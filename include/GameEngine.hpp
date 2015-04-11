@@ -8,6 +8,7 @@
 #include "GameState.hpp"
 #include "Window.hpp"
 #include "Timer.hpp"
+#include "Texture.hpp"
 /// \brief Main engine class.
 
 //Private inheritance of Initializer ensures initialization of systems before game starts
@@ -21,14 +22,28 @@ namespace Llama
 
             inline void Run()
             {
-                while(IsRunning())
+                try
                 {
-                    //m_fpsCapTimer.Start();
-                    HandleEvents();
-                    Update();
-                    Draw();
-//                    if(m_fpsCapTimer.GetTicks() < 1000 / MAX_FPS)
-//                        SDL_Delay((1000 / MAX_FPS) - m_fpsCapTimer.GetTicks());
+                    while(IsRunning())
+                    {
+                        //m_fpsCapTimer.Start();
+                        HandleEvents();
+                        Update();
+                        Draw();
+    //                    if(m_fpsCapTimer.GetTicks() < 1000 / MAX_FPS)
+    //                        SDL_Delay((1000 / MAX_FPS) - m_fpsCapTimer.GetTicks());
+                    }
+                }
+                catch(std::exception const & ex)
+                {
+                    LOG_STRING("Exception thrown. Program will terminate. Exception in next line.");
+                    LOG_STRING(ex.what());
+                    Window ErrorWindow("Oh no! Something went wrong!", 320, 320);
+                    Texture ErrorTexture("media/CreditsButton.png",ErrorWindow);
+                    ErrorWindow.ClearScreen();
+                    ErrorTexture.Draw(0,0);
+                    ErrorWindow.DrawEverything();
+                    SDL_Delay(1000);
                 }
             }
 

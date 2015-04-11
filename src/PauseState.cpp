@@ -13,6 +13,7 @@ namespace Llama
         AddButton("Resume", "media/Menu/ResumeButton.png", "media/Menu/ResumeButtonh.png", 276, 250);
         AddButton("Save", "media/Menu/SaveButton.png", "media/Menu/SaveButtonh.png", 276, 300);
         AddButton("Exit", "media/Menu/EndButton.png", "media/Menu/EndButtonh.png", 276, 350);
+        AddButton("Exit", "media/Menu/EndButton.pn", "media/Menu/EndButtonh.png", 276, 350);
         m_highlightedButton = 0;
     }
     PauseState::~PauseState()

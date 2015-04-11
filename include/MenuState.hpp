@@ -72,7 +72,7 @@ namespace Llama
             void DrawButtons();
             Texture m_menu;
             Window* m_win;
-            int                                     m_highlightedButton;
+            int                                     m_highlightedButton; // A tego co tak wywaliło w prawo? Bardziej prawy niż sam Korwin? :v
 
         private:
             std::vector<std::unique_ptr<Button>>    m_buttons;         //container for buttons in menu

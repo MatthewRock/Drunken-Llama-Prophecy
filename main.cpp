@@ -1,4 +1,5 @@
 #include "GameEngine.hpp"
+#include "Logger.hpp"
 
 int main(int argc, char* args[])
 {
