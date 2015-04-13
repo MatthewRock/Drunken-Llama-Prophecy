@@ -9,9 +9,7 @@ namespace Llama
     {
         m_engine = eng;
 
-        m_MusicManager.Insert(0, new Sounds::BGM("media/MainMenu.ogg"));//("media/music/Desire.mp3"));
-        //m_MusicManager.Insert(1, new Sounds::BGM("media/music/BlueOcean.mp3"));
-        //m_MusicManager.Insert(2, new Sounds::BGM("media/music/Sun.mp3"));
+        m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
 
         m_TileManager.Insert(0, new Texture("media/Tile/tileLava_tile.png", *m_win));
         m_TileManager.Insert(1, new Texture("media/Tile/tileMagic_tile.png", *m_win));

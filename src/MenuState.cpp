@@ -54,7 +54,7 @@ namespace Llama
 
     MenuState::~MenuState()
     {
-//        m_musicIterator->second->Stop();
+        m_musicIterator->second->Stop();
     }
 
     void MenuState::Pause()
@@ -64,6 +64,7 @@ namespace Llama
     void MenuState::Resume()
     {
         GameState::Resume();
+        m_musicIterator->second->Play();
     }
 
     void MenuState::HighlightUp()
@@ -88,7 +89,7 @@ namespace Llama
                 ChangeStateDestructively(new PlayState(m_engine));
                 break;
             case OPTION_CREDITS:
-                ChangeStateDestructively(new CreditsState(m_engine));
+                ChangeState(new CreditsState(m_engine));
                 break;
             case OPTION_EXIT:
                 Close();
@@ -203,9 +204,7 @@ namespace Llama
     }
     void MenuState::Draw()
     {
-        m_win->ClearScreen();
         m_menu.Draw(0, 0);
         DrawButtons();
-        m_win->DrawEverything();
     }
 }

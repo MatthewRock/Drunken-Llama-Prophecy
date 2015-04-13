@@ -26,11 +26,7 @@ namespace Llama
     }
     void CreditsState::Update()
     {
-
-    }
-    void CreditsState::HandleEvents(SDL_Event& event)
-    {
-        if (!Sounds::BGM::Playing())
+        if (!m_musicIterator->second->Playing())
         {
             ++m_musicIterator;
             if(m_musicIterator == m_musicManager.End())
@@ -39,9 +35,14 @@ namespace Llama
             }
             m_musicIterator->second->Play(0);
         }
+    }
+    void CreditsState::HandleEvents(SDL_Event& event)
+    {
+
         if (event.type == SDL_KEYDOWN)
             if (event.key.keysym.sym == SDLK_ESCAPE)
-                ChangeStateDestructively(new MenuState(m_engine));
+                Exit();
+                //ChangeStateDestructively(new MenuState(m_engine));
             else
             {
                 ++m_musicIterator;

@@ -17,13 +17,17 @@ namespace Llama
         {
             x->Update();
         }
+        bool changed = false;
         for(auto it = m_states.begin(); it != m_states.end(); ++it)
         {
             if((*it)->WantsToExit())
             {
                 m_states.erase(it--);
+                changed = true;
             }
         }
+        if(changed)
+            (*(m_states.end() - 1))->Resume();
     }
 
     void GameEngine::HandleEvents()
