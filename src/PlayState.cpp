@@ -20,7 +20,7 @@ namespace Llama
         m_TileManager.Insert(4, new Texture("media/Tile/alienBeige.png", *m_win));
         m_TileManager.Insert(5, new Texture("media/Tile/Tiles/treeCactus_1.png", *m_win));
         m_TileManager.Insert(6, new Texture("media/Tile/Tiles/treeCactus_3.png", *m_win));
-        m_TileManager.Insert(7, new Texture("media/Tile/Tiles/hillGrass.png", *m_win));
+        m_TileManager.Insert(7, new Texture("media/Tile/Tiles/smallRockDirt.png", *m_win));
 
         m_hexWidth = m_TileManager[0]->GetW() - 9;
         m_hexHeight = m_TileManager[0]->GetH() - 7;
@@ -113,6 +113,9 @@ namespace Llama
                 m_TileManager.GetElement(0)->Draw(tempCords.first, tempCords.second);
             }
 
+        tempCords = CalculateXY(12, 12);
+        m_TileManager.GetElement(7)->Draw(tempCords.first, tempCords.second);
+
         tempCords = CalculateXY(9,9);
         m_TileManager.GetElement(3)->Draw(tempCords.first, tempCords.second);
         CorrectForChar(tempCords);
@@ -129,5 +132,6 @@ namespace Llama
         tempCords = CalculateXY(m_charX, m_charY);
         CorrectForChar(tempCords);
         m_TileManager.GetElement(4)->Draw(tempCords.first, tempCords.second);
+
     }
 }

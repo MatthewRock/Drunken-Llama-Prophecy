@@ -1,5 +1,6 @@
 #include "Texture.hpp"
 #include "Window.hpp"
+#include <cassert>
 namespace Llama
 {
     Texture::Texture() : m_texture(nullptr, SDL_DestroyTexture), m_win(nullptr)
@@ -17,37 +18,31 @@ namespace Llama
     void Texture::loadTexture(const char* path, SDL_Renderer* renderer)
     {
         //Wrong argument passed
-        if(!renderer)
+        assert(renderer);
+        //We will be loading texture from surface. So, we load surface first
+        SDL_Surface* loadedSurface = IMG_Load(path);
+
+        //Always check for null
+        if(!loadedSurface)
         {
-            m_texture = nullptr;
+            throw TexException;
         }
         else
         {
-        //We will be loading texture from surface. So, we load surface first
-            SDL_Surface* loadedSurface = IMG_Load(path);
-
+            //Now create texture from this surface
+            m_texture = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>(SDL_CreateTextureFromSurface(renderer, loadedSurface), SDL_DestroyTexture);
             //Always check for null
-            if(!loadedSurface)
+            if(!m_texture)
             {
                 throw TexException;
             }
             else
             {
-                //Now create texture from this surface
-                m_texture = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>(SDL_CreateTextureFromSurface(renderer, loadedSurface), SDL_DestroyTexture);
-                //Always check for null
-                if(!m_texture)
-                {
-                    throw TexException;
-                }
-                else
-                {
-                    //Copy clip_rect from surface, solving the issue of SDL_Texture not having clip_rect
-                    m_rect = loadedSurface->clip_rect;
-                }
-                //Clean up
-                SDL_FreeSurface(loadedSurface);
+                //Copy clip_rect from surface, solving the issue of SDL_Texture not having clip_rect
+                m_rect = loadedSurface->clip_rect;
             }
+            //Clean up
+            SDL_FreeSurface(loadedSurface);
         }
     }
     void Texture::Init(const char* path, Window& win)

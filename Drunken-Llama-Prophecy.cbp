@@ -9,7 +9,7 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -43,9 +43,11 @@
 		<Unit filename="include/GameState.hpp" />
 		<Unit filename="include/Hex.hpp" />
 		<Unit filename="include/Initializer.hpp" />
+		<Unit filename="include/Land.hpp" />
 		<Unit filename="include/Logger.hpp" />
 		<Unit filename="include/Manager.hpp" />
 		<Unit filename="include/MenuState.hpp" />
+		<Unit filename="include/PauseState.hpp" />
 		<Unit filename="include/PlayState.hpp" />
 		<Unit filename="include/Printable.hpp" />
 		<Unit filename="include/Sounds.hpp" />
@@ -60,8 +62,10 @@
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Hex.cpp" />
 		<Unit filename="src/Initializer.cpp" />
+		<Unit filename="src/Land.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
 		<Unit filename="src/Printable.cpp" />
 		<Unit filename="src/Sounds.cpp" />

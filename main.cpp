@@ -1,5 +1,5 @@
 #include "GameEngine.hpp"
-#include "Logger.hpp"
+using namespace Llama;
 
 int main(int argc, char* args[])
 {

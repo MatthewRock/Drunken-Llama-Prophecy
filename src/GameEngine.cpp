@@ -9,7 +9,6 @@ namespace Llama
         m_win.Init("Drunken Llama Prophecy v.0.0.2", 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_states.emplace_back(new MenuState(this));
-
     }
 
     void GameEngine::Update()
@@ -24,7 +23,6 @@ namespace Llama
             {
                 m_states.erase(it--);
             }
-
         }
     }
 
@@ -35,11 +33,6 @@ namespace Llama
             auto top = m_states.end();
             --top;
             (*top)->HandleEvents(m_gameEvent);
-            //Previously: checking for all states' events.
-//            for(auto& x : m_states)
-//            {
-//                x->HandleEvents(m_gameEvent);
-//            }
             HandleEngineEvents();
         }
 
@@ -47,9 +40,6 @@ namespace Llama
 
     void GameEngine::Draw()
     {
-//        auto top = m_states.end();
-//        --top;
-//        (*top)->Draw();
         m_win.ClearScreen();
         for(auto& x : m_states)
         {
@@ -67,11 +57,6 @@ namespace Llama
         }
         else if( m_gameEvent.type == SDL_KEYDOWN && m_gameEvent.key.repeat == 0 )
         {
-        //If player pressed escape  (commenting for now because it annoys me ;x)
-        //    if( m_gameEvent.key.keysym.sym == SDLK_ESCAPE )
-        //    {
-        //        m_running = false;
-        //    }
         }
     }
     void GameEngine::ChangeState(GameState* state)

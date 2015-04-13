@@ -56,7 +56,7 @@ namespace Llama
 
             BGM(const char* filename = nullptr);
             BGM(const BGM& other) = delete;
-            BGM(BGM&& other) = delete; //: m_music(std::move(other.m_music)) {};
+            BGM(BGM&& other) = delete;
             ~BGM() = default;
         };
 
