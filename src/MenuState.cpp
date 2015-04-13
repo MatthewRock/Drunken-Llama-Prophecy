@@ -1,7 +1,6 @@
 #include "MenuState.hpp"
 #include "Printable.hpp"
 #include "GameEngine.hpp"
-#include "ExitState.hpp"
 #include "PlayState.hpp" // For "New game"
 #include "Credits.hpp"
 
@@ -54,7 +53,6 @@ namespace Llama
 
     MenuState::~MenuState()
     {
-        m_musicIterator->second->Stop();
     }
 
     void MenuState::Pause()

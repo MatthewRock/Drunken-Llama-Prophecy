@@ -8,9 +8,9 @@ namespace Llama
 {
     class Land
     {
-        enum HexType
+        enum HexType : char
         {
-            HEX_DIRT,
+            HEX_DIRT = 0,
             HEX_AUTUMN,
             HEX_LAVA,
             HEX_MAGIC,
@@ -20,13 +20,19 @@ namespace Llama
             HEX_SAND,
             HEX_SNOW,
             HEX_GRASS,
+            HEX_N
         };
-
+        struct Hex
+        {
+            unsigned x,y;
+            char type;
+        };
         public:
             Land();
         protected:
         private:
             Manager<HexType, Texture> m_HexTextureManager;
+
 
     };
 }

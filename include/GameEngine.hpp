@@ -26,12 +26,9 @@ namespace Llama
                 {
                     while(IsRunning())
                     {
-                        //m_fpsCapTimer.Start();
                         HandleEvents();
                         Update();
                         Draw();
-    //                    if(m_fpsCapTimer.GetTicks() < 1000 / MAX_FPS)
-    //                        SDL_Delay((1000 / MAX_FPS) - m_fpsCapTimer.GetTicks());
                     }
                 }
                 catch(std::exception const & ex)

@@ -93,10 +93,5 @@ namespace Llama
         {
             m_states.back()->Resume();
         }
-//        //If last element happened to be the only element, "send signal" to close program.
-//        else
-//        {
-//            Quit();
-//        }
     }
 }
