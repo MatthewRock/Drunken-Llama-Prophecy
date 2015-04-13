@@ -3,6 +3,7 @@
 #include "GameEngine.hpp"
 #include "ExitState.hpp"
 #include "PlayState.hpp" // For "New game"
+#include "Credits.hpp"
 
 namespace Llama
 {
@@ -85,6 +86,9 @@ namespace Llama
         {
             case OPTION_MAIN_MENU:
                 ChangeStateDestructively(new PlayState(m_engine));
+                break;
+            case OPTION_CREDITS:
+                ChangeStateDestructively(new CreditsState(m_engine));
                 break;
             case OPTION_EXIT:
                 Close();
