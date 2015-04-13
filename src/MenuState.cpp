@@ -33,7 +33,8 @@ namespace Llama
     MenuState::MenuState(GameEngine* eng) : m_win(eng->GetWindowPointer())
     {
         m_engine = eng; // If I ever get tempted to move this to parameter list: you can't if it's inherited slot. This one is... -.-
-
+        //Temporary!
+        Sounds::IsMusicPlayedVolumeHandler::Mute();
 
         m_menu.Init("media/Menu/Main/Menu.png", *m_win);
 

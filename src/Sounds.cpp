@@ -24,7 +24,7 @@ namespace Llama
             {
                 throw PlayException();
             }
-            else
+            else if(!IsMusicPlayedVolumeHandler::IsMuted())
             {
                 Mix_PlayMusic(m_music.get(), loops);
             }
@@ -136,6 +136,9 @@ namespace Llama
             Mix_Quit();
         }
         int SFX::__volume = 128;
+        bool IsMusicPlayedVolumeHandler::IsVolumePlayedWanted = true;
+        void IsMusicPlayedVolumeHandler::Mute()   { IsVolumePlayedWanted = false; BGM_SetVolume(0); SFX::SetVolume(0);}
+        void IsMusicPlayedVolumeHandler::UnMute() { IsVolumePlayedWanted = true; BGM_SetVolume(); SFX::SetVolume();}
     }
 }
 

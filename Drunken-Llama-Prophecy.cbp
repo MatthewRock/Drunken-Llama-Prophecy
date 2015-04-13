@@ -59,7 +59,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Credits.cpp" />
-		<Unit filename="src/ExitState.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Hex.cpp" />
