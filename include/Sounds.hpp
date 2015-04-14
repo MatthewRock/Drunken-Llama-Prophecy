@@ -11,19 +11,6 @@ namespace Llama
 {
     namespace Sounds
     {
-        //Class presenting interface for programmers to select if music should be played or not(like muting in settings)
-        //Name is java-like to discourage them from using it where it shouldn't be used.
-        class IsMusicPlayedVolumeHandler
-        {
-            static bool IsVolumePlayedWanted;
-
-            public:
-                static bool IsMuted() { return IsVolumePlayedWanted; }
-                static void Mute();
-                static void UnMute();
-                static void Toggle() { IsVolumePlayedWanted ? Mute() : UnMute(); }
-        };
-
         class PlayException : public std::exception
         {
             virtual const char* what() const throw()

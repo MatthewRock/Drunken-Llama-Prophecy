@@ -104,7 +104,7 @@ namespace Llama
     {
         //m_TileManager.GetElement(3)->Draw(CalculateX(0), CalculateY(1));
         auto tempCords = CalculateXY(0, 0);
-        for(int i = 0; i < 20;++i)
+        for(int i = 0; i < 19;++i)
             for(int j = 0; j < 20;++j)
             {
                 tempCords = CalculateXY(i,j);
