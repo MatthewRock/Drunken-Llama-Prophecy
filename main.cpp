@@ -1,9 +1,12 @@
 #include "GameEngine.hpp"
 
+#include "QuadTree.hpp"
+#include <iostream>
 int main(int argc, char* args[])
 {
-    Llama::GameEngine DrunkenLlamaProphecy;
+//    Llama::GameEngine DrunkenLlamaProphecy;
 
-    DrunkenLlamaProphecy.Run();
+//    DrunkenLlamaProphecy.Run();
+    std::cout<<"Welcome to my testing lab!";
     return 0;
 }

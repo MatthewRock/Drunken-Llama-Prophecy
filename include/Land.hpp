@@ -25,14 +25,14 @@ namespace Llama
         struct Hex
         {
             unsigned x,y;
-            char type;
+            HexType type;
         };
         public:
             Land();
         protected:
+            std::pair<int, int> CalculateXY(int, int);
         private:
             Manager<HexType, Texture> m_HexTextureManager;
-
 
     };
 }
