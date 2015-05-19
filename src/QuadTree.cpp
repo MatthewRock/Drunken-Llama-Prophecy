@@ -55,6 +55,20 @@ void QuadTree::Clear()
     m_objects.clear();
 }
 
+bool QuadTree::Collides(GameObject* first, GameObject* other)
+{
+    bool containsFirst, containsOther;
+    containsFirst = this->contains(first);
+    containsOther = this->contains(other);
+
+    if((containsFirst && !containsOther) || (containsOther && !containsFirst))
+        return false;
+    else
+    {
+        return true;
+    }
+}
+
 bool QuadTree::contains(GameObject* obj)
 {
     return !(obj->GetX() > m_x + m_width ||

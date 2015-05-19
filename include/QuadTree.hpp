@@ -6,11 +6,13 @@
 
 class GameObject
 {
+    int _x,_y,_w,_h;
     public:
-        int GetW() { return 0;}
-        int GetX() { return 0;}
-        int GetY() { return 0;}
-        int GetH() { return 0;}
+        GameObject(int x, int y, int w, int h) : _x(x), _y(y), _w(w), _h(h){}
+        int GetW() { return _w;}
+        int GetX() { return _x;}
+        int GetY() { return _y;}
+        int GetH() { return _h;}
 };
 
 class QuadTree
@@ -21,6 +23,7 @@ class QuadTree
 
         void Add(GameObject* obj);
         void Clear();
+        bool Collides(GameObject* first, GameObject* other);
     protected:
     private:
 

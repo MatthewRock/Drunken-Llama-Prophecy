@@ -2,11 +2,13 @@
 
 #include "QuadTree.hpp"
 #include <iostream>
+#include <vector>
+#include <memory>
+
 int main(int argc, char* args[])
 {
-//    Llama::GameEngine DrunkenLlamaProphecy;
+    Llama::GameEngine DrunkenLlamaProphecy;
 
-//    DrunkenLlamaProphecy.Run();
-    std::cout<<"Welcome to my testing lab!";
+    DrunkenLlamaProphecy.Run();
     return 0;
 }

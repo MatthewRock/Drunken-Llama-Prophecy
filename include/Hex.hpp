@@ -1,25 +1,35 @@
 #ifndef HEX_HPP
 #define HEX_HPP
 
-#include "Printable.hpp"
-#include "Manager.hpp"
-#include "Texture.hpp"
-
 namespace Llama
 {
-    class Hex : public Printable
+    enum HexType : unsigned char
     {
-        public:
-            Hex();
-            void Update(){};
-            void Draw(){};
-            int GetW(){};
-            int GetH(){};
-
-        protected:
-        private:
-
-        decltype(Manager<int,Texture>::GetIteratorType()) m_Tex;
+        HEX_DIRT = 0,
+        HEX_AUTUMN,
+        HEX_LAVA,
+        HEX_MAGIC,
+        HEX_ROCK,
+        HEX_STONE,
+        HEX_WATER,
+        HEX_SAND,
+        HEX_SNOW,
+        HEX_GRASS,
+        HEX_N
+    };
+    struct Hex
+    {
+        Hex(int xx, int yy, HexType typee) : x(xx), y(yy), type(typee){}
+        unsigned x,y;
+        HexType type;
+        bool Passable()
+        {
+            return (type != HEX_LAVA) && (type != HEX_WATER);
+        }
+        inline unsigned int cost()
+        {
+            return 1;
+        }
     };
 }
 #endif // HEX_HPP

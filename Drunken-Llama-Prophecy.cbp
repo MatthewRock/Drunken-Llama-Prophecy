@@ -9,15 +9,12 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
-				<Linker>
-					<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Drunken-Llama-Prophecy" prefix_auto="1" extension_auto="1" />
@@ -36,12 +33,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
+		</Linker>
 		<Unit filename="include/Camera.hpp" />
 		<Unit filename="include/Command.hpp" />
 		<Unit filename="include/Credits.hpp" />
-		<Unit filename="include/ExitState.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
+		<Unit filename="include/Graph.hpp" />
 		<Unit filename="include/Hex.hpp" />
 		<Unit filename="include/Initializer.hpp" />
 		<Unit filename="include/Land.hpp" />
@@ -51,6 +51,8 @@
 		<Unit filename="include/PauseState.hpp" />
 		<Unit filename="include/PlayState.hpp" />
 		<Unit filename="include/Printable.hpp" />
+		<Unit filename="include/PriorityQueue.hpp" />
+		<Unit filename="include/QuadTree.hpp" />
 		<Unit filename="include/Sounds.hpp" />
 		<Unit filename="include/Texture.hpp" />
 		<Unit filename="include/Timer.hpp" />
@@ -61,7 +63,7 @@
 		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
-		<Unit filename="src/Hex.cpp" />
+		<Unit filename="src/Graph.cpp" />
 		<Unit filename="src/Initializer.cpp" />
 		<Unit filename="src/Land.cpp" />
 		<Unit filename="src/Logger.cpp" />
@@ -69,6 +71,7 @@
 		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
 		<Unit filename="src/Printable.cpp" />
+		<Unit filename="src/QuadTree.cpp" />
 		<Unit filename="src/Sounds.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Window.cpp" />

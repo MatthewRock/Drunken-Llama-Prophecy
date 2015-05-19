@@ -1,66 +1,27 @@
-#ifndef LAND_H
-#define LAND_H
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
 
-#include "Texture.hpp"
-#include "Manager.hpp"
-#include <vector>
-#include <array>
-#include <cstdlib> //abs
-#include <PriorityQueue.hpp>
-#include <map>
-
-namespace Llama
+class Graph
 {
-    class Land
-    {
-        enum HexType : unsigned char
+    public:
+        Graph();
+        ~Graph();//TODO: FINISH
+    protected:
+    private:
+        std::vector<Hex> m_Hexes;
+        int CoordsToIndex(int x, int y)
         {
-            HEX_DIRT = 0,
-            HEX_AUTUMN,
-            HEX_LAVA,
-            HEX_MAGIC,
-            HEX_ROCK,
-            HEX_STONE,
-            HEX_WATER,
-            HEX_SAND,
-            HEX_SNOW,
-            HEX_GRASS,
-            HEX_N
-        };
-        struct Hex
-        {
-            unsigned x,y;
-            HexType type;
-            bool Passable()
+            if(x < 0 || y < 0)
+                return -1;
+            else
             {
-                return (type != HEX_LAVA) && (type != HEX_WATER);
-            }
-            inline unsigned int cost()
-            {
-                return 1;
-            }
-        };
-        public:
-            Land();
-        protected:
-            std::pair<int, int> CalculateXY(int, int);
-            int m_Width, m_Height;
-        private:
-            Manager<HexType, Texture> m_HexTextureManager;
-            std::vector<Hex> m_Hexes;
-            int CoordsToIndex(int x, int y)
-            {
-                if(x < 0 || y < 0)
+                int index = x + m_Width * y;
+                if(index >= m_Hexes.size())
                     return -1;
                 else
-                {
-                    int index = x + m_Width * y;
-                    if(index >= m_Hexes.size())
-                        return -1;
-                    else
-                        return index;
-                }
+                    return index;
             }
+        }
 
         /// \brief returns array of 6 IDs of index's neighbours. -1 indicates no neighbour on this position.
         std::array<int, 6> graphNeigbours(int index)
@@ -123,8 +84,6 @@ namespace Llama
                 }
             }
         }
-        //TODO: Move this to separate class.
-    };
-}
+};
 
-#endif // LAND_H
+#endif // GRAPH_HPP
