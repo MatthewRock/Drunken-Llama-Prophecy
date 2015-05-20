@@ -1,10 +1,12 @@
 #include <queue>
+#include <utility>
+#include <vector>
 
 template<typename T, typename Number=int>
 struct PriorityQueue
 {
-  typedef pair<Number, T> PQElement;
-  std::priority_queue<PQElement, vector<PQElement>,
+  typedef std::pair<Number, T> PQElement;
+  std::priority_queue<PQElement, std::vector<PQElement>,
                  std::greater<PQElement>> elements;
 
   inline bool empty() { return elements.empty(); }
