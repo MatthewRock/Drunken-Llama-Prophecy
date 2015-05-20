@@ -37,6 +37,7 @@
 			<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
 		</Linker>
 		<Unit filename="include/Camera.hpp" />
+		<Unit filename="include/Character.hpp" />
 		<Unit filename="include/Command.hpp" />
 		<Unit filename="include/Credits.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
@@ -50,6 +51,7 @@
 		<Unit filename="include/MenuState.hpp" />
 		<Unit filename="include/PauseState.hpp" />
 		<Unit filename="include/PlayState.hpp" />
+		<Unit filename="include/PlayableCharacter.hpp" />
 		<Unit filename="include/Printable.hpp" />
 		<Unit filename="include/PriorityQueue.hpp" />
 		<Unit filename="include/QuadTree.hpp" />
@@ -60,16 +62,24 @@
 		<Unit filename="include/World.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Character.cpp" />
 		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
-		<Unit filename="src/Graph.cpp" />
+		<Unit filename="src/Graph.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/Initializer.cpp" />
-		<Unit filename="src/Land.cpp" />
+		<Unit filename="src/Land.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
+		<Unit filename="src/PlayableCharacter.cpp" />
 		<Unit filename="src/Printable.cpp" />
 		<Unit filename="src/QuadTree.cpp" />
 		<Unit filename="src/Sounds.cpp" />
