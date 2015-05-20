@@ -1,7 +1,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-#include <string.h>
-#include "Texture.hpp"
+#include <string>
 namespace Llama
 {
     class Character
