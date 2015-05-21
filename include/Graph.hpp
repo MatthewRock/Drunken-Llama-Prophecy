@@ -9,36 +9,25 @@
 
 namespace Llama
 {
-
     class Graph
     {
         public:
-            Graph(int w, int h);
-            ~Graph();//TODO: FINISH
+            Graph(int w, int h, std::vector<Hex>&& hexes = {}) : m_Width(w), m_Height(h), m_Hexes(hexes){}
+            ~Graph() = default;
+
+            int CoordsToIndex(int x, int y);
+            void AStar(int startIndex, int goalIndex, std::unordered_map<int, int>& came_from, std::unordered_map<int, int> cost_so_far);
         protected:
         private:
             int m_Width, m_Height;
             std::vector<Hex> m_Hexes;
-            int CoordsToIndex(int x, int y)
-            {
-                if(x < 0 || y < 0)
-                    return -1;
-                else
-                {
-                    int index = x + m_Width * y;
-                    if(index >= m_Hexes.size())
-                        return -1;
-                    else
-                        return index;
-                }
-            }
 
             /// \brief returns array of 6 IDs of index's neighbours. -1 indicates no neighbour on this position.
             std::array<int, 6> graphNeigbours(int index)
             {
                 int y = index / m_Width;
                 int x = index % m_Width;
-                if(y % 2 == 0)
+                if(y % 2 == 1)
                 {
                     return {CoordsToIndex(x-1, y-1),
                             CoordsToIndex(x,   y-1),
@@ -65,34 +54,6 @@ namespace Llama
                 x2 = startIndex % m_Width;
                 y2 = startIndex / m_Width;
                 return abs(x1 - x2) + abs(y1 - y2);
-            }
-
-            void AStar(int startIndex, int goalIndex, std::unordered_map<int, int>& came_from, std::unordered_map<int, int> cost_so_far)
-            {
-                PriorityQueue<int> frontier;//queue of indexes
-                frontier.put(startIndex, 0);
-
-                came_from[startIndex] = startIndex;
-                cost_so_far[startIndex] = 0;
-                while(!frontier.empty())
-                {
-                    auto current = frontier.get();
-                    if(current == goalIndex)
-                        break;
-
-                    for(auto next : graphNeigbours(current))
-                    {
-                        int new_cost = cost_so_far[current] + 1;//TODO: CHange this to written function next(curr. in Hex)
-
-                        if(!cost_so_far.count(next) || new_cost < cost_so_far[next])
-                        {
-                            cost_so_far[next] = new_cost;
-                            int priority = new_cost + Heuristic(next, goalIndex);
-                            frontier.put(next, priority);
-                            came_from[next] = current;
-                        }
-                    }
-                }
             }
     };
 }

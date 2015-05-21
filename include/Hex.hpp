@@ -17,6 +17,9 @@ namespace Llama
         HEX_GRASS,
         HEX_N
     };
+
+// TODO (malice#1#): Remove x and y
+
     struct Hex
     {
         Hex(int xx, int yy, HexType typee) : x(xx), y(yy), type(typee){}
@@ -26,7 +29,7 @@ namespace Llama
         {
             return (type != HEX_LAVA) && (type != HEX_WATER);
         }
-        inline unsigned int cost()
+        inline unsigned int Cost()
         {
             return 1;
         }
