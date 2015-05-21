@@ -22,13 +22,13 @@ int main(int argc, char* args[])
         }
     }
     Graph testGraph(5,5,std::move(maciek));
-    std::unordered_map<int,int> wojtek;
-    std::unordered_map<int,int> pszemek;
-    testGraph.AStar(testGraph.CoordsToIndex(0,0), testGraph.CoordsToIndex(4,0),wojtek, pszemek);
 
-    for(auto x : wojtek)
+    std::stack<int> pszemek = testGraph.AStar(testGraph.CoordsToIndex(0,0), testGraph.CoordsToIndex(4,4));
+    while(!pszemek.empty())
     {
-        std::cout << x.second << std::endl;
+        auto x = pszemek.top();
+        std::cout << x << std::endl;
+        pszemek.pop();
     }
     return 0;
 }

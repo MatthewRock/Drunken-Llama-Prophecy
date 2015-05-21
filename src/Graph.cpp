@@ -1,5 +1,5 @@
 #include "Graph.hpp"
-
+#include <iostream>
 namespace Llama
 {
     int Graph::CoordsToIndex(int x, int y)
@@ -15,9 +15,11 @@ namespace Llama
                 return index;
         }
     }
-    void Graph::AStar(int startIndex, int goalIndex, std::unordered_map<int, int>& came_from, std::unordered_map<int, int> cost_so_far)
+    std::stack<Graph::Index> Graph::AStar(int startIndex, int goalIndex)
     {
-        PriorityQueue<int> frontier;//queue of indexes
+        PriorityQueue<Index> frontier;//queue of indexes
+        std::unordered_map<Index, Index> came_from; // map of where you came from(calling came_from[vertice] gives you previousely attended vertice
+        std::unordered_map<Index, int> cost_so_far; // Map of total cost of path, needed for algorithm.
         frontier.put(startIndex, 0);
 
         came_from[startIndex] = startIndex;
@@ -46,5 +48,15 @@ namespace Llama
                 }
             }
         }
+        //Perform "stack undwinding" to record path to target.
+        std::stack<Index> path;
+        path.push(goalIndex); // At the end we just reach our destination.
+        Index previousOne = came_from[goalIndex];
+        while(previousOne != startIndex)
+        {
+            path.push(previousOne);
+            previousOne = came_from[previousOne];
+        }
+        return path;
     }
 }

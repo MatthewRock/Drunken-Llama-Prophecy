@@ -42,7 +42,9 @@
 		<Unit filename="include/Credits.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/GameState.hpp" />
-		<Unit filename="include/Graph.hpp" />
+		<Unit filename="include/Graph.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/Hex.hpp" />
 		<Unit filename="include/Initializer.hpp" />
 		<Unit filename="include/Land.hpp" />
@@ -66,15 +68,9 @@
 		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/GameState.cpp" />
-		<Unit filename="src/Graph.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/Graph.cpp" />
 		<Unit filename="src/Initializer.cpp" />
-		<Unit filename="src/Land.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/Land.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/PauseState.cpp" />

@@ -6,24 +6,26 @@
 #include <vector>
 #include <array>
 #include <unordered_map>
+#include <stack>
 
 namespace Llama
 {
     class Graph
     {
+        typedef int Index;
         public:
             Graph(int w, int h, std::vector<Hex>&& hexes = {}) : m_Width(w), m_Height(h), m_Hexes(hexes){}
             ~Graph() = default;
 
-            int CoordsToIndex(int x, int y);
-            void AStar(int startIndex, int goalIndex, std::unordered_map<int, int>& came_from, std::unordered_map<int, int> cost_so_far);
+            Index CoordsToIndex(int x, int y);
+            std::stack<Index> AStar(Index startIndex, Index goalIndex);
         protected:
         private:
             int m_Width, m_Height;
             std::vector<Hex> m_Hexes;
 
             /// \brief returns array of 6 IDs of index's neighbours. -1 indicates no neighbour on this position.
-            std::array<int, 6> graphNeigbours(int index)
+            std::array<int, 6> graphNeigbours(Index index)
             {
                 int y = index / m_Width;
                 int x = index % m_Width;
@@ -46,7 +48,7 @@ namespace Llama
                             CoordsToIndex(x+1, y+1)};
                 }
             }
-            inline unsigned int Heuristic(int startIndex, int endIndex)
+            inline unsigned int Heuristic(Index startIndex, Index endIndex)
             {
                 int x1,y1,x2,y2;
                 x1 = startIndex % m_Width;
