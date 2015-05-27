@@ -3,6 +3,8 @@
 #include <sstream>
 #include <cmath>
 #include "PauseState.hpp"
+#include <string>
+
 namespace Llama
 {
     PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer())
@@ -22,6 +24,10 @@ namespace Llama
 
         m_hexWidth = m_TileManager[0]->GetW() - 9;
         m_hexHeight = m_TileManager[0]->GetH() - 7;
+        LOG_STRING("Width of hex:");
+        LOG_STRING(std::to_string(m_TileManager[0]->GetW()));
+        LOG_STRING("Height of hex:");
+        LOG_STRING(std::to_string(m_TileManager[0]->GetH()));
         m_musIterator = m_MusicManager.Beginning();
         m_charX = 8;
         m_charY = 10;

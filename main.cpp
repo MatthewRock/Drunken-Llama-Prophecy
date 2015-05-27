@@ -9,9 +9,9 @@ using namespace Llama;
 
 int main(int argc, char* args[])
 {
-//    GameEngine DrunkenLlamaProphecy;
-//
-//    DrunkenLlamaProphecy.Run();
+    GameEngine DrunkenLlamaProphecy;
+
+    DrunkenLlamaProphecy.Run();
 
     std::vector<Hex> maciek;
     for(int i = 0; i < 5; ++i)
@@ -24,10 +24,9 @@ int main(int argc, char* args[])
     maciek[11] = Hex(1, 2, HEX_LAVA);
     maciek[12] = Hex(2, 2, HEX_LAVA);
     maciek[13] = Hex(3, 2, HEX_LAVA);
-    maciek[14] = Hex(4, 2, HEX_LAVA);
     Graph testGraph(5,5,std::move(maciek));
 
-    std::stack<int> pszemek = testGraph.AStar(testGraph.CoordsToIndex(0,0), testGraph.CoordsToIndex(4,4));
+    std::stack<int> pszemek = testGraph.AStar(testGraph.CoordsToIndex(0,0), testGraph.CoordsToIndex(0,3));
     while(!pszemek.empty())
     {
         auto x = pszemek.top();

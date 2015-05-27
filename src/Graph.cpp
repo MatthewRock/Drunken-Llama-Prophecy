@@ -50,8 +50,13 @@ namespace Llama
         }
         //Perform "stack undwinding" to record path to target.
         std::stack<Index> path;
-        path.push(goalIndex); // At the end we just reach our destination.
         Index previousOne = came_from[goalIndex];
+        //If path was found
+        if(previousOne != startIndex)
+        {
+            path.push(goalIndex); // Add destination to the end. It's last tile we reach.
+        }
+        //Reconstruct path, as a stack. Top is first tile to go to.
         while(previousOne != startIndex)
         {
             path.push(previousOne);

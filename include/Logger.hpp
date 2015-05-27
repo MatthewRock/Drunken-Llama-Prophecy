@@ -22,6 +22,7 @@ namespace Llama
 
         static Logger* Get();
         void Log(std::string logText);
+        inline void Log(int num) { Log(std::to_string(num));};
     };
 }
 #endif //LOGGER_HPP

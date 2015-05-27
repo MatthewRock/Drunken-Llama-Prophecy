@@ -33,6 +33,8 @@ namespace Llama
         {
             return 1;
         }
+        static const int WIDTH = 56;
+        static const int HEIGHT = 82;
     };
 }
 #endif // HEX_HPP

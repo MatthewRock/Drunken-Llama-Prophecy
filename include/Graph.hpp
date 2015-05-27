@@ -18,6 +18,7 @@ namespace Llama
             ~Graph() = default;
 
             Index CoordsToIndex(int x, int y);
+            /// \brief Returns stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
             std::stack<Index> AStar(Index startIndex, Index goalIndex);
         protected:
         private:

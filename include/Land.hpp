@@ -11,6 +11,7 @@ namespace Llama
     {
         public:
             Land();
+            void InsertTexture(HexType type, Texture& texture);
         protected:
             std::pair<int, int> CalculateXY(int, int);
         private:
