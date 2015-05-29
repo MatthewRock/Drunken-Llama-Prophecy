@@ -9,7 +9,7 @@ namespace Llama
     {
         public:
             Camera() = default;
-            inline std::pair<int, int> GetXY() { return {m_cameraX, m_cameraY} };
+            inline std::pair<int, int> GetXY() { return {m_cameraX, m_cameraY}; };
             inline void UpdateXY(int x, int y);
             ~Camera() = default;
         protected:

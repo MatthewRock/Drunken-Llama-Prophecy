@@ -18,12 +18,9 @@ namespace Llama
         HEX_N
     };
 
-// TODO (malice#1#): Remove x and y
-
     struct Hex
     {
-        Hex(int xx, int yy, HexType typee) : x(xx), y(yy), type(typee){}
-        unsigned x,y;
+        Hex(HexType typee) : type(typee){}
         HexType type;
         bool Passable()
         {

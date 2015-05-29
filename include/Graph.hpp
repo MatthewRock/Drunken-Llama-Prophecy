@@ -14,10 +14,15 @@ namespace Llama
     {
         typedef int Index;
         public:
-            Graph(int w, int h, std::vector<Hex>&& hexes = {}) : m_Width(w), m_Height(h), m_Hexes(hexes){}
+            Graph(int w, int h, std::vector<Hex>&& hexes = {}) : m_Width(w), m_Height(h), m_Hexes(hexes)
+            {
+                m_Hexes.reserve(m_Width * m_Height);
+            }
             ~Graph() = default;
 
             Index CoordsToIndex(int x, int y);
+            void InsertHex(int x, int y, HexType type);
+
             /// \brief Returns stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
             std::stack<Index> AStar(Index startIndex, Index goalIndex);
         protected:

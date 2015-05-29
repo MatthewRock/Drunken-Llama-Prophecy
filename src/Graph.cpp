@@ -1,5 +1,7 @@
 #include "Graph.hpp"
 #include <iostream>
+#include <assert.h>
+
 namespace Llama
 {
     int Graph::CoordsToIndex(int x, int y)
@@ -64,4 +66,14 @@ namespace Llama
         }
         return path;
     }
+    void Graph::InsertHex(int x, int y, HexType type)
+    {
+        //It has to be within bounds
+        assert(x < m_Width);
+        assert(y < m_Height);
+
+        m_Hexes[CoordsToIndex(x,y)] = Hex(type);
+    }
+
+
 }
