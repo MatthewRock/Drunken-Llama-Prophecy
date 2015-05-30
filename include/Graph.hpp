@@ -22,9 +22,21 @@ namespace Llama
 
             Index CoordsToIndex(int x, int y);
             void InsertHex(int x, int y, HexType type);
+            HexType GetHexType(int x, int y) { return m_Hexes[CoordsToIndex(x,y)].type; };
 
             /// \brief Returns stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
             std::stack<Index> AStar(Index startIndex, Index goalIndex);
+
+            std::pair<int, int> CalculateXY(int x, int y)
+            {
+                std::pair<int, int> result;
+                result.first = (y % 2 == 0) ? x * Hex::WIDTH : x * Hex::WIDTH - (.5 * Hex::WIDTH);
+                //Correcting offset
+                result.first -= 4;
+
+                result.second = (y - 1) * .5 * Hex::HEIGHT;
+                return result;
+            }
         protected:
         private:
             int m_Width, m_Height;
@@ -63,6 +75,8 @@ namespace Llama
                 y2 = startIndex / m_Width;
                 return abs(x1 - x2) + abs(y1 - y2);
             }
+
+
     };
 }
 #endif // GRAPH_HPP

@@ -32,6 +32,8 @@ namespace Llama
         }
         static const int WIDTH = 56;
         static const int HEIGHT = 82;
+        private:
+            int x, y;
     };
 }
 #endif // HEX_HPP

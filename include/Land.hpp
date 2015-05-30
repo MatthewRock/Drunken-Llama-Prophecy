@@ -10,12 +10,12 @@ namespace Llama
     class Land
     {
         public:
-            Land();
+            Land(int w, int h) : m_Graph(w,h){};
             void InsertTexture(HexType type, Texture* texture);
             void InsertHex(int x, int y, HexType type);
-
+            void DrawInProximity(int x, int y);
         protected:
-            std::pair<int, int> CalculateXY(int, int);
+
         private:
             Manager<HexType, Texture> m_HexTextureManager;
             Graph m_Graph;

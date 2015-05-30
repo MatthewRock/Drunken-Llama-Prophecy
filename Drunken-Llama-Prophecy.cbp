@@ -36,32 +36,78 @@
 		<Linker>
 			<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
 		</Linker>
-		<Unit filename="include/Camera.hpp" />
-		<Unit filename="include/Character.hpp" />
-		<Unit filename="include/Command.hpp" />
-		<Unit filename="include/Credits.hpp" />
-		<Unit filename="include/GameEngine.hpp" />
-		<Unit filename="include/GameState.hpp" />
+		<Unit filename="include/Camera.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Character.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Command.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Credits.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/GameEngine.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/GameState.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/Graph.hpp">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="include/Hex.hpp" />
-		<Unit filename="include/Initializer.hpp" />
-		<Unit filename="include/Land.hpp" />
-		<Unit filename="include/Logger.hpp" />
-		<Unit filename="include/Manager.hpp" />
-		<Unit filename="include/MenuState.hpp" />
-		<Unit filename="include/PauseState.hpp" />
-		<Unit filename="include/PlayState.hpp" />
-		<Unit filename="include/PlayableCharacter.hpp" />
-		<Unit filename="include/Printable.hpp" />
-		<Unit filename="include/PriorityQueue.hpp" />
-		<Unit filename="include/QuadTree.hpp" />
-		<Unit filename="include/Sounds.hpp" />
-		<Unit filename="include/Texture.hpp" />
-		<Unit filename="include/Timer.hpp" />
-		<Unit filename="include/Window.hpp" />
-		<Unit filename="include/World.hpp" />
+		<Unit filename="include/Hex.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Initializer.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Land.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Logger.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Manager.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/MenuState.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/PauseState.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/PlayState.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/PlayableCharacter.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Printable.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/PriorityQueue.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/QuadTree.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Sounds.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Texture.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Timer.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/Window.hpp">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="include/World.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Character.cpp" />

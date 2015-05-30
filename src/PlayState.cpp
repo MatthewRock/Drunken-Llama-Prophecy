@@ -7,30 +7,32 @@
 
 namespace Llama
 {
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer())
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100)
     {
         m_engine = eng;
 
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
 
-        m_TileManager.Insert(0, new Texture("media/Tile/tileLava_tile.png", *m_win));
-        m_TileManager.Insert(1, new Texture("media/Tile/tileMagic_tile.png", *m_win));
-        m_TileManager.Insert(2, new Texture("media/Tile/tileWater_tile.png", *m_win));
-        m_TileManager.Insert(3, new Texture("media/Tile/tileRock_tile.png", *m_win));
-        m_TileManager.Insert(4, new Texture("media/Tile/alienBeige.png", *m_win));
-        m_TileManager.Insert(5, new Texture("media/Tile/Tiles/treeCactus_1.png", *m_win));
-        m_TileManager.Insert(6, new Texture("media/Tile/Tiles/treeCactus_3.png", *m_win));
-        m_TileManager.Insert(7, new Texture("media/Tile/Tiles/smallRockDirt.png", *m_win));
+        m_Map.InsertTexture(HEX_LAVA, new Texture("media/Tile/tileLava_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_MAGIC, new Texture("media/Tile/tileMagic_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_WATER, new Texture("media/Tile/tileWater_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
 
-        m_hexWidth = m_TileManager[0]->GetW() - 9;
-        m_hexHeight = m_TileManager[0]->GetH() - 7;
-        LOG_STRING("Width of hex:");
-        LOG_STRING(std::to_string(m_TileManager[0]->GetW()));
-        LOG_STRING("Height of hex:");
-        LOG_STRING(std::to_string(m_TileManager[0]->GetH()));
+        m_Character = std::unique_ptr<Texture>(new Texture("media/Tile/alienBeige.png", *m_win));
+// TODO (malice#1#): Make drawing Hexes simple and easy
+
+        m_hexWidth = 56;
+        m_hexHeight = 82;
+
         m_musIterator = m_MusicManager.Beginning();
         m_charX = 8;
         m_charY = 10;
+
+        for(int i = 0; i < 30; ++i)
+        {
+            for(int j = 0; j < 30; ++j)
+                m_Map.InsertHex(i,j,HEX_DIRT);
+        }
     }
     std::pair<int, int> PlayState::CalculateXY(int x, int y)
     {
@@ -108,34 +110,10 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        //m_TileManager.GetElement(3)->Draw(CalculateX(0), CalculateY(1));
-        auto tempCords = CalculateXY(0, 0);
-        for(int i = 0; i < 19;++i)
-            for(int j = 0; j < 20;++j)
-            {
-                tempCords = CalculateXY(i,j);
-                m_TileManager.GetElement(0)->Draw(tempCords.first, tempCords.second);
-            }
-
-        tempCords = CalculateXY(12, 12);
-        m_TileManager.GetElement(7)->Draw(tempCords.first, tempCords.second);
-
-        tempCords = CalculateXY(9,9);
-        m_TileManager.GetElement(3)->Draw(tempCords.first, tempCords.second);
+        m_Map.DrawInProximity(m_charX, m_charY);
+        auto tempCords = CalculateXY(m_charX, m_charY);
         CorrectForChar(tempCords);
-        m_TileManager.GetElement(5)->Draw(tempCords.first, tempCords.second);
-
-        tempCords = CalculateXY(8,10);
-        m_TileManager.GetElement(2)->Draw(tempCords.first, tempCords.second);
-
-        tempCords = CalculateXY(8,9);
-        m_TileManager.GetElement(1)->Draw(tempCords.first, tempCords.second);
-        CorrectForChar(tempCords);
-        m_TileManager.GetElement(6)->Draw(tempCords.first, tempCords.second);
-
-        tempCords = CalculateXY(m_charX, m_charY);
-        CorrectForChar(tempCords);
-        m_TileManager.GetElement(4)->Draw(tempCords.first, tempCords.second);
+        m_Character->Draw(tempCords.first, tempCords.second);
 
     }
 }

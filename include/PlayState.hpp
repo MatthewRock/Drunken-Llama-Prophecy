@@ -7,7 +7,7 @@
 #include "Texture.hpp"
 #include <utility> // std::pair
 #include "Sounds.hpp"
-
+#include "Land.hpp"
 namespace Llama
 {
     class PlayState : public GameState
@@ -27,9 +27,10 @@ namespace Llama
             void CorrectForChar(std::pair<int, int>& pr);
             std::pair<int, int> CalculateXY(int, int);
             Window* m_win; // Non-owning Window ptr.
-            Manager<int,Texture> m_TileManager;
             Manager<int,Sounds::BGM> m_MusicManager;
 
+            std::unique_ptr<Texture> m_Character;
+            Land m_Map;
             int m_hexWidth;
             int m_hexHeight;
             int m_charX, m_charY;

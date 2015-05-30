@@ -74,6 +74,4 @@ namespace Llama
 
         m_Hexes[CoordsToIndex(x,y)] = Hex(type);
     }
-
-
 }
