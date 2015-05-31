@@ -1,4 +1,6 @@
 #include "Land.hpp"
+#include <iostream>
+
 namespace Llama
 {
     void Land::InsertTexture(HexType type, Texture* texture)
@@ -20,13 +22,21 @@ namespace Llama
         if(newx < 0) newx = 0;
         if(newy < 0) newy = 0;
 
-        for(; newx < 20; ++newx)
-            for(; newy < 20; ++newy)
+        int finishx = newx + 20;
+        int finishy = newy + 20;
+
+
+        for(; newx < finishx; ++newx)
+        {
+            for(int yy = newy; yy < finishy; ++yy)
             {
-                auto type = m_Graph.GetHexType(newx, newy);
-                auto coords = m_Graph.CalculateXY(newx, newy);
+                auto type = m_Graph.GetHexType(newx, yy);
+                auto coords = m_Graph.CalculateXY(newx, yy);
                 m_HexTextureManager.GetElement(type)->Draw(coords.first, coords.second);
             }
+
+        }
+
     }
 }
 // TODO (malice#1#): Fix segfault. Segfault's because w of texture is set to some huge number, not sure why.

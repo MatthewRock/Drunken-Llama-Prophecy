@@ -7,6 +7,8 @@
 
 namespace Llama
 {
+// TODO (malice#1#): Change this from magic number to some actual map size
+
     PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100)
     {
         m_engine = eng;
@@ -17,6 +19,7 @@ namespace Llama
         m_Map.InsertTexture(HEX_MAGIC, new Texture("media/Tile/tileMagic_tile.png", *m_win));
         m_Map.InsertTexture(HEX_WATER, new Texture("media/Tile/tileWater_tile.png", *m_win));
         m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_DIRT, new Texture("media/Tile/tileDirt_tile.png", *m_win));
 
         m_Character = std::unique_ptr<Texture>(new Texture("media/Tile/alienBeige.png", *m_win));
 // TODO (malice#1#): Make drawing Hexes simple and easy
