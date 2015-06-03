@@ -141,6 +141,7 @@ namespace Llama
     void PlayState::Draw()
     {
         m_Map.DrawInProximity(m_charX, m_charY);
+        m_Map.DrawInProximityDebug(m_charX, m_charY);
         //auto tempCords = CalculateXY(m_charX, m_charY);
         auto tempCords = CalculateXY(9, 8);
         CorrectForChar(tempCords);
