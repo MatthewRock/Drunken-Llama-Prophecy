@@ -33,7 +33,7 @@ namespace Llama
                 }
                 catch(std::exception const & ex)
                 {
-                    LOG_STRING("Exception thrown. Program will terminate. Exception in next line.");
+                    LOG_STRING("Exception thrown. Program will terminate. Encountered exception: ");
                     LOG_STRING(ex.what());
                     Window ErrorWindow("Oh no! Something went wrong!", 320, 320);
                     Texture ErrorTexture("media/CreditsButton.png",ErrorWindow);

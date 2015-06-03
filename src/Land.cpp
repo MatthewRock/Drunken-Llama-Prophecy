@@ -18,25 +18,29 @@ namespace Llama
         //Character will be the center of action.
         int newx = x - 10;
         int newy = y - 10;
-
+        //If we got out of map, correct it.
+        //TODO: Correct for going out of max bounds too
         if(newx < 0) newx = 0;
         if(newy < 0) newy = 0;
-
+        // Know when to stop looping
         int finishx = newx + 20;
         int finishy = newy + 20;
 
-
+        int i = 0, j = 0;
+        //Print tiles
         for(; newx < finishx; ++newx)
         {
             for(int yy = newy; yy < finishy; ++yy)
             {
+                //Get type and coords
                 auto type = m_Graph.GetHexType(newx, yy);
-                auto coords = m_Graph.CalculateXY(newx, yy);
-                m_HexTextureManager.GetElement(type)->Draw(coords.first, coords.second);
+                auto cords = coords[i][j];
+                //Finally print
+                m_HexTextureManager.GetElement(type)->Draw(cords.first, cords.second);
+                j = (j + 1) % 20;
             }
-
+            ++i;
         }
-
     }
 }
 // TODO (malice#1#): Fix segfault. Segfault's because w of texture is set to some huge number, not sure why.

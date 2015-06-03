@@ -4,19 +4,23 @@
 
 namespace Llama
 {
-    int Graph::CoordsToIndex(int x, int y)
+    /// \brief Changes x and y coordinates into index of given tile in graph.
+    /// \return That index or -1 if index would be out of bounds.
+    Graph::Index Graph::CoordsToIndex(int x, int y)
     {
         if(x < 0 || y < 0)
             return -1;
         else
         {
-            int index = x + m_Width * y;
-            if(index >= m_Hexes.size())
+            Index index = x + m_Width * y;
+            if(index >= m_Hexes.capacity())
                 return -1;
             else
                 return index;
         }
     }
+    /// \brief A* algorithm for finding closest path. Takes index of start and destination.
+    /// \return Stack of indexes, top being the first tile to go, bottom being destination, or empty stack if no way was found.
     std::stack<Graph::Index> Graph::AStar(int startIndex, int goalIndex)
     {
         PriorityQueue<Index> frontier;//queue of indexes
@@ -56,7 +60,7 @@ namespace Llama
         //If path was found
         if(previousOne != startIndex)
         {
-            path.push(goalIndex); // Add destination to the end. It's last tile we reach.
+            path.push(goalIndex); // Add destination to the end. It's the last tile we reach.
         }
         //Reconstruct path, as a stack. Top is first tile to go to.
         while(previousOne != startIndex)
@@ -66,6 +70,7 @@ namespace Llama
         }
         return path;
     }
+    /// \brief Constructs Hex from arguments and inserts it to graph.
     void Graph::InsertHex(int x, int y, HexType type)
     {
         //It has to be within bounds

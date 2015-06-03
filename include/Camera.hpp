@@ -8,9 +8,9 @@ namespace Llama
     class Camera
     {
         public:
-            Camera() = default;
+            Camera() : m_cameraX(0), m_cameraY(0) {};
             inline std::pair<int, int> GetXY() { return {m_cameraX, m_cameraY}; };
-            inline void UpdateXY(int x, int y);
+            inline void UpdateXY(int dx, int dy);
             ~Camera() = default;
         protected:
         private:
@@ -18,10 +18,10 @@ namespace Llama
         int m_cameraY;
     };
 
-    void Camera::UpdateXY(int x, int y)
+    void Camera::UpdateXY(int dx, int dy)
     {
-        m_cameraX += x;
-        m_cameraY += y;
+        m_cameraX += dx;
+        m_cameraY += dy;
     }
 }
 #endif // CAMERA_HPP

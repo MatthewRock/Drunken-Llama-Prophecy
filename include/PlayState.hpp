@@ -28,6 +28,7 @@ namespace Llama
             std::pair<int, int> CalculateXY(int, int);
             Window* m_win; // Non-owning Window ptr.
             Manager<int,Sounds::BGM> m_MusicManager;
+            Camera m_Camera;
 
             std::unique_ptr<Texture> m_Character;
             Land m_Map;

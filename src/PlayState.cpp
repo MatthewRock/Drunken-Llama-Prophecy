@@ -31,10 +31,15 @@ namespace Llama
         m_charX = 8;
         m_charY = 10;
 
-        for(int i = 0; i < 30; ++i)
+        for(int i = 0; i < 20; ++i)
         {
-            for(int j = 0; j < 30; ++j)
-                m_Map.InsertHex(i,j,HEX_DIRT);
+            for(int j = 0; j < 40; ++j)
+                j % 2 == 0 ? m_Map.InsertHex(i,j,HEX_LAVA) : m_Map.InsertHex(i,j,HEX_ROCK);
+        }
+        for(int i = 20; i < 40; ++i)
+        {
+            for(int j = 0; j < 40; ++j)
+                m_Map.InsertHex(i,j,HEX_LAVA);
         }
     }
     std::pair<int, int> PlayState::CalculateXY(int x, int y)
@@ -54,41 +59,62 @@ namespace Llama
     }
     void PlayState::HandleEvents(SDL_Event& event)
     {
+        int movedX = 0, movedY = 0;
         if(event.type == SDL_KEYDOWN)
         {
             switch(event.key.keysym.sym)
             {
                 case SDLK_q:
                     m_charY--;
+                    movedY--;
                     if(m_charY % 2 == 0)
+                    {
                         m_charX--;
+                        movedX--;
+                    }
                 break;
                 case SDLK_w:
                     m_charY--;
-                break;
-                case SDLK_z:
-                    m_charY++;
-                    if(m_charY % 2 == 0)
-                        m_charX--;
-                break;
-                case SDLK_c:
-                    m_charY++;
-                    if(m_charY % 2 == 1)
-                        m_charX++;
-                break;
-                case SDLK_s:
-                    m_charY++;
-                break;
-                case SDLK_a:
-                    m_charX--;
-                break;
-                case SDLK_d:
-                    m_charX++;
+                    movedY--;
                 break;
                 case SDLK_e:
                     m_charY--;
+                    movedY--;
                     if(m_charY % 2 == 1)
+                    {
                         m_charX++;
+                        movedX++;
+                    }
+                break;
+                case SDLK_z:
+                    m_charY++;
+                    movedY = true;
+                    if(m_charY % 2 == 0)
+                    {
+                        m_charX--;
+                        movedX--;
+                    }
+                break;
+                case SDLK_c:
+                    m_charY++;
+                    movedY = true;
+                    if(m_charY % 2 == 1)
+                    {
+                        m_charX++;
+                        movedX++;
+                    }
+                break;
+                case SDLK_s:
+                    m_charY++;
+                    movedY++;
+                break;
+                case SDLK_a:
+                    m_charX--;
+                    movedX--;
+                break;
+                case SDLK_d:
+                    m_charX++;
+                    movedX++;
                 break;
                 case SDLK_n:
                     m_musIterator++;
@@ -105,6 +131,7 @@ namespace Llama
                 break;
             }
         }
+        m_Camera.UpdateXY(movedX * Hex::WIDTH, movedY * Hex::HEIGHT);
     }
     void PlayState::Update()
     {
@@ -114,7 +141,8 @@ namespace Llama
     void PlayState::Draw()
     {
         m_Map.DrawInProximity(m_charX, m_charY);
-        auto tempCords = CalculateXY(m_charX, m_charY);
+        //auto tempCords = CalculateXY(m_charX, m_charY);
+        auto tempCords = CalculateXY(9, 8);
         CorrectForChar(tempCords);
         m_Character->Draw(tempCords.first, tempCords.second);
 

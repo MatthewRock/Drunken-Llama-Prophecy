@@ -66,7 +66,8 @@ namespace Llama
 
     void MenuState::HighlightUp()
     {
-        m_highlightedButton = (++m_highlightedButton) % m_buttons.size();
+        ++m_highlightedButton;
+        m_highlightedButton = m_highlightedButton % m_buttons.size();
     }
     void MenuState::HighlightDown()
     {

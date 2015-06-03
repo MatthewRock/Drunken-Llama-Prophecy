@@ -65,6 +65,7 @@ namespace Llama
 
     void Texture::Draw(int x, int y)
     {
+
         //Create temporary destinaction rectangle using m_rect(texture width and height) and x and y into which we will be drawning
         SDL_Rect dest;
         dest.x = x;
@@ -73,5 +74,9 @@ namespace Llama
         dest.w = m_rect.w;
         //Render using Window's renderer.
         SDL_RenderCopy(m_win->getRenderer(), m_texture.get(), &m_rect, &dest );
+        SDL_RenderDrawRect(m_win->getRenderer(), &dest);
+
     }
+
+//    void Texture::DebugDrawOutline(int x, int y)
 }

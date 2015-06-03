@@ -22,11 +22,14 @@ namespace Llama
 
             Index CoordsToIndex(int x, int y);
             void InsertHex(int x, int y, HexType type);
+            /// \return Type of hex at x,y.
             HexType GetHexType(int x, int y) { return m_Hexes[CoordsToIndex(x,y)].type; };
 
-            /// \brief Returns stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
+            /// \return Stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
             std::stack<Index> AStar(Index startIndex, Index goalIndex);
 
+            /// \brief Changes x and y in our coordinate system to x and y that it should have on screen to print.
+            /// \return Pair(x,y) of coordinates for SDL to print.
             std::pair<int, int> CalculateXY(int x, int y)
             {
                 std::pair<int, int> result;
@@ -42,7 +45,7 @@ namespace Llama
             int m_Width, m_Height;
             std::vector<Hex> m_Hexes;
 
-            /// \brief returns array of 6 IDs of index's neighbours. -1 indicates no neighbour on this position.
+            /// \return Array of 6 IDs of index's neighbours. -1 indicates no neighbour on this position.
             std::array<int, 6> graphNeigbours(Index index)
             {
                 int y = index / m_Width;
@@ -75,8 +78,6 @@ namespace Llama
                 y2 = startIndex / m_Width;
                 return abs(x1 - x2) + abs(y1 - y2);
             }
-
-
     };
 }
 #endif // GRAPH_HPP
