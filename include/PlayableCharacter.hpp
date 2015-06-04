@@ -1,7 +1,9 @@
 #ifndef PLAYABLECHARACTER_H
 #define PLAYABLECHARACTER_H
+
+#include <utility>
 #include "Character.hpp"
-#include "Texture.hpp"
+#include "AnimationHandler.hpp"
 namespace Llama
 {
     class PlayableCharacter : public Character
@@ -12,12 +14,13 @@ namespace Llama
             virtual ~PlayableCharacter();
 
             void Draw();
-            void Move();
-
+            void Move(int, int);
+            std::pair<int, int> GetPosition()  {   return m_position;  }
         protected:
         private:
-        int m_x, m_y;
-        Texture m_tex;
+        std::pair<int, int> m_position;
+        std::pair<int, int> m_translocation;
+        AnimationHandler m_tex;
     };
 }
 #endif // PLAYABLECHARACTER_H
