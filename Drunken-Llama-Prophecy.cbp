@@ -36,7 +36,9 @@
 		<Linker>
 			<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
 		</Linker>
-		<Unit filename="include/AnimationHandler.hpp" />
+		<Unit filename="include/AnimationHandler.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/Camera.hpp">
 			<Option compile="1" />
 		</Unit>
@@ -55,7 +57,9 @@
 		<Unit filename="include/GameEngine.hpp">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="include/GameObject.hpp" />
+		<Unit filename="include/GameObject.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/GameState.hpp">
 			<Option compile="1" />
 		</Unit>

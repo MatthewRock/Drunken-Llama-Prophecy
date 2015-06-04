@@ -16,7 +16,7 @@ namespace Llama
         public:
             Graph(int w, int h, std::vector<Hex>&& hexes = {}) : m_Width(w), m_Height(h), m_Hexes(hexes)
             {
-                m_Hexes.reserve(m_Width * m_Height);
+                m_Hexes.resize(m_Width * m_Height);
             }
             ~Graph() = default;
 

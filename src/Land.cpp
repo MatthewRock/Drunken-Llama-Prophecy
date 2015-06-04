@@ -26,15 +26,19 @@ namespace Llama
         // Know when to stop looping
         int finishx = newx + 20;
         int finishy = newy + 20;
-
+        bool flag = (y % 2 == 1 ? true : false);
         int i = 0, j = 0;
         //Print tiles
         for(; newx < finishx; ++newx)
         {
             for(int yy = newy; yy < finishy; ++yy)
             {
+                HexType type;
                 //Get type and coords
-                auto type = m_Graph.GetHexType(newx, yy);
+                if(yy%2==1 && flag)
+                    type = m_Graph.GetHexType(newx, yy);
+                else
+                    type = m_Graph.GetHexType(newx-1, yy);
                 auto cords = coords[i][j];
                 //Finally print
                 m_HexTextureManager.GetElement(type)->Draw(cords.first, cords.second);
@@ -74,5 +78,4 @@ namespace Llama
         //return std::make_pair(x,y);
 
     }
-
 }

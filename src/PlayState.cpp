@@ -21,7 +21,7 @@ namespace Llama
         m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
         m_Map.InsertTexture(HEX_DIRT, new Texture("media/Tile/tileDirt_tile.png", *m_win));
 
-        m_Character = std::unique_ptr<PlayableCharacter>(new PlayableCharacter("Pszemek","media/Tile/alienBeige.png", *m_win, 9, 8));
+        m_Character = std::unique_ptr<PlayableCharacter>(new PlayableCharacter("Pszemek","media/Tile/alienBeige.png", *m_win, 32, 32));
 // TODO (malice#1#): Make drawing Hexes simple and easy
 
         m_hexWidth = 56;
@@ -31,16 +31,20 @@ namespace Llama
         m_charX = 8;
         m_charY = 10;
 
-        for(int i = 0; i < 20; ++i)
-        {
-            for(int j = 0; j < 40; ++j)
-                j % 2 == 0 ? m_Map.InsertHex(i,j,HEX_LAVA) : m_Map.InsertHex(i,j,HEX_ROCK);
-        }
         for(int i = 20; i < 40; ++i)
         {
-            for(int j = 0; j < 40; ++j)
+            for(int j = 20; j < 60; ++j)
+                j % 2 == 0 ? m_Map.InsertHex(i,j,HEX_LAVA) : m_Map.InsertHex(i,j,HEX_ROCK);
+        }
+        for(int i = 40 ; i < 60; ++i)
+        {
+            for(int j = 20; j < 60; ++j)
                 m_Map.InsertHex(i,j,HEX_LAVA);
         }
+        m_Map.InsertHex(25,25,HEX_MAGIC);
+        m_Map.InsertHex(25,26,HEX_MAGIC);
+        m_Map.InsertHex(24,26,HEX_MAGIC);
+
     }
     std::pair<int, int> PlayState::CalculateXY(int x, int y)
     {

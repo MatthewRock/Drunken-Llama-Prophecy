@@ -20,6 +20,7 @@ namespace Llama
 
     struct Hex
     {
+        Hex():type(HEX_DIRT){}
         Hex(HexType typee) : type(typee){}
         HexType type;
         bool Passable()
