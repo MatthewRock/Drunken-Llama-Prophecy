@@ -1,5 +1,6 @@
 #include "Land.hpp"
 #include <iostream>
+#include "Collision.hpp"
 
 namespace Llama
 {
@@ -42,34 +43,35 @@ namespace Llama
             ++i;
         }
     }
-    void Land::DrawInProximityDebug(int x, int y)
+    std::pair<int,int> Land::CheckCollision(SDL_Event& event)
     {
-        //Character will be the center of action.
-        int newx = x - 10;
-        int newy = y - 10;
-        //If we got out of map, correct it.
-        //TODO: Correct for going out of max bounds too
-        if(newx < 0) newx = 0;
-        if(newy < 0) newy = 0;
-        // Know when to stop looping
-        int finishx = newx + 5;
-        int finishy = newy + 5;
-
-        int i = 0, j = 0;
-        //Print tiles
-        for(; newx < finishx; ++newx)
+        int distances[20][20];
+        for(int i = 0; i < 20; ++i)
         {
-            for(int yy = newy; yy < finishy; ++yy)
+            for(int j = 0; j < 20; ++j)
             {
-                //Get type and coords
-                auto type = m_Graph.GetHexType(newx, yy);
-                auto cords = coords[i][j];
-                //Finally print
-                m_HexTextureManager.GetElement(type)->DebugDrawOutline(cords.first, cords.second);
-                j = (j + 1) % 20;
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i][j]);
             }
-            ++i;
         }
+        int min, x = 0, y = 0;
+        min = distances[0][0];
+        for(int i = 0; i < 20; ++i)
+        {
+            for(int j = 0; j < 20; ++j)
+            {
+                if(min > distances[i][j])
+                {
+                    min = distances[i][j];
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        //I don't know why, but I have to adjust according to Y... Why ;__;
+        m_Graph.InsertHex(y%2==0?x:x-1,y-1,HEX_MAGIC);
+        //TODO: When character class is ready, make him move.
+        //return std::make_pair(x,y);
+
     }
+
 }
-// TODO (malice#1#): Fix segfault. Segfault's because w of texture is set to some huge number, not sure why.

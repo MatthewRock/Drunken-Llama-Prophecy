@@ -1,6 +1,8 @@
 #include "Texture.hpp"
 #include "Window.hpp"
 #include <cassert>
+#include <SDL2/SDL2_gfxPrimitives.h>
+#include <cmath>
 namespace Llama
 {
     Texture::Texture() : m_texture(nullptr, SDL_DestroyTexture), m_win(nullptr)
@@ -74,16 +76,5 @@ namespace Llama
         dest.w = m_rect.w;
         //Render using Window's renderer.
         SDL_RenderCopy(m_win->getRenderer(), m_texture.get(), &m_rect, &dest );
-        //SDL_RenderDrawRect(m_win->getRenderer(), &dest);
-    }
-
-    void Texture::DebugDrawOutline(int x, int y)
-    {
-        SDL_Rect dest;
-        dest.x = x;
-        dest.y = y;
-        dest.h = m_rect.h;
-        dest.w = m_rect.w;
-        SDL_RenderDrawRect(m_win->getRenderer(), &dest);
     }
 }

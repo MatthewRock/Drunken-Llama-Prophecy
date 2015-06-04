@@ -24,7 +24,7 @@ namespace Llama
             void InsertTexture(HexType type, Texture* texture);
             void InsertHex(int x, int y, HexType type);
             void DrawInProximity(int x, int y);
-            void DrawInProximityDebug(int x, int y);
+            std::pair<int,int> CheckCollision(SDL_Event& event);
         protected:
 
         private:

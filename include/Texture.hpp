@@ -44,7 +44,6 @@ namespace Llama
         //Draw texture on screen using Window's renderer, at coordinates of x and y
         void Draw(Window& win, int x = 0, int y = 0);
         void Draw(int x = 0, int y = 0);
-        void DebugDrawOutline(int x, int y);
 
         //Converter. It's going to be used in Draw(), it is natural that Texture should be able to take form of ordinary SDL_Texture*.
         operator SDL_Texture*() {return m_texture.get();}

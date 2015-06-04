@@ -132,6 +132,11 @@ namespace Llama
             }
         }
         m_Camera.UpdateXY(movedX * Hex::WIDTH, movedY * Hex::HEIGHT);
+
+        if(event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            m_Map.CheckCollision(event);
+        }
     }
     void PlayState::Update()
     {
@@ -141,7 +146,6 @@ namespace Llama
     void PlayState::Draw()
     {
         m_Map.DrawInProximity(m_charX, m_charY);
-        m_Map.DrawInProximityDebug(m_charX, m_charY);
         //auto tempCords = CalculateXY(m_charX, m_charY);
         auto tempCords = CalculateXY(9, 8);
         CorrectForChar(tempCords);
