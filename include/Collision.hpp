@@ -15,7 +15,7 @@ namespace Llama
         }
         int MouseHexCollision(SDL_Event& event, std::pair<int,int>& hexCoords)
         {
-            int dist = distance(event.button.x, event.button.y, hexCoords.first+4, hexCoords.second-6);
+            int dist = distance(event.button.x, event.button.y, hexCoords.first + 30, hexCoords.second+35);//26 = Hex::WIDTH/2,41 = Hex::HEIGHT/2, then x+4, y-6
             return dist;
             //radius of circle should be(from experiments):32
             //X of circle = x+4, y=y-6

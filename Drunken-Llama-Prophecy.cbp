@@ -36,13 +36,16 @@
 		<Linker>
 			<Add option="-lSDL2 -lSDL2_image -lSDL2_mixer" />
 		</Linker>
+		<Unit filename="include/AnimationHandler.hpp" />
 		<Unit filename="include/Camera.hpp">
 			<Option compile="1" />
 		</Unit>
 		<Unit filename="include/Character.hpp">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="include/Collision.hpp" />
+		<Unit filename="include/Collision.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/Command.hpp">
 			<Option compile="1" />
 		</Unit>
@@ -52,6 +55,7 @@
 		<Unit filename="include/GameEngine.hpp">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="include/GameObject.hpp" />
 		<Unit filename="include/GameState.hpp">
 			<Option compile="1" />
 		</Unit>
@@ -110,10 +114,12 @@
 			<Option compile="1" />
 		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="src/AnimationHandler.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Character.cpp" />
 		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
+		<Unit filename="src/GameObject.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Graph.cpp" />
 		<Unit filename="src/Initializer.cpp" />

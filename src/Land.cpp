@@ -67,8 +67,9 @@ namespace Llama
                 }
             }
         }
-        //I don't know why, but I have to adjust according to Y... Why ;__;
-        m_Graph.InsertHex(y%2==0?x:x-1,y-1,HEX_MAGIC);
+        //TODO: Make it according to camera!!
+        //TODO: Make drawing better, wtf effects...
+        m_Graph.InsertHex(x,y,HEX_MAGIC);
         //TODO: When character class is ready, make him move.
         //return std::make_pair(x,y);
 
