@@ -21,7 +21,7 @@ namespace Llama
         m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
         m_Map.InsertTexture(HEX_DIRT, new Texture("media/Tile/tileDirt_tile.png", *m_win));
 
-        m_Character = std::unique_ptr<Texture>(new Texture("media/Tile/alienBeige.png", *m_win));
+        m_Character = std::unique_ptr<PlayableCharacter>(new PlayableCharacter("Pszemek","media/Tile/alienBeige.png", *m_win, 9, 8));
 // TODO (malice#1#): Make drawing Hexes simple and easy
 
         m_hexWidth = 56;
@@ -65,56 +65,28 @@ namespace Llama
             switch(event.key.keysym.sym)
             {
                 case SDLK_q:
-                    m_charY--;
-                    movedY--;
-                    if(m_charY % 2 == 0)
-                    {
-                        m_charX--;
-                        movedX--;
-                    }
+                    m_Character->Move((m_Character->GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
                 break;
                 case SDLK_w:
-                    m_charY--;
-                    movedY--;
+                    m_Character->Move( 0, --movedY );
                 break;
                 case SDLK_e:
-                    m_charY--;
-                    movedY--;
-                    if(m_charY % 2 == 1)
-                    {
-                        m_charX++;
-                        movedX++;
-                    }
+                    m_Character->Move((m_Character->GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
                 break;
                 case SDLK_z:
-                    m_charY++;
-                    movedY = true;
-                    if(m_charY % 2 == 0)
-                    {
-                        m_charX--;
-                        movedX--;
-                    }
+                    m_Character->Move((m_Character->GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
                 break;
                 case SDLK_c:
-                    m_charY++;
-                    movedY = true;
-                    if(m_charY % 2 == 1)
-                    {
-                        m_charX++;
-                        movedX++;
-                    }
+                    m_Character->Move((m_Character->GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
                 break;
                 case SDLK_s:
-                    m_charY++;
-                    movedY++;
+                    m_Character->Move(0, ++movedY);
                 break;
                 case SDLK_a:
-                    m_charX--;
-                    movedX--;
+                    m_Character->Move(--movedX, 0);
                 break;
                 case SDLK_d:
-                    m_charX++;
-                    movedX++;
+                    m_Character->Move(++movedX, 0);
                 break;
                 case SDLK_n:
                     m_musIterator++;
@@ -140,12 +112,12 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        m_Map.DrawInProximity(m_charX, m_charY);
-        m_Map.DrawInProximityDebug(m_charX, m_charY);
+        m_Map.DrawInProximity(m_Character->GetPosition().first, m_Character->GetPosition().second);
+        m_Map.DrawInProximityDebug(m_Character->GetPosition().first, m_Character->GetPosition().second);
         //auto tempCords = CalculateXY(m_charX, m_charY);
-        auto tempCords = CalculateXY(9, 8);
-        CorrectForChar(tempCords);
-        m_Character->Draw(tempCords.first, tempCords.second);
+        //auto tempCords = CalculateXY(9, 8);
+        //CorrectForChar(tempCords);
+        m_Character->Draw(/*tempCords.first, tempCords.second*/);
 
     }
 }

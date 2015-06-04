@@ -5,10 +5,11 @@ namespace Llama
     {
         //ctor
     }
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y) : m_x(x), m_y(y)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y) : m_tex(filename, win)
     {
-        SetName(n);
-        m_tex.Init(filename, win);
+        m_position = std::make_pair(x, y);
+        m_translocation = std::make_pair(0, 0);
+        Setname(n);
     }
     PlayableCharacter::~PlayableCharacter()
     {
@@ -17,11 +18,15 @@ namespace Llama
 
     void PlayableCharacter::Draw()
     {
-        m_tex.Draw(m_x, m_y);
+        m_tex.Draw(std::make_pair(9,8));
+        if(m_tex.IsIdle())
+            m_translocation = std::make_pair(0, 0);
     }
-    void PlayableCharacter::Move()
+
+    void PlayableCharacter::Move(int x, int y)
     {
-
-
+        m_translocation = std::make_pair(x, y);
+        m_position.first += x;
+        m_position.second += y;
     }
 }

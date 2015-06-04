@@ -4,7 +4,7 @@
 #include "GameState.hpp"
 #include "Window.hpp"
 #include "Manager.hpp"
-#include "Texture.hpp"
+#include "PlayableCharacter.hpp"
 #include <utility> // std::pair
 #include "Sounds.hpp"
 #include "Land.hpp"
@@ -30,7 +30,7 @@ namespace Llama
             Manager<int,Sounds::BGM> m_MusicManager;
             Camera m_Camera;
 
-            std::unique_ptr<Texture> m_Character;
+            std::unique_ptr<PlayableCharacter> m_Character;
             Land m_Map;
             int m_hexWidth;
             int m_hexHeight;
