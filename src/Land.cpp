@@ -14,7 +14,7 @@ namespace Llama
         m_Graph.InsertHex(x,y,type);
     }
     //19x20(x,y) hexes grid fits on screen
-    void Land::DrawInProximity(int x, int y)
+    void Land::DrawInProximity(int x, int y, int offsetx = 0, int offsety = 0)
     {
         //Character will be the center of action.
         int newx = x - 10;
@@ -41,7 +41,7 @@ namespace Llama
                     type = m_Graph.GetHexType(newx-1, yy);
                 auto cords = coords[i][j];
                 //Finally print
-                m_HexTextureManager.GetElement(type)->Draw(cords.first, cords.second);
+                m_HexTextureManager.GetElement(type)->Draw(cords.first + offsetx, cords.second + offsety);
                 j = (j + 1) % 20;
             }
             ++i;

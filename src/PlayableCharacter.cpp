@@ -16,13 +16,21 @@ namespace Llama
 
     void PlayableCharacter::Move(int x, int y)
     {
-        m_translocation = std::make_pair(x, y);
-        m_position.first += x;
-        m_position.second += y;
+        if(m_tex.IsIdle())
+        {
+            m_translocation = std::make_pair(x, y);
+            m_position.first += x;
+            m_position.second += y;
+            m_tex.InitiateAnimation();
+        }
     }
     void PlayableCharacter::Teleport(int x,int y)
     {
         m_position.first  = x;
         m_position.second = y;
+    }
+    std::pair<int, int> PlayableCharacter::GetAnimationOffset()
+    {
+        return std::make_pair( m_translocation.first * 56 * (15 - m_tex.getFrame()) / 15, m_translocation.second * 82 * (15 - m_tex.getFrame()) / 15);
     }
 }

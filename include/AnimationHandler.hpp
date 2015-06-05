@@ -7,15 +7,20 @@ namespace Llama
 {
     class AnimationHandler
     {
+
         public:
             AnimationHandler();
             AnimationHandler(const char*, Window&);
             virtual ~AnimationHandler();
 
             void Draw(std::pair<int,int>);
-            bool IsIdle()     { return m_idle; }
+            bool IsIdle()           {   return m_idle;  }
+            int  getFrame()         {   return m_framecounter;  }
+            int  currentAnimation() {   return m_currentAnim;   }
+            void InitiateAnimation();
         protected:
         private:
+            int     m_currentAnim;
             Texture m_tex;
             int     m_framecounter;
             bool    m_idle;

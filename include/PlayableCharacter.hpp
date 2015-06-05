@@ -16,7 +16,8 @@ namespace Llama
             void Draw();
             void Move(int, int);
             void Teleport(int,int);
-            std::pair<int, int> GetPosition()  {   return m_position;  }
+            std::pair<int, int> GetPosition()       {   return m_position;  }
+            std::pair<int, int> GetAnimationOffset();
         protected:
         private:
         std::pair<int, int> m_position;

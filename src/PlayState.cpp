@@ -121,7 +121,7 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        m_Map.DrawInProximity(m_Character.GetPosition().first, m_Character.GetPosition().second);
+        m_Map.DrawInProximity(m_Character.GetPosition().first, m_Character.GetPosition().second, m_Character.GetAnimationOffset().first, m_Character.GetAnimationOffset().second);
 
         //auto tempCords = CalculateXY(m_charX, m_charY);
         //auto tempCords = CalculateXY(9, 8);
