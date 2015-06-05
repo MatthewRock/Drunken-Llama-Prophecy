@@ -31,6 +31,6 @@ namespace Llama
     }
     std::pair<int, int> PlayableCharacter::GetAnimationOffset()
     {
-        return std::make_pair( m_translocation.first * 56 * (15 - m_tex.getFrame()) / 15, m_translocation.second * 82 * (15 - m_tex.getFrame()) / 15);
+        return std::make_pair( ((m_translocation.first + ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 46) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
     }
 }

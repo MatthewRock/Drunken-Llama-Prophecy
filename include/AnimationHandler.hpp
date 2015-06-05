@@ -17,9 +17,11 @@ namespace Llama
             bool IsIdle()           {   return m_idle;  }
             int  getFrame()         {   return m_framecounter;  }
             int  currentAnimation() {   return m_currentAnim;   }
+            int  getAnimationLength(){  return m_animationLength;}
             void InitiateAnimation();
         protected:
         private:
+            const int m_animationLength = 150;
             int     m_currentAnim;
             Texture m_tex;
             int     m_framecounter;
