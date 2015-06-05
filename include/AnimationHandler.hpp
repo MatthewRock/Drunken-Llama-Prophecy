@@ -21,7 +21,7 @@ namespace Llama
             void InitiateAnimation();
         protected:
         private:
-            const int m_animationLength = 150;
+            const int m_animationLength = 15;
             int     m_currentAnim;
             Texture m_tex;
             int     m_framecounter;

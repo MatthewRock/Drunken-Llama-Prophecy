@@ -14,6 +14,11 @@ namespace Llama
             m_translocation = std::make_pair(0, 0);
     }
 
+    void PlayableCharacter::Order(Orders ord, int x, int y)
+    {
+        m_ordersQueue.push(std::make_tuple(ord, x, y));
+
+    }
     void PlayableCharacter::Move(int x, int y)
     {
         if(m_tex.IsIdle())
@@ -24,6 +29,23 @@ namespace Llama
             m_tex.InitiateAnimation();
         }
     }
+    void PlayableCharacter::Execute()
+    {
+        if(!m_ordersQueue.empty())
+        {
+            OrderExecutor(m_ordersQueue.front());
+            m_ordersQueue.pop();
+        }
+    }
+    void PlayableCharacter::OrderExecutor(std::tuple<Orders, int, int> ord)
+    {
+        switch(std::get<0>(ord))
+        {
+            case MOVE:
+                Move(std::get<1>(ord), std::get<2>(ord));
+            break;
+        }
+    }
     void PlayableCharacter::Teleport(int x,int y)
     {
         m_position.first  = x;
@@ -31,6 +53,6 @@ namespace Llama
     }
     std::pair<int, int> PlayableCharacter::GetAnimationOffset()
     {
-        return std::make_pair( ((m_translocation.first + ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 46) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
+        return std::make_pair( ((m_translocation.first + ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
     }
 }

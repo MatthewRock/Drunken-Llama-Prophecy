@@ -63,34 +63,37 @@ namespace Llama
     void PlayState::HandleEvents(SDL_Event& event)
     {
         int movedX = 0, movedY = 0;
-        if(event.type == SDL_KEYDOWN)
+        if(event.type == SDL_KEYDOWN && m_Character.IsIdle())
         {
             switch(event.key.keysym.sym)
             {
+                if(m_Character.IsIdle())
+                {
                 case SDLK_q:
-                    m_Character.Move((m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
+                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
                 break;
                 case SDLK_w:
-                    m_Character.Move( 0, --movedY );
+                    m_Character.Order(PlayableCharacter::MOVE, 0, --movedY );
                 break;
                 case SDLK_e:
-                    m_Character.Move((m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
+                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
                 break;
                 case SDLK_z:
-                    m_Character.Move((m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
+                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
                 break;
                 case SDLK_c:
-                    m_Character.Move((m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
+                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
                 break;
                 case SDLK_s:
-                    m_Character.Move(0, ++movedY);
+                    m_Character.Order(PlayableCharacter::MOVE, 0, ++movedY);
                 break;
                 case SDLK_a:
-                    m_Character.Move(--movedX, 0);
+                    m_Character.Order(PlayableCharacter::MOVE, --movedX, 0);
                 break;
                 case SDLK_d:
-                    m_Character.Move(++movedX, 0);
+                    m_Character.Order(PlayableCharacter::MOVE, ++movedX, 0);
                 break;
+                }
                 case SDLK_n:
                     m_musIterator++;
                     if(m_musIterator == m_MusicManager.End())
@@ -108,11 +111,18 @@ namespace Llama
         }
         m_Camera.UpdateXY(movedX * Hex::WIDTH, movedY * Hex::HEIGHT);
 
+
         if(event.type == SDL_MOUSEBUTTONDOWN)
         {
             //m_Map.CheckCollision(event);
             m_Map.MoveCharacterAccordingly(event, m_Character);
         }
+
+        if(m_Character.IsIdle())
+        {
+            m_Character.Execute();
+        }
+
     }
     void PlayState::Update()
     {
