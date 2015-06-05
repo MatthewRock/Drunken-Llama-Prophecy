@@ -72,10 +72,45 @@ namespace Llama
             }
         }
         //TODO: Make it according to camera!!
-        //TODO: Make drawing better, wtf effects...
         m_Graph.InsertHex(x,y,HEX_MAGIC);
         //TODO: When character class is ready, make him move.
         //return std::make_pair(x,y);
 
+    }
+    void Land::MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character)
+    {
+        //Get distance to every hex's middle
+        int distances[20][20];
+        for(int i = 0; i < 20; ++i)
+        {
+            for(int j = 0; j < 20; ++j)
+            {
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i][j]);
+            }
+        }
+        //Find the hex with closest middle point; we clicked on this hex
+        int min, x = 0, y = 0;
+        min = distances[0][0];
+        for(int i = 0; i < 20; ++i)
+        {
+            for(int j = 0; j < 20; ++j)
+            {
+                if(min > distances[i][j])
+                {
+                    min = distances[i][j];
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        //Shift x and y according to character position.
+        x += character.GetPosition().first - (character.GetPosition().second%2==0? 10:9);
+        y += character.GetPosition().second - 8;
+
+        if(y%2==0 && character.GetPosition().second%2==0)
+            ++x;
+        //Now move character to that tile.
+        character.Teleport(x,y);
+// TODO (malice#1#): Make it simpler.
     }
 }

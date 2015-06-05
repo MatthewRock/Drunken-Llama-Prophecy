@@ -30,7 +30,7 @@ namespace Llama
             Manager<int,Sounds::BGM> m_MusicManager;
             Camera m_Camera;
 
-            std::unique_ptr<PlayableCharacter> m_Character;
+            PlayableCharacter m_Character;
             Land m_Map;
             int m_hexWidth;
             int m_hexHeight;

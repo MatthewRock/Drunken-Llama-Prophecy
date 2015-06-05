@@ -9,7 +9,7 @@ namespace Llama
 {
 // TODO (malice#1#): Change this from magic number to some actual map size
 
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100)
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/Tile/alienBeige.png", *m_win, 32, 32)
     {
         m_engine = eng;
 
@@ -21,7 +21,6 @@ namespace Llama
         m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
         m_Map.InsertTexture(HEX_DIRT, new Texture("media/Tile/tileDirt_tile.png", *m_win));
 
-        m_Character = std::unique_ptr<PlayableCharacter>(new PlayableCharacter("Pszemek","media/Tile/alienBeige.png", *m_win, 32, 32));
 // TODO (malice#1#): Make drawing Hexes simple and easy
 
         m_hexWidth = 56;
@@ -69,28 +68,28 @@ namespace Llama
             switch(event.key.keysym.sym)
             {
                 case SDLK_q:
-                    m_Character->Move((m_Character->GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
+                    m_Character.Move((m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
                 break;
                 case SDLK_w:
-                    m_Character->Move( 0, --movedY );
+                    m_Character.Move( 0, --movedY );
                 break;
                 case SDLK_e:
-                    m_Character->Move((m_Character->GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
+                    m_Character.Move((m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
                 break;
                 case SDLK_z:
-                    m_Character->Move((m_Character->GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
+                    m_Character.Move((m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
                 break;
                 case SDLK_c:
-                    m_Character->Move((m_Character->GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
+                    m_Character.Move((m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
                 break;
                 case SDLK_s:
-                    m_Character->Move(0, ++movedY);
+                    m_Character.Move(0, ++movedY);
                 break;
                 case SDLK_a:
-                    m_Character->Move(--movedX, 0);
+                    m_Character.Move(--movedX, 0);
                 break;
                 case SDLK_d:
-                    m_Character->Move(++movedX, 0);
+                    m_Character.Move(++movedX, 0);
                 break;
                 case SDLK_n:
                     m_musIterator++;
@@ -111,7 +110,8 @@ namespace Llama
 
         if(event.type == SDL_MOUSEBUTTONDOWN)
         {
-            m_Map.CheckCollision(event);
+            //m_Map.CheckCollision(event);
+            m_Map.MoveCharacterAccordingly(event, m_Character);
         }
     }
     void PlayState::Update()
@@ -121,12 +121,12 @@ namespace Llama
     }
     void PlayState::Draw()
     {
-        m_Map.DrawInProximity(m_Character->GetPosition().first, m_Character->GetPosition().second);
+        m_Map.DrawInProximity(m_Character.GetPosition().first, m_Character.GetPosition().second);
 
         //auto tempCords = CalculateXY(m_charX, m_charY);
         //auto tempCords = CalculateXY(9, 8);
         //CorrectForChar(tempCords);
-        m_Character->Draw(/*tempCords.first, tempCords.second*/);
+        m_Character.Draw(/*tempCords.first, tempCords.second*/);
 
     }
 }

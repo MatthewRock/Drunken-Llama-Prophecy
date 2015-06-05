@@ -9,12 +9,13 @@ namespace Llama
     class PlayableCharacter : public Character
     {
         public:
-            PlayableCharacter();
+            PlayableCharacter() = default;
             PlayableCharacter(std::string, const char*, Window&, int, int);
-            virtual ~PlayableCharacter();
+            ~PlayableCharacter() = default;
 
             void Draw();
             void Move(int, int);
+            void Teleport(int,int);
             std::pair<int, int> GetPosition()  {   return m_position;  }
         protected:
         private:

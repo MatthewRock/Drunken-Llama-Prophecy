@@ -5,6 +5,7 @@
 #include "Manager.hpp"
 #include "Graph.hpp"
 #include "Camera.hpp"
+#include "PlayableCharacter.hpp"
 
 namespace Llama
 {
@@ -25,6 +26,7 @@ namespace Llama
             void InsertHex(int x, int y, HexType type);
             void DrawInProximity(int x, int y);
             std::pair<int,int> CheckCollision(SDL_Event& event);
+            void MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character);
         protected:
 
         private:
