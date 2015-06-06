@@ -44,6 +44,8 @@ namespace Llama
             case MOVE:
                 Move(std::get<1>(ord), std::get<2>(ord));
             break;
+            default:
+            break;
         }
     }
     void PlayableCharacter::Teleport(int x,int y)

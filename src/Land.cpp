@@ -103,11 +103,10 @@ namespace Llama
                 }
             }
         }
-        //Shift x and y according to character position.
-        x += character.GetPosition().first - (character.GetPosition().second%2==0? 10:9);
-        y += character.GetPosition().second - 8;
+        x += character.GetPosition().first - 9;
+        y += character.GetPosition().second - 9;
 
-        if(y%2==0 && character.GetPosition().second%2==0)
+        if(y%2==0 && character.GetPosition().second%2==1)
             ++x;
         //Now move character to that tile.
         character.Teleport(x,y);
