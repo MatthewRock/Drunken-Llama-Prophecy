@@ -17,8 +17,8 @@ namespace Llama
     void Land::DrawInProximity(int x, int y, int offsetx = 0, int offsety = 0)
     {
         //Character will be the center of action.
-        int newx = x - 11;
-        int newy = y - 11;
+        int newx = x - 10;
+        int newy = y - 10;
         //If we got out of map, correct it.
         //TODO: Correct for going out of max bounds too
         if(newx < 0) newx = 0;
@@ -26,7 +26,7 @@ namespace Llama
         // Know when to stop looping
         int finishx = newx + 22;
         int finishy = newy + 22;
-        bool flag = (y % 2 == 1 ? true : false);
+        bool flag = (y % 2 == 0 ? true : false);
         int i = 0, j = 0;
         //Print tiles
         for(; newx < finishx; ++newx)
@@ -54,7 +54,7 @@ namespace Llama
         {
             for(int j = 0; j < 20; ++j)
             {
-                distances[i][j] = Collision::MouseHexCollision(event, coords[i+1][j+1]);
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i+2][j+1]);
             }
         }
         int min, x = 0, y = 0;
@@ -85,7 +85,7 @@ namespace Llama
         {
             for(int j = 0; j < 20; ++j)
             {
-                distances[i][j] = Collision::MouseHexCollision(event, coords[i+1][j+1]);
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i+2][j+1]);
             }
         }
         //Find the hex with closest middle point; we clicked on this hex
@@ -106,7 +106,7 @@ namespace Llama
         x += character.GetPosition().first - 9;
         y += character.GetPosition().second - 9;
 
-        if(y%2==0 && character.GetPosition().second%2==1)
+        if(y%2==1 && character.GetPosition().second%2==0)
             ++x;
         //Now move character to that tile.
         character.Teleport(x,y);

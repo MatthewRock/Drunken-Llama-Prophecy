@@ -18,7 +18,7 @@ namespace Llama
                 {
                     for(int j = 0; j < 22; ++j)
                     {
-                        coords[i][j] = m_Graph.CalculateXY(i-1,j-1);
+                        coords[i][j] = m_Graph.CalculateXY(i-2,j-1);
                     }
                 }
             };

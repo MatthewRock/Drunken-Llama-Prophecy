@@ -26,7 +26,7 @@ namespace Llama
             m_translocation = std::make_pair(x, y);
             m_position.first += x;
             m_position.second += y;
-            if( (x < 0) || ( (m_position.second % 2 == 0) && (y!=0) && (x == 0) ) )
+            if( (x < 0) || ( (m_position.second % 2 == 1) && (y!=0) && (x == 0) ) )
             {
                 m_tex.InitiateAnimation(AnimationHandler::WALK_LEFT);
             }
@@ -62,6 +62,6 @@ namespace Llama
     }
     std::pair<int, int> PlayableCharacter::GetAnimationOffset()
     {
-        return std::make_pair( ((m_translocation.first + ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
+        return std::make_pair( ((m_translocation.first - ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
     }
 }

@@ -9,7 +9,7 @@ namespace Llama
 {
 // TODO (malice#1#): Change this from magic number to some actual map size
 
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 32, 32)
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25)
     {
         m_engine = eng;
 
@@ -70,19 +70,19 @@ namespace Llama
                 if(m_Character.IsIdle())
                 {
                 case SDLK_q:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? --movedX : 0, --movedY );
                 break;
                 case SDLK_w:
                     m_Character.Order(Character::MOVE, 0, --movedY );
                 break;
                 case SDLK_e:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? ++movedX : 0, --movedY);
                 break;
                 case SDLK_z:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? --movedX : 0, ++movedY);
                 break;
                 case SDLK_c:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? ++movedX : 0, ++movedY);
                 break;
                 case SDLK_s:
                     m_Character.Order(Character::MOVE, 0, ++movedY);
