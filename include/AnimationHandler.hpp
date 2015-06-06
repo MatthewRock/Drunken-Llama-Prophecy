@@ -10,6 +10,7 @@ namespace Llama
     {
 
         public:
+            enum Animations { IDLE = 0, WALK_RIGHT, WALK_LEFT};
             AnimationHandler();
             AnimationHandler(const char*, Window&, int, int);
             virtual ~AnimationHandler();
@@ -19,7 +20,7 @@ namespace Llama
             int  getFrame()         {   return m_framecounter;  }
             int  currentAnimation() {   return m_currentAnim;   }
             int  getAnimationLength(){  return m_animationLength;}
-            void InitiateAnimation();
+            void InitiateAnimation(Animations);
         protected:
         private:
             SDL_Rect  m_rect;

@@ -5,7 +5,7 @@ namespace Llama
     {
         //ctor
     }
-    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_idle(true), m_framecounter(0), m_win(&win)
+    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_idle(true), m_framecounter(0), m_win(&win), m_currentAnim(0)
     {
         m_rect.x = 0;
         m_rect.y = 0;
@@ -18,8 +18,9 @@ namespace Llama
         //dtor
     }
 
-    void AnimationHandler::InitiateAnimation()
+    void AnimationHandler::InitiateAnimation(Animations a)
     {
+        m_currentAnim = a;
         m_idle = false;
 
     }
@@ -32,7 +33,6 @@ namespace Llama
         dest.y = (coords.second - 1) * .5 * 82 + 37 /*m_rect.h/2*/;
         dest.w = m_rect.w;
         dest.h = m_rect.h;
-        SDL_RenderCopy(m_win->getRenderer(), (m_tex), &m_rect, &dest);
 
         //m_tex.Draw(((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) + 11 - m_tex.GetW()/2, (coords.second - 1) * .5 * 82 - m_tex.GetH()/2);
         if(!m_idle)
@@ -58,6 +58,10 @@ namespace Llama
                     m_idle = true;
                 }
         }
+        if(m_currentAnim == WALK_LEFT)
+            SDL_RenderCopyEx(m_win->getRenderer(), (m_tex), &m_rect, &dest, 0, NULL, SDL_FLIP_HORIZONTAL);
+        else
+            SDL_RenderCopy(m_win->getRenderer(), (m_tex), &m_rect, &dest);
 
     }
 }

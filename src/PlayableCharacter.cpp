@@ -26,7 +26,14 @@ namespace Llama
             m_translocation = std::make_pair(x, y);
             m_position.first += x;
             m_position.second += y;
-            m_tex.InitiateAnimation();
+            if( (x < 0) || ( (m_position.second % 2 == 0) && (y!=0) && (x == 0) ) )
+            {
+                m_tex.InitiateAnimation(AnimationHandler::WALK_LEFT);
+            }
+            else
+            {
+                m_tex.InitiateAnimation(AnimationHandler::WALK_RIGHT);
+            }
         }
     }
     void PlayableCharacter::Execute()
