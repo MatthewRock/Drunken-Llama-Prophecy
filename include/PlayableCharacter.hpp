@@ -23,6 +23,8 @@ namespace Llama
             ///\brief Moves character in desired direction
             ///\param Two ints. X and Y components of translocation vector
             void Move(int, int);
+            ///\brief Attacks(for now only animation) in specified direction(for now only right/left)
+            void Attack(int, int);
             ///\brief Executes first order stored in queue. In case of empty queue does nothing
             void Execute();
             void Teleport(int,int);

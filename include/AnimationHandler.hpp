@@ -10,7 +10,7 @@ namespace Llama
     {
 
         public:
-            enum Animations { IDLE = 0, WALK_RIGHT, WALK_LEFT};
+            enum Animations { IDLE = 0, WALK_RIGHT, WALK_LEFT, ATTACK_ANIM, ATTACK_LEFT, ATTACK_RIGHT};
             AnimationHandler();
             AnimationHandler(const char*, Window&, int, int);
             virtual ~AnimationHandler();

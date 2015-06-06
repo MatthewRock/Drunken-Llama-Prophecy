@@ -9,7 +9,7 @@ namespace Llama
     }
     void PlayableCharacter::Draw()
     {
-        m_tex.Draw(std::make_pair(9,8));
+        m_tex.Draw(std::make_pair(9,9));
         if(m_tex.IsIdle())
             m_translocation = std::make_pair(0, 0);
     }
@@ -21,20 +21,23 @@ namespace Llama
     }
     void PlayableCharacter::Move(int x, int y)
     {
-        if(m_tex.IsIdle())
+
+        m_translocation = std::make_pair(x, y);
+        m_position.first += x;
+        m_position.second += y;
+        if( (x < 0) || ( (m_position.second % 2 == 1) && (y!=0) && (x == 0) ) )
         {
-            m_translocation = std::make_pair(x, y);
-            m_position.first += x;
-            m_position.second += y;
-            if( (x < 0) || ( (m_position.second % 2 == 1) && (y!=0) && (x == 0) ) )
-            {
-                m_tex.InitiateAnimation(AnimationHandler::WALK_LEFT);
-            }
-            else
-            {
-                m_tex.InitiateAnimation(AnimationHandler::WALK_RIGHT);
-            }
+            m_tex.InitiateAnimation(AnimationHandler::WALK_LEFT);
         }
+        else
+        {
+            m_tex.InitiateAnimation(AnimationHandler::WALK_RIGHT);
+        }
+
+    }
+    void PlayableCharacter::Attack(int x, int y)
+    {
+        m_tex.InitiateAnimation(AnimationHandler::ATTACK_ANIM);
     }
     void PlayableCharacter::Execute()
     {
@@ -51,6 +54,8 @@ namespace Llama
             case MOVE:
                 Move(std::get<1>(ord), std::get<2>(ord));
             break;
+            case ATTACK:
+                Attack(std::get<1>(ord), std::get<2>(ord));
             default:
             break;
         }

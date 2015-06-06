@@ -93,6 +93,9 @@ namespace Llama
                 case SDLK_d:
                     m_Character.Order(Character::MOVE, ++movedX, 0);
                 break;
+                case SDLK_SPACE:
+                    m_Character.Order(Character::ATTACK, 0, 0);
+                break;
                 }
                 case SDLK_n:
                     m_musIterator++;
