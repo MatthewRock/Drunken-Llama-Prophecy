@@ -70,28 +70,28 @@ namespace Llama
                 if(m_Character.IsIdle())
                 {
                 case SDLK_q:
-                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, --movedY );
                 break;
                 case SDLK_w:
-                    m_Character.Order(PlayableCharacter::MOVE, 0, --movedY );
+                    m_Character.Order(Character::MOVE, 0, --movedY );
                 break;
                 case SDLK_e:
-                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, --movedY);
                 break;
                 case SDLK_z:
-                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? --movedX : 0, ++movedY);
                 break;
                 case SDLK_c:
-                    m_Character.Order(PlayableCharacter::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
+                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? ++movedX : 0, ++movedY);
                 break;
                 case SDLK_s:
-                    m_Character.Order(PlayableCharacter::MOVE, 0, ++movedY);
+                    m_Character.Order(Character::MOVE, 0, ++movedY);
                 break;
                 case SDLK_a:
-                    m_Character.Order(PlayableCharacter::MOVE, --movedX, 0);
+                    m_Character.Order(Character::MOVE, --movedX, 0);
                 break;
                 case SDLK_d:
-                    m_Character.Order(PlayableCharacter::MOVE, ++movedX, 0);
+                    m_Character.Order(Character::MOVE, ++movedX, 0);
                 break;
                 }
                 case SDLK_n:

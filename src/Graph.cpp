@@ -8,7 +8,7 @@ namespace Llama
     /// \return That index or -1 if index would be out of bounds.
     Graph::Index Graph::CoordsToIndex(int x, int y)
     {
-        if(x < 0 || y < 0)
+        if(x < 0 || y < 0 || x > m_Width || y > m_Height)
             return -1;
         else
         {

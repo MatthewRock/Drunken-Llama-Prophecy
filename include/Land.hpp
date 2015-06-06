@@ -32,7 +32,7 @@ namespace Llama
         private:
             Manager<HexType, Texture> m_HexTextureManager;
             Graph m_Graph;
-            ///Stores screen coordinates for hexes. 0 indexes are off screen.
+            ///Stores screen coordinates for hexes. 0 indexes are off screen, 1 are first visible
             std::pair<int,int>coords[22][22];
     };
 }

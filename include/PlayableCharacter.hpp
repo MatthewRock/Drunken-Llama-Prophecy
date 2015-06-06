@@ -11,8 +11,6 @@ namespace Llama
     class PlayableCharacter : public Character
     {
         public:
-            ///brief Enum for orders. All except move: To be implemented ;______;
-            enum Orders { MOVE, ATTACK, INTERACT};
             PlayableCharacter() = default;
             PlayableCharacter(std::string, const char*, Window&, int, int);
             ~PlayableCharacter() = default;
