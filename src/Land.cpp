@@ -54,7 +54,7 @@ namespace Llama
         {
             for(int j = 0; j < 20; ++j)
             {
-                distances[i][j] = Collision::MouseHexCollision(event, coords[i][j]);
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i+1][j+1]);
             }
         }
         int min, x = 0, y = 0;
@@ -85,7 +85,7 @@ namespace Llama
         {
             for(int j = 0; j < 20; ++j)
             {
-                distances[i][j] = Collision::MouseHexCollision(event, coords[i][j]);
+                distances[i][j] = Collision::MouseHexCollision(event, coords[i+1][j+1]);
             }
         }
         //Find the hex with closest middle point; we clicked on this hex
