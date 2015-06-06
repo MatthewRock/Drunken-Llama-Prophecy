@@ -14,11 +14,11 @@ namespace Llama
         public:
             Land(int w, int h) : m_Graph(w,h)
             {
-                for(int i = 0; i < 20; ++i)
+                for(int i = 0; i < 22; ++i)
                 {
-                    for(int j = 0; j < 20; ++j)
+                    for(int j = 0; j < 22; ++j)
                     {
-                        coords[i][j] = m_Graph.CalculateXY(i,j);
+                        coords[i][j] = m_Graph.CalculateXY(i-1,j-1);
                     }
                 }
             };
@@ -32,7 +32,7 @@ namespace Llama
         private:
             Manager<HexType, Texture> m_HexTextureManager;
             Graph m_Graph;
-            std::pair<int,int>coords[20][20];
+            std::pair<int,int>coords[22][22];
     };
 }
 #endif // LAND_H

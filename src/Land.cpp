@@ -17,15 +17,15 @@ namespace Llama
     void Land::DrawInProximity(int x, int y, int offsetx = 0, int offsety = 0)
     {
         //Character will be the center of action.
-        int newx = x - 10;
-        int newy = y - 10;
+        int newx = x - 11;
+        int newy = y - 11;
         //If we got out of map, correct it.
         //TODO: Correct for going out of max bounds too
         if(newx < 0) newx = 0;
         if(newy < 0) newy = 0;
         // Know when to stop looping
-        int finishx = newx + 20;
-        int finishy = newy + 20;
+        int finishx = newx + 22;
+        int finishy = newy + 22;
         bool flag = (y % 2 == 1 ? true : false);
         int i = 0, j = 0;
         //Print tiles
@@ -42,7 +42,7 @@ namespace Llama
                 auto cords = coords[i][j];
                 //Finally print
                 m_HexTextureManager.GetElement(type)->Draw(cords.first + offsetx, cords.second + offsety);
-                j = (j + 1) % 20;
+                j = (j + 1) % 22;
             }
             ++i;
         }
