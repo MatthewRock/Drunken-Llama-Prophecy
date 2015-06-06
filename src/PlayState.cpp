@@ -9,7 +9,7 @@ namespace Llama
 {
 // TODO (malice#1#): Change this from magic number to some actual map size
 
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/Tile/alienBeige.png", *m_win, 32, 32)
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 32, 32)
     {
         m_engine = eng;
 

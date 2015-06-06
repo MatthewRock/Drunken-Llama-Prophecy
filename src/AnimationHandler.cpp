@@ -5,9 +5,12 @@ namespace Llama
     {
         //ctor
     }
-    AnimationHandler::AnimationHandler(const char* filename, Window& win) : m_tex(filename, win), m_idle(true), m_framecounter(0)
+    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_idle(true), m_framecounter(0), m_win(&win)
     {
-
+        m_rect.x = 0;
+        m_rect.y = 0;
+        m_rect.w = w;
+        m_rect.h = h;
     }
 
     AnimationHandler::~AnimationHandler()
@@ -24,16 +27,36 @@ namespace Llama
     void AnimationHandler::Draw(std::pair<int,int> coords)
     {   // 56 - hexWidth, 82 - hexHeight
 
+        SDL_Rect dest;
+        dest.x = ((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) - 29/* m_rect.w/2*/;
+        dest.y = (coords.second - 1) * .5 * 82 + 37 /*m_rect.h/2*/;
+        dest.w = m_rect.w;
+        dest.h = m_rect.h;
+        SDL_RenderCopy(m_win->getRenderer(), (m_tex), &m_rect, &dest);
 
-
-        m_tex.Draw(((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) + 11, (coords.second - 1) * .5 * 82 - 15);
+        //m_tex.Draw(((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) + 11 - m_tex.GetW()/2, (coords.second - 1) * .5 * 82 - m_tex.GetH()/2);
         if(!m_idle)
         {
-                if(++m_framecounter > m_animationLength - 1)
+                if(m_framecounter % (m_animationLength / 2) == 0)
+                {
+                    m_rect.x = 0;
+                    m_rect.y = 0;
+                }
+                else
+                {
+                    if(m_framecounter % 2 == 0)
                     {
-                        m_framecounter = 0;
-                        m_idle = true;
+                        m_rect.x = (m_framecounter % (m_animationLength / 2)) / 2 * (m_rect.w + 1);
                     }
+                }
+
+                if(++m_framecounter > m_animationLength - 1)
+                {
+                    m_rect.x = 0;
+                    m_rect.y = 0;
+                    m_framecounter = 0;
+                    m_idle = true;
+                }
         }
 
     }

@@ -1,7 +1,7 @@
 #include "PlayableCharacter.hpp"
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y) : m_tex(filename, win)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y) : m_tex(filename, win, 63, 63)
     {
         m_position = std::make_pair(x, y);
         m_translocation = std::make_pair(0, 0);
