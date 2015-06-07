@@ -41,7 +41,7 @@ namespace Llama
                 result.second = (y - 1) * .5 * Hex::HEIGHT;
                 return result;
             }
-            std::stack<std::pair<int,int> > AStarPrim(Graph::Index startIndex, Graph::Index goalIndex);
+            std::queue<std::pair<int,int> > AStarPrim(Graph::Index startIndex, Graph::Index goalIndex);
         protected:
         private:
             int m_Width, m_Height;

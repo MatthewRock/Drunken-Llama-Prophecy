@@ -54,7 +54,7 @@ namespace Llama
             static void Toggle();
             static void MuteToggle();
             static void Louder();
-            static void Quiter();
+            static void Quieter();
             static bool Playing(){return Mix_PlayingMusic();}
 
             BGM(const char* filename = nullptr);

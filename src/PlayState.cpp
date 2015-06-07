@@ -47,7 +47,7 @@ namespace Llama
                         {
                             if(event.type == SDL_KEYDOWN)
                             {
-                                if(event.key.keysym.sym == SDLK_TAB)
+                                if(event.key.keysym.sym == SDLK_TAB && event.key.repeat == 0)
                                 {
                                     return true;
                                 }

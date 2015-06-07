@@ -62,7 +62,7 @@ namespace Llama
                 m_framecounter = 0;
                 m_idle = true;
             }
-            std::cout << m_currentAnim << std::endl;
+         //   std::cout << m_currentAnim << std::endl;
         }
         if(m_currentAnim == WALK_LEFT || m_currentAnim == ATTACK_LEFT)
             SDL_RenderCopyEx(m_win->getRenderer(), (m_tex), &m_rect, &dest, 0, NULL, SDL_FLIP_HORIZONTAL);

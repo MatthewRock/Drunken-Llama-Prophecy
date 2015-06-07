@@ -67,7 +67,7 @@ namespace Llama
             else if(m_gameEvent.key.keysym.sym == SDLK_EQUALS)
                 Sounds::BGM::Louder();
             else if(m_gameEvent.key.keysym.sym == SDLK_MINUS)
-                Sounds::BGM::Quiter();
+                Sounds::BGM::Quieter();
 
         }
     }

@@ -71,7 +71,7 @@ namespace Llama
             BGM_SetVolume(BGM_GetVolume() + 2);
         }
         /// \brief Makes music quiter.
-        void BGM::Quiter()
+        void BGM::Quieter()
         {
             BGM_SetVolume(BGM_GetVolume() - 2);
         }

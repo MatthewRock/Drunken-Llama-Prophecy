@@ -61,23 +61,26 @@ namespace Llama
         if(previousOne != startIndex)
         {
             path.push(goalIndex); // Add destination to the end. It's the last tile we reach.
+            std::cout<< "A*: " << goalIndex << std::endl;
         }
         //Reconstruct path, as a stack. Top is first tile to go to.
         while(previousOne != startIndex)
         {
+            std::cout<< "A*: " << previousOne << std::endl;
             path.push(previousOne);
             previousOne = came_from[previousOne];
         }
         return path;
     }
-    std::stack<std::pair<int,int> > Graph::AStarPrim(Graph::Index startIndex, Graph::Index goalIndex)
+    std::queue<std::pair<int,int> > Graph::AStarPrim(Graph::Index startIndex, Graph::Index goalIndex)
     {
         auto indexStack = AStar(startIndex, goalIndex);
-        std::stack<std::pair<int,int> > result;
+        std::queue<std::pair<int,int> > result;
         if(indexStack.size() > 1)
         {
             Index beginning = indexStack.top();
             indexStack.pop();
+            result.push(HowToMoveFrom(startIndex,beginning));
             while(!indexStack.empty())
             {
                 Index destination = indexStack.top();
@@ -86,10 +89,9 @@ namespace Llama
                 beginning = destination;
             }
         }
-        else if(indexStack.size() == 1)
-        {
-            result.push(HowToMoveFrom(startIndex, goalIndex));
-        }
+        else
+            result.push(HowToMoveFrom(startIndex,goalIndex));
+
         return result;
     }
     /// \brief Constructs Hex from arguments and inserts it to graph.
@@ -103,11 +105,42 @@ namespace Llama
     }
     std::pair<int,int> Graph::HowToMoveFrom(Index start, Index end)
     {
-        int startX, startY, endX, endY;
+        int startX, startY, endX, endY, sumX, sumY;
         startX = start % m_Width;
         startY = start / m_Width;
         endX = end % m_Width;
         endY = end / m_Width;
-        return std::make_pair(endX - startX, endY - startY);
+        sumX = endX - startX;
+        sumY = endY - startY;
+        //if "C pressed"
+        char c = 'n';//default. n = no movement.
+            if(sumX == 1)
+            {
+                if(sumY == 1)
+                    c = 'c';
+                else if(sumY == 0)
+                    c = 'd';
+                else if(sumY == -1)
+                    c = 'e';
+            }
+            else if(sumX == 0)
+            {
+                if(sumY == 1)
+                    c = (startY % 2 == 0 ? 'z' : 'c');
+                else if(sumY == -1)
+                    c = (startY % 2 == 0 ? 'q' : 'e');
+            }
+            else if(sumX == -1)
+            {
+                if(sumY == 1)
+                    c = 'z';
+                else if(sumY == 0)
+                    c = 'a';
+                else if(sumY == -1)
+                    c = 'q';
+            }
+
+        std::cout<< c << std::endl;
+        return std::pair<int,int>(c, 0);
     }
 }

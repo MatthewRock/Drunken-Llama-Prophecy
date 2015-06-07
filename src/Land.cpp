@@ -110,11 +110,11 @@ namespace Llama
             ++x;
         //Now move character to that tile.
         //character.Teleport(x,y);
-
+        std::cout<< character.GetPosition().first << " " <<character.GetPosition().second << " | " << x << ' ' << y << std::endl;
         auto path = m_Graph.AStarPrim(m_Graph.CoordsToIndex(character.GetPosition().first, character.GetPosition().second), m_Graph.CoordsToIndex(x,y));
         while(!path.empty())
         {
-            auto coords = path.top();
+            auto coords = path.front();
             path.pop();
             character.Order(Character::MOVE, coords.first, coords.second);
         }

@@ -42,6 +42,16 @@ namespace Llama
         AnimationHandler m_tex;
         ///Queue of tuples: orders and directional parameters
         std::queue<std::tuple<Orders, int, int>>    m_ordersQueue;
+
+        //Rage corner
+        std::pair<int, int> MoveQ();
+        std::pair<int, int> MoveW();
+        std::pair<int, int> MoveE();
+        std::pair<int, int> MoveA();
+        std::pair<int, int> MoveS();
+        std::pair<int, int> MoveD();
+        std::pair<int, int> MoveZ();
+        std::pair<int, int> MoveC();
     };
 }
 #endif // PLAYABLECHARACTER_H
