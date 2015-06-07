@@ -57,6 +57,7 @@
 		<Unit filename="include/GameEngine.hpp">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="include/GameLogic.hpp" />
 		<Unit filename="include/GameObject.hpp">
 			<Option compile="1" />
 		</Unit>
@@ -123,6 +124,7 @@
 		<Unit filename="src/Character.cpp" />
 		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
+		<Unit filename="src/GameLogic.cpp" />
 		<Unit filename="src/GameObject.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Graph.cpp" />

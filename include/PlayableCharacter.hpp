@@ -22,36 +22,15 @@ namespace Llama
             ///\param Order flag and
             ///\param Two ints. X and Y components of direction vector for desired order
             void Order(Orders, int, int);
-            ///\brief Moves character in desired direction
-            ///\param Two ints. X and Y components of translocation vector
-            void Move(int, int);
-            ///\brief Attacks(for now only animation) in specified direction(for now only right/left)
-            void Attack(int, int);
+
             ///\brief Executes first order stored in queue. In case of empty queue does nothing
             void Execute();
-            void Teleport(int,int);
-            std::pair<int, int> GetPosition()       {   return m_position;  }
-            std::pair<int, int> GetAnimationOffset();
-            bool IsIdle()                           {   return m_tex.IsIdle();}
             void HandleEvents(SDL_Event& event);
         protected:
         private:
-        void OrderExecutor(std::tuple<Orders, int, int>);
-        std::pair<int, int> m_position;
-        std::pair<int, int> m_translocation;
-        AnimationHandler m_tex;
         ///Queue of tuples: orders and directional parameters
         std::queue<std::tuple<Orders, int, int>>    m_ordersQueue;
 
-        //Rage corner
-        std::pair<int, int> MoveQ();
-        std::pair<int, int> MoveW();
-        std::pair<int, int> MoveE();
-        std::pair<int, int> MoveA();
-        std::pair<int, int> MoveS();
-        std::pair<int, int> MoveD();
-        std::pair<int, int> MoveZ();
-        std::pair<int, int> MoveC();
     };
 }
 #endif // PLAYABLECHARACTER_H
