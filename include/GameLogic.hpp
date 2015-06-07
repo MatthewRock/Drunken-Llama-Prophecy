@@ -17,7 +17,7 @@ namespace Llama
             /// \brief Processess turn(activates enteties, moves map, etc), but rather than on its own, invokes other instances.
             void ProcessTurn();
             void AddRule(std::function<bool(SDL_Event&)>&& func);
-
+            inline bool AllowNextTurn() { return m_ProcessTurn; }
         protected:
         private:
             bool m_ProcessTurn;

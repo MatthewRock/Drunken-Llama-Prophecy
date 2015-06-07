@@ -8,6 +8,7 @@
 #include <utility> // std::pair
 #include "Sounds.hpp"
 #include "Land.hpp"
+#include "GameLogic.hpp"
 namespace Llama
 {
     class PlayState : public GameState
@@ -29,6 +30,7 @@ namespace Llama
             Window* m_win; // Non-owning Window ptr.
             Manager<int,Sounds::BGM> m_MusicManager;
             Camera m_Camera;
+            GameLogic m_Logic;
 
             PlayableCharacter m_Character;
             Land m_Map;

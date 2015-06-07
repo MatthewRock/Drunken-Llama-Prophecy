@@ -9,7 +9,7 @@ namespace Llama
 {
 // TODO (malice#1#): Change this from magic number to some actual map size
 
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25)
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic)
     {
         m_engine = eng;
 
@@ -43,6 +43,14 @@ namespace Llama
         m_Map.InsertHex(25,25,HEX_MAGIC);
         m_Map.InsertHex(25,26,HEX_MAGIC);
         m_Map.InsertHex(24,26,HEX_MAGIC);
+        m_Logic.AddRule([](SDL_Event& event)
+                        {
+                            if(event.type == SDL_KEYDOWN)
+                                if(event.key.keysym.sym == SDLK_TAB)
+                                    return true;
+                            return false;
+                        });
+        m_Logic.ProcessTurn();
 
     }
     std::pair<int, int> PlayState::CalculateXY(int x, int y)
@@ -62,41 +70,12 @@ namespace Llama
     }
     void PlayState::HandleEvents(SDL_Event& event)
     {
-        int movedX = 0, movedY = 0;
-        if(event.type == SDL_KEYDOWN && m_Character.IsIdle())
+        m_Logic.ProcessInput(event);
+        m_Character.HandleEvents(event);
+        if(event.type == SDL_KEYDOWN)
         {
             switch(event.key.keysym.sym)
             {
-                if(m_Character.IsIdle())
-                {
-                case SDLK_q:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? --movedX : 0, --movedY );
-                break;
-                case SDLK_w:
-                    m_Character.Order(Character::MOVE, 0, --movedY );
-                break;
-                case SDLK_e:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? ++movedX : 0, --movedY);
-                break;
-                case SDLK_z:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 1) ? --movedX : 0, ++movedY);
-                break;
-                case SDLK_c:
-                    m_Character.Order(Character::MOVE, (m_Character.GetPosition().second % 2 == 0) ? ++movedX : 0, ++movedY);
-                break;
-                case SDLK_s:
-                    m_Character.Order(Character::MOVE, 0, ++movedY);
-                break;
-                case SDLK_a:
-                    m_Character.Order(Character::MOVE, --movedX, 0);
-                break;
-                case SDLK_d:
-                    m_Character.Order(Character::MOVE, ++movedX, 0);
-                break;
-                case SDLK_SPACE:
-                    m_Character.Order(Character::ATTACK, 0, 0);
-                break;
-                }
                 case SDLK_n:
                     m_musIterator++;
                     if(m_musIterator == m_MusicManager.End())
@@ -112,26 +91,27 @@ namespace Llama
                 break;
             }
         }
-        m_Camera.UpdateXY(movedX * Hex::WIDTH, movedY * Hex::HEIGHT);
-
-
         if(event.type == SDL_MOUSEBUTTONDOWN)
         {
             //m_Map.CheckCollision(event);
             m_Map.MoveCharacterAccordingly(event, m_Character);
         }
-
-        if(m_Character.IsIdle())
-        {
-            m_Character.Execute();
-        }
-
     }
+
     void PlayState::Update()
     {
         if(!Sounds::BGM::Playing())
             m_musIterator->second->Play();
+        if(m_Logic.AllowNextTurn())
+        {
+            if(m_Character.IsIdle())
+            {
+                m_Character.Execute();
+            }
+            m_Logic.ProcessTurn();
+        }
     }
+
     void PlayState::Draw()
     {
         m_Map.DrawInProximity(m_Character.GetPosition().first, m_Character.GetPosition().second, m_Character.GetAnimationOffset().first, m_Character.GetAnimationOffset().second);

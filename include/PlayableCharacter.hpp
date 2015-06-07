@@ -6,13 +6,15 @@
 #include <queue>
 #include "Character.hpp"
 #include "AnimationHandler.hpp"
+#include "SDL2/SDL.h"
+#include "GameLogic.hpp"
 namespace Llama
 {
     class PlayableCharacter : public Character
     {
         public:
             PlayableCharacter() = default;
-            PlayableCharacter(std::string, const char*, Window&, int, int);
+            PlayableCharacter(std::string, const char*, Window&, int, int,GameLogic&);
             ~PlayableCharacter() = default;
 
             void Draw();
@@ -31,6 +33,7 @@ namespace Llama
             std::pair<int, int> GetPosition()       {   return m_position;  }
             std::pair<int, int> GetAnimationOffset();
             bool IsIdle()                           {   return m_tex.IsIdle();}
+            void HandleEvents(SDL_Event& event);
         protected:
         private:
         void OrderExecutor(std::tuple<Orders, int, int>);

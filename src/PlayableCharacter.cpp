@@ -1,11 +1,31 @@
 #include "PlayableCharacter.hpp"
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y) : m_tex(filename, win, 63, 63)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : m_tex(filename, win, 63, 63)
     {
         m_position = std::make_pair(x, y);
         m_translocation = std::make_pair(0, 0);
         Setname(n);
+        logic.AddRule([](SDL_Event& event)
+                      {
+                            if(event.type == SDL_KEYDOWN)
+                            {
+                                switch(event.key.keysym.sym)
+                                {
+                                    case SDLK_q:
+                                    case SDLK_w:
+                                    case SDLK_e:
+                                    case SDLK_z:
+                                    case SDLK_c:
+                                    case SDLK_s:
+                                    case SDLK_a:
+                                    case SDLK_d:
+                                    case SDLK_SPACE:
+                                        return true;
+                                }
+                            }
+                            return false;
+                      });
     }
     void PlayableCharacter::Draw()
     {
@@ -41,7 +61,7 @@ namespace Llama
     }
     void PlayableCharacter::Execute()
     {
-        if(!m_ordersQueue.empty())
+        if(!m_ordersQueue.empty() && IsIdle())
         {
             OrderExecutor(m_ordersQueue.front());
             m_ordersQueue.pop();
@@ -68,5 +88,43 @@ namespace Llama
     std::pair<int, int> PlayableCharacter::GetAnimationOffset()
     {
         return std::make_pair( ((m_translocation.first - ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
+    }
+    void PlayableCharacter::HandleEvents(SDL_Event& event)
+    {
+        if(event.type == SDL_KEYDOWN && IsIdle())
+        {
+            switch(event.key.keysym.sym)
+            {
+                case SDLK_q:
+                    Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, -1 );
+                break;
+                case SDLK_w:
+                    Order(MOVE, 0, -1);
+                break;
+                case SDLK_e:
+                    Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, -1);
+                break;
+                case SDLK_z:
+                    Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, 1);
+                break;
+                case SDLK_c:
+                    Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, 1 );
+                break;
+                case SDLK_s:
+                    Order(MOVE, 0, 1);
+                break;
+                case SDLK_a:
+                    Order(MOVE, -1, 0);
+                break;
+                case SDLK_d:
+                    Order(MOVE, 1, 0);
+                break;
+                case SDLK_SPACE:
+                    Order(ATTACK, 0, 0);
+                break;
+                default:
+                break;
+            }
+        }
     }
 }
