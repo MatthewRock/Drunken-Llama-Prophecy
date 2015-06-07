@@ -29,7 +29,10 @@ namespace Llama
             std::pair<int, int> GetAnimationOffset();
 
             Character() = default;
-            Character(const char* filename, Window& win) : m_tex(filename, win, 63, 63) {}
+            Character(const char* filename, Window& win, int x, int y) : m_tex(filename, win, 63, 63)
+            {
+                m_position = std::make_pair(x,y);
+            }
             ~Character() = default;
         protected:
 

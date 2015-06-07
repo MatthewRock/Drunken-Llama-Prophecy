@@ -1,9 +1,8 @@
 #include "PlayableCharacter.hpp"
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : Character(filename, win)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : Character(filename, win, x, y)
     {
-        m_position = std::make_pair(x, y);
         m_translocation = std::make_pair(0, 0);
         Setname(n);
         logic.AddRule([](SDL_Event& event)
