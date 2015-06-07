@@ -21,7 +21,7 @@ namespace Llama
     }
     /// \brief A* algorithm for finding closest path. Takes index of start and destination.
     /// \return Stack of indexes, top being the first tile to go, bottom being destination, or empty stack if no way was found.
-    std::stack<Graph::Index> Graph::AStar(int startIndex, int goalIndex)
+    std::stack<Graph::Index> Graph::AStar(Graph::Index startIndex, Graph::Index goalIndex)
     {
         PriorityQueue<Index> frontier;//queue of indexes
         std::unordered_map<Index, Index> came_from; // map of where you came from(calling came_from[vertice] gives you previousely attended vertice
@@ -70,6 +70,23 @@ namespace Llama
         }
         return path;
     }
+    std::stack<std::pair<int,int> > Graph::AStarPrim(Graph::Index startIndex, Graph::Index goalIndex)
+    {
+        auto indexStack = AStar(startIndex, goalIndex);
+        std::stack<std::pair<int,int> > result;
+        if(indexStack.size() > 1)
+        {
+            Index beginning = indexStack.top();
+            indexStack.pop();
+            while(!indexStack.empty())
+            {
+                Index destination = indexStack.top();
+                indexStack.pop();
+                result.push(HowToMoveFrom(beginning, destination));
+                beginning = destination;
+            }
+        }
+    }
     /// \brief Constructs Hex from arguments and inserts it to graph.
     void Graph::InsertHex(int x, int y, HexType type)
     {
@@ -78,5 +95,14 @@ namespace Llama
         assert(y < m_Height);
 
         m_Hexes[CoordsToIndex(x,y)] = Hex(type);
+    }
+    std::pair<int,int> Graph::HowToMoveFrom(Index start, Index end)
+    {
+        int startX, startY, endX, endY;
+        startX = start % m_Width;
+        startY = start / m_Width;
+        endX = end % m_Width;
+        endY = end / m_Width;
+        return std::make_pair(endX - startX, endY - startY);
     }
 }

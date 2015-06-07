@@ -32,8 +32,8 @@ namespace Llama
             Camera m_Camera;
             GameLogic m_Logic;
 
-            PlayableCharacter m_Character;
             Land m_Map;
+            PlayableCharacter m_Character;
             int m_hexWidth;
             int m_hexHeight;
             int m_charX, m_charY;

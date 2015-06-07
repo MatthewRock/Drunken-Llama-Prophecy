@@ -109,7 +109,15 @@ namespace Llama
         if(y%2==1 && character.GetPosition().second%2==0)
             ++x;
         //Now move character to that tile.
-        character.Teleport(x,y);
+        //character.Teleport(x,y);
+
+        auto path = m_Graph.AStarPrim(m_Graph.CoordsToIndex(character.GetPosition().first, character.GetPosition().second), m_Graph.CoordsToIndex(x,y));
+        while(!path.empty())
+        {
+            auto coords = path.top();
+            path.pop();
+            character.Order(Character::MOVE, coords.first, coords.second);
+        }
 // TODO (malice#1#): Make it simpler.
     }
 }

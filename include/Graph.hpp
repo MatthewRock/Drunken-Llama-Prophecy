@@ -7,6 +7,7 @@
 #include <array>
 #include <unordered_map>
 #include <stack>
+#include <utility>
 
 namespace Llama
 {
@@ -40,6 +41,7 @@ namespace Llama
                 result.second = (y - 1) * .5 * Hex::HEIGHT;
                 return result;
             }
+            std::stack<std::pair<int,int> > AStarPrim(Graph::Index startIndex, Graph::Index goalIndex);
         protected:
         private:
             int m_Width, m_Height;
@@ -69,6 +71,7 @@ namespace Llama
                             CoordsToIndex(x+1, y+1)};
                 }
             }
+
             inline unsigned int Heuristic(Index startIndex, Index endIndex)
             {
                 int x1,y1,x2,y2;
@@ -78,6 +81,7 @@ namespace Llama
                 y2 = startIndex / m_Width;
                 return abs(x1 - x2) + abs(y1 - y2);
             }
+            std::pair<int,int> HowToMoveFrom(Index start, Index end);
     };
 }
 #endif // GRAPH_HPP
