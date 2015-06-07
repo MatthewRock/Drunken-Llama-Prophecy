@@ -144,4 +144,34 @@ namespace Llama
         std::cout<< c << std::endl;
         return std::pair<int,int>(c, 0);
     }
+    void Graph::Resize(int newWidth, int newHeight)
+    {
+        //Remember old map
+        int oldWidth = m_Width, oldHeight = m_Height;
+        Hex tab[m_Width][m_Height];
+        for(unsigned i = 0; i < m_Hexes.size(); ++i)
+        {
+            tab[i%m_Width][i/m_Width] = m_Hexes[i];
+        }
+        std::vector<Hex> newHexes;
+        newHexes.resize(newWidth * newHeight);
+
+        /*Change width so that CoordsToIndex will work correctly. Do not remove!
+      */m_Width = newWidth;
+        m_Height = newHeight;
+        for(unsigned x = 0; x < m_Width; ++x)
+        {
+            for(unsigned y = 0; y < m_Height; ++y)
+            {
+                newHexes[CoordsToIndex(x,y)] = tab[x][y];
+            }
+        }
+    }
+    void Graph::PrintGraph(std::ostream& stream)
+    {
+        for(auto& x : m_Hexes)
+        {
+            stream << x.type << std::endl;
+        }
+    }
 }

@@ -27,8 +27,6 @@ namespace Llama
         m_hexHeight = 82;
 
         m_musIterator = m_MusicManager.Beginning();
-        m_charX = 8;
-        m_charY = 10;
 
         for(int i = 20; i < 40; ++i)
         {
@@ -60,11 +58,6 @@ namespace Llama
                         });
         m_Logic.ProcessTurn();
 
-    }
-    void PlayState::CorrectForChar(std::pair<int, int>& pr)
-    {
-        pr.first += 15;
-        pr.second -= 15;
     }
     void PlayState::HandleEvents(SDL_Event& event)
     {

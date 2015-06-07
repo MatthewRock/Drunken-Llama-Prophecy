@@ -12,7 +12,6 @@ namespace Llama
     {
         m_paused = false;
     }
-
     void GameState::ChangeState(GameState* state)
     {
         m_engine->ChangeState(state);

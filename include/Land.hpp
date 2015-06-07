@@ -6,11 +6,13 @@
 #include "Graph.hpp"
 #include "Camera.hpp"
 #include "PlayableCharacter.hpp"
+#include <fstream>
 
 namespace Llama
 {
     class Land
     {
+
         public:
             Land(int w, int h) : m_Graph(w,h)
             {
@@ -25,8 +27,10 @@ namespace Llama
             void InsertTexture(HexType type, Texture* texture);
             void InsertHex(int x, int y, HexType type);
             void DrawInProximity(int x, int y, int offsetx, int offsety);
-            std::pair<int,int> CheckCollision(SDL_Event& event);
+            std::pair<int,int> CheckCollision(SDL_Event& event, int offsetx, int offsety);
             void MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character);
+            inline void Resize(int x, int y) { m_Graph.Resize(x,y); }
+            void PrintMap(std::ostream& stream);
         protected:
 
         private:

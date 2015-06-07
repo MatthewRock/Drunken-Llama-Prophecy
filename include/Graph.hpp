@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <stack>
 #include <utility>
+#include <fstream>
 
 namespace Llama
 {
@@ -42,6 +43,9 @@ namespace Llama
                 return result;
             }
             std::queue<std::pair<int,int> > AStarPrim(Graph::Index startIndex, Graph::Index goalIndex);
+            void Resize(int newWidth, int newHeight);
+            void PrintGraph(std::ostream& stream);
+            inline int Size() { return m_Hexes.size();}
         protected:
         private:
             int m_Width, m_Height;
@@ -82,6 +86,7 @@ namespace Llama
                 return abs(x1 - x2) + abs(y1 - y2);
             }
             std::pair<int,int> HowToMoveFrom(Index start, Index end);
+
     };
 }
 #endif // GRAPH_HPP

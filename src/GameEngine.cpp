@@ -68,7 +68,6 @@ namespace Llama
                 Sounds::BGM::Louder();
             else if(m_gameEvent.key.keysym.sym == SDLK_MINUS)
                 Sounds::BGM::Quieter();
-
         }
     }
     void GameEngine::ChangeState(GameState* state)
@@ -101,5 +100,11 @@ namespace Llama
         {
             m_states.back()->Resume();
         }
+    }
+    void GameEngine::CrushWithState(GameState* state)
+    {
+        decltype(m_states) emptyvec;
+        std::swap(emptyvec, m_states);
+        m_states.push_back(std::unique_ptr<GameState>(state));
     }
 }

@@ -1,5 +1,5 @@
 #include "PauseState.hpp"
-
+#include "MapGenerator.hpp"
 
 namespace Llama
 {
@@ -35,6 +35,9 @@ namespace Llama
             case PAUSE_RESUME:
                 Exit();
                 break;
+            case PAUSE_SAVE:
+                m_engine->CrushWithState(new MapGenerator(m_win));
+            break;
             case PAUSE_EXIT:
                 MenuState::Close();
                 break;

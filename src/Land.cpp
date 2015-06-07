@@ -34,6 +34,8 @@ namespace Llama
             for(int yy = newy; yy < finishy; ++yy)
             {
                 HexType type;
+                if(newx * yy > m_Graph.Size())
+                    return;
                 //Get type and coords
                 if(yy%2==1 && flag)
                     type = m_Graph.GetHexType(newx, yy);
@@ -47,7 +49,7 @@ namespace Llama
             ++i;
         }
     }
-    std::pair<int,int> Land::CheckCollision(SDL_Event& event)
+    std::pair<int,int> Land::CheckCollision(SDL_Event& event, int offsetx, int offsety)
     {
         int distances[20][20];
         for(int i = 0; i < 20; ++i)
@@ -71,11 +73,13 @@ namespace Llama
                 }
             }
         }
-        //TODO: Make it according to camera!!
-        m_Graph.InsertHex(x,y,HEX_MAGIC);
-        //TODO: When character class is ready, make him move.
-        //return std::make_pair(x,y);
+        x += offsetx - 9;
+        y += offsety - 9;
 
+        if(y%2==1 && offsety %2==0)
+            ++x;
+
+        return std::make_pair(x,y);
     }
     void Land::MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character)
     {
@@ -118,6 +122,9 @@ namespace Llama
             path.pop();
             character.Order(Character::MOVE, coords.first, coords.second);
         }
-// TODO (malice#1#): Make it simpler.
+    }
+    void Land::PrintMap(std::ostream& stream)
+    {
+        m_Graph.PrintGraph(stream);
     }
 }

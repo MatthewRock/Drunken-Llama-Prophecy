@@ -46,6 +46,7 @@ namespace Llama
 
             void ChangeState(GameState* state);
             void ChangeStateDestructively(GameState* state);
+            void CrushWithState(GameState* state);
             void PushState(GameState* state);
             void PopState();
             Window* GetWindowPointer() { return &m_win; }

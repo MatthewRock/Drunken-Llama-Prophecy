@@ -16,27 +16,22 @@ namespace Llama
         public:
             PlayState(GameEngine* eng);
             ~PlayState() = default;
-            void Pause(){};
-            void Resume(){};
+            void Pause(){GameState::Pause();};
+            void Resume(){GameState::Resume();};
 
             void HandleEvents(SDL_Event& event);
             void Update();
             void Draw();
-
         protected:
         private:
-            void CorrectForChar(std::pair<int, int>& pr);
-            std::pair<int, int> CalculateXY(int, int);
             Window* m_win; // Non-owning Window ptr.
             Manager<int,Sounds::BGM> m_MusicManager;
-            Camera m_Camera;
             GameLogic m_Logic;
 
             Land m_Map;
             PlayableCharacter m_Character;
             int m_hexWidth;
             int m_hexHeight;
-            int m_charX, m_charY;
             decltype(m_MusicManager.Beginning()) m_musIterator;
     };
 }

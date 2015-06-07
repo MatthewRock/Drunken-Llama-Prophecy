@@ -57,7 +57,9 @@
 		<Unit filename="include/GameEngine.hpp">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="include/GameLogic.hpp" />
+		<Unit filename="include/GameLogic.hpp">
+			<Option compile="1" />
+		</Unit>
 		<Unit filename="include/GameObject.hpp">
 			<Option compile="1" />
 		</Unit>
