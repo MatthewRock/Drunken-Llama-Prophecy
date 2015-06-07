@@ -151,48 +151,55 @@ namespace Llama
     }
     void PlayableCharacter::HandleEvents(SDL_Event& event)
     {
-        if(event.type == SDL_KEYDOWN && IsIdle())
+        if(event.type == SDL_KEYDOWN)
         {
-            switch(event.key.keysym.sym)
+            if(event.key.keysym.sym == SDLK_BACKSPACE)
             {
-                case SDLK_q:
-                    //Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, -1 );
-                    Order(MOVE, 'q', 0);
-                break;
-                case SDLK_w:
-                    //Order(MOVE, 0, -1);
-                    Order(MOVE, 'w',0);
-                break;
-                case SDLK_e:
-                    //Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, -1);
-                    Order(MOVE, 'e',0);
-                break;
-                case SDLK_z:
-                   // Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, 1);
-                   Order(MOVE, 'z',0);
-                break;
-                case SDLK_c:
-                   // Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, 1 );
-                   Order(MOVE, 'c',0);
-                break;
-                case SDLK_s:
-                    //Order(MOVE, 0, 1);
-                    Order(MOVE, 's',0);
-                break;
-                case SDLK_a:
-                  //  Order(MOVE, -1, 0);
-                  Order(MOVE, 'a',0);
-                break;
-                case SDLK_d:
-                  //  Order(MOVE, 1, 0);
-                  Order(MOVE, 'd',0);
-                break;
-                case SDLK_SPACE:
-                    Order(ATTACK, 0, 0);
-                break;
-                default:
-                break;
+                decltype(m_ordersQueue) temp;
+                std::swap(m_ordersQueue, temp);
             }
+
+            if(IsIdle())
+                switch(event.key.keysym.sym)
+                {
+                    case SDLK_q:
+                        //Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, -1 );
+                        Order(MOVE, 'q', 0);
+                    break;
+                    case SDLK_w:
+                        //Order(MOVE, 0, -1);
+                        Order(MOVE, 'w',0);
+                    break;
+                    case SDLK_e:
+                        //Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, -1);
+                        Order(MOVE, 'e',0);
+                    break;
+                    case SDLK_z:
+                       // Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, 1);
+                       Order(MOVE, 'z',0);
+                    break;
+                    case SDLK_c:
+                       // Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, 1 );
+                       Order(MOVE, 'c',0);
+                    break;
+                    case SDLK_s:
+                        //Order(MOVE, 0, 1);
+                        Order(MOVE, 's',0);
+                    break;
+                    case SDLK_a:
+                      //  Order(MOVE, -1, 0);
+                      Order(MOVE, 'a',0);
+                    break;
+                    case SDLK_d:
+                      //  Order(MOVE, 1, 0);
+                      Order(MOVE, 'd',0);
+                    break;
+                    case SDLK_SPACE:
+                        Order(ATTACK, 0, 0);
+                    break;
+                    default:
+                    break;
+                }
         }
     }
 }
