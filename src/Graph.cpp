@@ -23,11 +23,13 @@ namespace Llama
     /// \return Stack of indexes, top being the first tile to go, bottom being destination, or empty stack if no way was found.
     std::stack<Graph::Index> Graph::AStar(Graph::Index startIndex, Graph::Index goalIndex)
     {
+        std::stack<Index> path;
         PriorityQueue<Index> frontier;//queue of indexes
         std::unordered_map<Index, Index> came_from; // map of where you came from(calling came_from[vertice] gives you previousely attended vertice
         std::unordered_map<Index, int> cost_so_far; // Map of total cost of path, needed for algorithm.
         frontier.put(startIndex, 0);
-
+        if(!m_Hexes[goalIndex].Passable())
+            return path;
         came_from[startIndex] = startIndex;
         cost_so_far[startIndex] = 0;
         while(!frontier.empty())
@@ -55,7 +57,6 @@ namespace Llama
             }
         }
         //Perform "stack undwinding" to record path to target.
-        std::stack<Index> path;
         Index previousOne = came_from[goalIndex];
         //If path was found
         if(previousOne != startIndex)

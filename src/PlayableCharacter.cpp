@@ -8,7 +8,7 @@ namespace Llama
         Setname(n);
         logic.AddRule([](SDL_Event& event)
                       {
-                            if(event.type == SDL_KEYDOWN && event.key.repeat == 0)
+                            if(event.type == SDL_KEYDOWN)
                             {
                                 switch(event.key.keysym.sym)
                                 {
