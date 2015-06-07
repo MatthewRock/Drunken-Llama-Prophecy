@@ -1,6 +1,7 @@
 #include "GameEngine.hpp"
 #include "MenuState.hpp"
 #include "Printable.hpp"
+#include "Sounds.hpp"
 namespace Llama
 {
     GameEngine::GameEngine()
@@ -59,8 +60,15 @@ namespace Llama
         {
             m_running = false;
         }
-        else if( m_gameEvent.type == SDL_KEYDOWN && m_gameEvent.key.repeat == 0 )
+        else if( m_gameEvent.type == SDL_KEYDOWN)
         {
+            if(m_gameEvent.key.keysym.sym == SDLK_m && m_gameEvent.key.repeat == 0 )
+                Sounds::BGM::MuteToggle();
+            else if(m_gameEvent.key.keysym.sym == SDLK_EQUALS)
+                Sounds::BGM::Louder();
+            else if(m_gameEvent.key.keysym.sym == SDLK_MINUS)
+                Sounds::BGM::Quiter();
+
         }
     }
     void GameEngine::ChangeState(GameState* state)

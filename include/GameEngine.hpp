@@ -64,8 +64,6 @@ namespace Llama
             SDL_Event m_gameEvent;
             const int MAX_FPS = 30;
             Timer<> m_fpsCapTimer;
-
-            //A vector of pairs: regex, and code (enum) for matching option.
     };
 }
 #endif // GAMEENGINE_HPP

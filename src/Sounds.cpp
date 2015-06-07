@@ -57,6 +57,24 @@ namespace Llama
             else
                 Pause();
         }
+        /// \brief Switches between muting and unmuting
+        void BGM::MuteToggle()
+        {
+            if(BGM_GetVolume() != 0)
+                BGM_SetVolume(0);
+            else
+                BGM_SetVolume();
+        }
+        /// \brief Makes music louder
+        void BGM::Louder()
+        {
+            BGM_SetVolume(BGM_GetVolume() + 2);
+        }
+        /// \brief Makes music quiter.
+        void BGM::Quiter()
+        {
+            BGM_SetVolume(BGM_GetVolume() - 2);
+        }
         /// \param filename const char* : Path to music file. By default no file is loaded.
         BGM::BGM(const char* filename) : m_music(nullptr, Mix_FreeMusic)
         {

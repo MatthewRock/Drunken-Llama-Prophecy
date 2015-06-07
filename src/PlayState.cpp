@@ -33,7 +33,7 @@ namespace Llama
         for(int i = 20; i < 40; ++i)
         {
             for(int j = 20; j < 60; ++j)
-                j % 2 == 0 ? m_Map.InsertHex(i,j,HEX_LAVA) : m_Map.InsertHex(i,j,HEX_ROCK);
+                j % 2 == 0 ? m_Map.InsertHex(i,j,HEX_ROCK) : m_Map.InsertHex(i,j,HEX_ROCK);
         }
         for(int i = 40 ; i < 60; ++i)
         {
@@ -46,22 +46,20 @@ namespace Llama
         m_Logic.AddRule([](SDL_Event& event)
                         {
                             if(event.type == SDL_KEYDOWN)
+                            {
                                 if(event.key.keysym.sym == SDLK_TAB)
+                                {
                                     return true;
-                            return false;
+                                }
+                                return false;
+                            }
+                            else if(event.type == SDL_MOUSEBUTTONDOWN)
+                                return true;
+                            else
+                                return false;
                         });
         m_Logic.ProcessTurn();
 
-    }
-    std::pair<int, int> PlayState::CalculateXY(int x, int y)
-    {
-        std::pair<int, int> result;
-        result.first = (y % 2 == 0) ? x * m_hexWidth : x * m_hexWidth - (.5 * m_hexWidth);
-        //Correcting offset
-        result.first -= 4;
-
-        result.second = (y - 1) * .5 * m_hexHeight;
-        return result;
     }
     void PlayState::CorrectForChar(std::pair<int, int>& pr)
     {

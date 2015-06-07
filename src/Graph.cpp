@@ -86,6 +86,11 @@ namespace Llama
                 beginning = destination;
             }
         }
+        else if(indexStack.size() == 1)
+        {
+            result.push(HowToMoveFrom(startIndex, goalIndex));
+        }
+        return result;
     }
     /// \brief Constructs Hex from arguments and inserts it to graph.
     void Graph::InsertHex(int x, int y, HexType type)
