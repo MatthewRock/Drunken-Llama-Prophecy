@@ -15,7 +15,7 @@ namespace Llama
             AnimationHandler(const char*, Window&, int, int);
             virtual ~AnimationHandler();
 
-            void Draw(std::pair<int,int>);
+            void Draw(std::pair<int,int> coords, int offsetx = 0, int offsety = 0);
             bool IsIdle()           {   return m_idle;  }
             int  getFrame()         {   return m_framecounter;  }
             int  currentAnimation() {   return m_currentAnim;   }

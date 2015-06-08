@@ -6,7 +6,9 @@
 #include "Graph.hpp"
 #include "Camera.hpp"
 #include "PlayableCharacter.hpp"
+#include "Monster.hpp"
 #include <fstream>
+#include <vector>
 
 namespace Llama
 {
@@ -34,6 +36,7 @@ namespace Llama
         protected:
 
         private:
+            std::vector<Monster> m_Monsters;
             Manager<HexType, Texture> m_HexTextureManager;
             Graph m_Graph;
             ///Stores screen coordinates for hexes. 0 indexes are off screen, 1 are first visible

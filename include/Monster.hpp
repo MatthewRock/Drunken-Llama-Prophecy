@@ -5,15 +5,15 @@
 
 namespace Llama
 {
+    enum MonsterType {  MON_BLACK, MON_ORANGE};
     class Monster : public Character
     {
         public:
             void Order(Orders, int, int);
-            void Draw();
-
+            void Draw(int x, int y, int offsetx = 0, int offsety = 0);
 
             Monster() = default;
-            Monster(const char*, Window&, int, int);
+            Monster(const char*, Window&, int, int, int, int, int, int);
             ~Monster() = default;
         protected:
         private:

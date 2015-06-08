@@ -32,12 +32,12 @@ namespace Llama
 
     }
 
-    void AnimationHandler::Draw(std::pair<int,int> coords)
+    void AnimationHandler::Draw(std::pair<int,int> coords, int offsetx, int offsety)
     {   // 56 - hexWidth, 82 - hexHeight
 
         SDL_Rect dest;
-        dest.x = ((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) /* m_rect.w/2*/;
-        dest.y = (coords.second - 1) * .5 * 82 /*m_rect.h/2*/;
+        dest.x = ((coords.second % 2 == 0) ? coords.first * 56 : coords.first * 56 - (.5 * 56)) + offsetx/* m_rect.w/2*/;
+        dest.y = (coords.second - 1) * .5 * 82 + offsety/*m_rect.h/2*/;
         dest.w = m_rect.w;
         dest.h = m_rect.h;
 

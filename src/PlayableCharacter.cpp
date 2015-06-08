@@ -1,7 +1,7 @@
 #include "PlayableCharacter.hpp"
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : Character(filename, win, x, y)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : Character(filename, win, x, y, 10, 1, 1, 0)
     {
         m_translocation = std::make_pair(0, 0);
         Setname(n);

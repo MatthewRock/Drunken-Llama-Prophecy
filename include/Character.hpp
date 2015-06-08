@@ -12,11 +12,12 @@ namespace Llama
             enum Orders { MOVE, ATTACK, INTERACT};
             struct Stats
             {
+                Stats(int health, int attack, int defence, int experience) : hp(health), str(attack), def(defence), exp(experience) {};
                 int hp;
                 int str;
                 int def;
+                int exp;
             };
-            virtual void Draw() = 0;
             virtual void Order(Orders, int, int) = 0;
             std::pair<int, int> GetPosition()       {   return m_position;  }
             ///\brief Moves character in desired direction
@@ -29,7 +30,7 @@ namespace Llama
             std::pair<int, int> GetAnimationOffset();
 
             Character() = default;
-            Character(const char* filename, Window& win, int x, int y) : m_tex(filename, win, 63, 63)
+            Character(const char* filename, Window& win, int x, int y, int health, int attack, int defence, int experience) : m_tex(filename, win, 63, 63), m_stats(health, attack, defence, experience)
             {
                 m_position = std::make_pair(x,y);
             }
@@ -39,7 +40,7 @@ namespace Llama
             std::pair<int, int> m_translocation;
             void OrderExecutor(std::tuple<Orders, int, int>);
             AnimationHandler m_tex;
-
+            Stats           m_stats;
             std::pair<int, int> m_position;
             //Rage corner
             std::pair<int, int> MoveQ();

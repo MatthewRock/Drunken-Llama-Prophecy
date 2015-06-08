@@ -84,9 +84,11 @@
 		<Unit filename="include/Manager.hpp">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="include/MapGenerator.hpp" />
 		<Unit filename="include/MenuState.hpp">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="include/Monster.hpp" />
 		<Unit filename="include/PauseState.hpp">
 			<Option compile="1" />
 		</Unit>
@@ -133,7 +135,9 @@
 		<Unit filename="src/Initializer.cpp" />
 		<Unit filename="src/Land.cpp" />
 		<Unit filename="src/Logger.cpp" />
+		<Unit filename="src/MapGenerator.cpp" />
 		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/Monster.cpp" />
 		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
 		<Unit filename="src/PlayableCharacter.cpp" />
