@@ -1,5 +1,5 @@
 #include "Graph.hpp"
-#include <iostream>
+#include <fstream>
 #include <assert.h>
 
 namespace Llama
@@ -62,12 +62,12 @@ namespace Llama
         if(previousOne != startIndex)
         {
             path.push(goalIndex); // Add destination to the end. It's the last tile we reach.
-            std::cout<< "A*: " << goalIndex << std::endl;
+//            std::cout<< "A*: " << goalIndex << std::endl;
         }
         //Reconstruct path, as a stack. Top is first tile to go to.
         while(previousOne != startIndex)
         {
-            std::cout<< "A*: " << previousOne << std::endl;
+//            std::cout<< "A*: " << previousOne << std::endl;
             path.push(previousOne);
             previousOne = came_from[previousOne];
         }
@@ -141,7 +141,7 @@ namespace Llama
                     c = 'q';
             }
 
-        std::cout<< c << std::endl;
+//        std::cout<< c << std::endl;
         return std::pair<int,int>(c, 0);
     }
     void Graph::Resize(int newWidth, int newHeight)
@@ -172,6 +172,19 @@ namespace Llama
         for(auto& x : m_Hexes)
         {
             stream << x.type << std::endl;
+        }
+    }
+    Graph::Graph(std::string pathname)
+    {
+        std::ifstream file(pathname);
+        file >> m_Width;
+        m_Height = m_Width;
+        m_Hexes.reserve(m_Height * m_Width);
+        for(int i = m_Width * m_Height; i > 0; --i)
+        {
+            int type;
+            file >> type;
+            m_Hexes.push_back({static_cast<HexType>(type)});
         }
     }
 }

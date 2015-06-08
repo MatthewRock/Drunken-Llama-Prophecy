@@ -84,7 +84,13 @@
 		<Unit filename="include/Manager.hpp">
 			<Option compile="1" />
 		</Unit>
+<<<<<<< HEAD
 		<Unit filename="include/MapGenerator.hpp" />
+=======
+		<Unit filename="include/MapGenerator.hpp">
+			<Option compile="1" />
+		</Unit>
+>>>>>>> b97a0c11c6ba9e4b4021b5c1a595ece98ca17e1b
 		<Unit filename="include/MenuState.hpp">
 			<Option compile="1" />
 		</Unit>

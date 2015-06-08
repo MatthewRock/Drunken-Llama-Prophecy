@@ -89,6 +89,9 @@ namespace Llama
             case OPTION_CREDITS:
                 ChangeState(new CreditsState(m_engine));
                 break;
+            case OPTION_LOADGAME:
+                ChangeStateDestructively(new PlayState(m_engine, "media/SavedMap.map.save"));
+            break;
             case OPTION_EXIT:
                 Close();
                 break;
