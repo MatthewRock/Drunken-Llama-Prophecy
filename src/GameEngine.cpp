@@ -7,7 +7,7 @@ namespace Llama
     GameEngine::GameEngine()
     {
         m_running = true;
-        m_win.Init("Drunken Llama Prophecy v.0.6", 1024, 768);
+        m_win.Init("Drunken Llama Prophecy v.0.7", 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_states.emplace_back(new MenuState(this));
     }
