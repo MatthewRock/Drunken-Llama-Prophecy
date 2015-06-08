@@ -15,16 +15,16 @@ namespace Llama
 
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
 
-        m_Map.InsertTexture(HEX_LAVA, new Texture("media/Tile/tileLava_tile.png", *m_win));
-        m_Map.InsertTexture(HEX_MAGIC, new Texture("media/Tile/tileMagic_tile.png", *m_win));
-        m_Map.InsertTexture(HEX_WATER, new Texture("media/Tile/tileWater_tile.png", *m_win));
-        m_Map.InsertTexture(HEX_ROCK, new Texture("media/Tile/tileRock_tile.png", *m_win));
-        m_Map.InsertTexture(HEX_DIRT, new Texture("media/Tile/tileDirt_tile.png", *m_win));
-
-// TODO (malice#1#): Make drawing Hexes simple and easy
-
-        m_hexWidth = 56;
-        m_hexHeight = 82;
+        m_Map.InsertTexture(HEX_DIRT,   new Texture("media/Tile/tileDirt_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_AUTUMN, new Texture("media/Tile/tileAutumn_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_MAGIC,  new Texture("media/Tile/tileMagic_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_ROCK,   new Texture("media/Tile/tileRock_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_STONE,  new Texture("media/Tile/tileStone_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_WATER,  new Texture("media/Tile/tileWater_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_SAND,   new Texture("media/Tile/tileSand_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_SNOW,   new Texture("media/Tile/tileSnow_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_GRASS,  new Texture("media/Tile/tileGrass_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
 
         m_musIterator = m_MusicManager.Beginning();
 
@@ -41,6 +41,9 @@ namespace Llama
         m_Map.InsertHex(25,25,HEX_MAGIC);
         m_Map.InsertHex(25,26,HEX_MAGIC);
         m_Map.InsertHex(24,26,HEX_MAGIC);
+        for(int x = 20; x < 29; ++x)
+            m_Map.InsertHex(x,27,HEX_LAVA);
+
         m_Logic.AddRule([](SDL_Event& event)
                         {
                             if(event.type == SDL_KEYDOWN)
@@ -57,8 +60,43 @@ namespace Llama
                                 return false;
                         });
         m_Logic.ProcessTurn();
-
     }
+    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic)
+    {
+        m_engine = eng;
+        m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
+
+        m_Map.InsertTexture(HEX_DIRT,   new Texture("media/Tile/tileDirt_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_AUTUMN, new Texture("media/Tile/tileAutumn_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_MAGIC,  new Texture("media/Tile/tileMagic_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_ROCK,   new Texture("media/Tile/tileRock_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_STONE,  new Texture("media/Tile/tileStone_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_WATER,  new Texture("media/Tile/tileWater_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_SAND,   new Texture("media/Tile/tileSand_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_SNOW,   new Texture("media/Tile/tileSnow_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_GRASS,  new Texture("media/Tile/tileGrass_tile.png", *m_win));
+        m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
+
+        m_musIterator = m_MusicManager.Beginning();
+
+        m_Logic.AddRule([](SDL_Event& event)
+                {
+                    if(event.type == SDL_KEYDOWN)
+                    {
+                        if(event.key.keysym.sym == SDLK_TAB && event.key.repeat == 0)
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                    else if(event.type == SDL_MOUSEBUTTONDOWN)
+                        return true;
+                    else
+                        return false;
+                });
+        m_Logic.ProcessTurn();
+    }
+
     void PlayState::HandleEvents(SDL_Event& event)
     {
         m_Logic.ProcessInput(event);

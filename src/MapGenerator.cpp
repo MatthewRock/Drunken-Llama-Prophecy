@@ -1,9 +1,11 @@
 #include "MapGenerator.hpp"
+#include "PauseState.hpp"
 
 namespace Llama
 {
-    MapGenerator::MapGenerator(Window* win) : m_win(win), m_Map(40,40)
+    MapGenerator::MapGenerator(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(40,40)
     {
+        m_engine = eng;
         m_MapSize = 40;
         m_EditorPosX = m_EditorPosY = 20;
         m_CurrentHex = HexType::HEX_DIRT;//Equal to zero, but oh well, -fpermissive forbids me to put zero.
@@ -17,6 +19,8 @@ namespace Llama
         m_Map.InsertTexture(HEX_SNOW,   new Texture("media/Tile/tileSnow_tile.png", *m_win));
         m_Map.InsertTexture(HEX_GRASS,  new Texture("media/Tile/tileGrass_tile.png", *m_win));
         m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
+        m_DrawContinuously = false;
+        m_DeleteContinuously = false;
     }
 
     void MapGenerator::Pause()
@@ -58,25 +62,35 @@ namespace Llama
                 case SDLK_a:
                     --m_EditorPosX;
                 break;
+                case SDLK_ESCAPE:
+                    ChangeState(new PauseState(m_engine));
                 default:
                 break;
             }
         }
-        else if(event.button.state == SDL_PRESSED)
+        else if(event.type == SDL_MOUSEBUTTONDOWN)
         {
-            auto coords = m_Map.CheckCollision(event, m_EditorPosX, m_EditorPosY);
-
             switch(event.button.button)
             {
                 case SDL_BUTTON_LEFT://Insert hex at mouse position
-                    m_Map.InsertHex(coords.first, coords.second, m_CurrentHex);
+                    m_DrawContinuously = !m_DrawContinuously;
+                    m_DeleteContinuously = false;
                 break;
                 case SDL_BUTTON_RIGHT:
-                    m_Map.InsertHex(coords.first, coords.second, HEX_DIRT);
+                    m_DeleteContinuously = !m_DeleteContinuously;
+                    m_DrawContinuously = false;
                 break;
                 default:
                 break;
             }
+        }
+        else if(event.type == SDL_MOUSEMOTION)
+        {
+            auto coords = m_Map.CheckCollision(event, m_EditorPosX, m_EditorPosY);
+            if(m_DrawContinuously)
+                m_Map.InsertHex(coords.first, coords.second, m_CurrentHex);
+            else if(m_DeleteContinuously)
+                m_Map.InsertHex(coords.first, coords.second, HEX_DIRT);
         }
     }
     void MapGenerator::Update()

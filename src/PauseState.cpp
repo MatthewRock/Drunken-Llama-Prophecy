@@ -36,7 +36,7 @@ namespace Llama
                 Exit();
                 break;
             case PAUSE_SAVE:
-                m_engine->CrushWithState(new MapGenerator(m_win));
+                m_engine->CrushWithState(new MapGenerator(m_engine));
             break;
             case PAUSE_EXIT:
                 MenuState::Close();

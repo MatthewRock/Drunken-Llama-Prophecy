@@ -20,6 +20,7 @@ namespace Llama
             {
                 m_Hexes.resize(m_Width * m_Height);
             }
+            Graph(std::string pathname);
             ~Graph() = default;
 
             Index CoordsToIndex(int x, int y);

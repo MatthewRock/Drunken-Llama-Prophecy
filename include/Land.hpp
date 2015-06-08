@@ -24,6 +24,16 @@ namespace Llama
                     }
                 }
             };
+            Land(std::string pathname) : m_Graph(pathname)
+            {
+                for(int i = 0; i < 22; ++i)
+                {
+                    for(int j = 0; j < 22; ++j)
+                    {
+                        coords[i][j] = m_Graph.CalculateXY(i-2,j-1);
+                    }
+                }
+            }
             void InsertTexture(HexType type, Texture* texture);
             void InsertHex(int x, int y, HexType type);
             void DrawInProximity(int x, int y, int offsetx, int offsety);

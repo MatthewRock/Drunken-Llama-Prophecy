@@ -15,6 +15,7 @@ namespace Llama
     {
         public:
             PlayState(GameEngine* eng);
+            PlayState(GameEngine* eng, std::string pathname);
             ~PlayState() = default;
             void Pause(){GameState::Pause();};
             void Resume(){GameState::Resume();};
@@ -30,8 +31,6 @@ namespace Llama
 
             Land m_Map;
             PlayableCharacter m_Character;
-            int m_hexWidth;
-            int m_hexHeight;
             decltype(m_MusicManager.Beginning()) m_musIterator;
     };
 }

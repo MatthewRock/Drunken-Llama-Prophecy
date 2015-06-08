@@ -9,7 +9,7 @@ namespace Llama
     class MapGenerator final : public GameState
     {
         public:
-            MapGenerator(Window* win);
+            MapGenerator(GameEngine* eng);
             ~MapGenerator();
             void Pause() override;
             void Resume() override;
@@ -25,6 +25,8 @@ namespace Llama
             int m_MapSize;
             int m_EditorPosX, m_EditorPosY;
             HexType m_CurrentHex;
+            bool m_DrawContinuously;
+            bool m_DeleteContinuously;
     };
 }
 #endif // MAPGENERATOR_HPP
