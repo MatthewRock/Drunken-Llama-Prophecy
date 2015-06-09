@@ -28,9 +28,12 @@ namespace Llama
             ///\brief Executes first order stored in queue. In case of empty queue does nothing
             void Execute();
             void HandleEvents(SDL_Event& event);
+            void ShowStats();
+            void LvlUp();
         protected:
         private:
         Land* m_map;
+        int m_Lvl;
         ///Queue of tuples: orders and directional parameters
         std::queue<std::tuple<Orders, int, int>>    m_ordersQueue;
 

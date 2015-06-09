@@ -137,10 +137,10 @@ namespace Llama
             switch(mtype)
             {
                 case MON_BLACK:
-                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterBL.png", win, x, y, 5, 1, 1, 4)));
+                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterBL.png", win, x, y, 10, 3, 1, 3)));
                 break;
                 case MON_ORANGE:
-                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterO.png", win, x, y, 2, 1, 1, 1)));
+                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterO.png", win, x, y, 4, 1, 1, 1)));
                 break;
             }
         }
@@ -193,5 +193,22 @@ namespace Llama
                 if(it->GetPosition().first == x && it->GetPosition().second == y)
                     it->Damage(str);
             }
+    }
+    bool Land::IsDead(int x, int y)
+    {
+        bool temp = false;
+        for(auto & it : m_Monsters)
+            if(it->IsDead() && it->GetPosition().first == x && it->GetPosition().second == y)
+                temp = true;
+
+        return temp;
+    }
+    int Land::GetExp(int x, int y)
+    {
+
+        for(auto & it : m_Monsters)
+            if(it->IsDead() && it->GetPosition().first == x && it->GetPosition().second == y)
+                return it->GetStats().exp;
+        return 0;
     }
 }

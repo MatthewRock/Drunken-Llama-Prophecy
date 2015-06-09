@@ -21,8 +21,10 @@ namespace Llama
 
     void AnimationHandler::InitiateAnimation(Animations a)
     {
-        if( a == ATTACK_LEFT || a == ATTACK_RIGHT || DIE || ATTACK_ANIM)
+        if( a == ATTACK_LEFT || a == ATTACK_RIGHT || a == DIE || a == ATTACK_ANIM)
                 m_rect.y = 64;
+        else
+                m_rect.y = 0;
 
 
         m_currentAnim = a;

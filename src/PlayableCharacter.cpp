@@ -1,7 +1,8 @@
 #include "PlayableCharacter.hpp"
+#include <iostream>
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic, Land& land) : Character(filename, win, x, y, 10, 1, 1, 0), m_map(&land)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic, Land& land) : Character(filename, win, x, y, 10, 1, 1, 0), m_map(&land), m_Lvl(1)
     {
         m_translocation = std::make_pair(0, 0);
         Setname(n);
@@ -19,12 +20,14 @@ namespace Llama
                                     case SDLK_s:
                                     case SDLK_a:
                                     case SDLK_d:
+                                    case SDLK_x:
                                     case SDLK_SPACE:
                                         return true;
                                 }
                             }
                             return false;
                       });
+            ShowStats();
     }
     void PlayableCharacter::Draw()
     {
@@ -50,9 +53,28 @@ namespace Llama
     {
         Character::Attack(x - GetPosition().first + ((GetPosition().second % 2 == 0) ? -1 : 0), 0);
         m_map->DamageMonster(x, y, m_stats.str);
+        if(m_map->IsDead(x, y))
+        {
+            m_stats.exp+=m_map->GetExp(x, y);
+                if(m_stats.exp >= (4*(2*m_Lvl - 1)))
+                {
+                    std::cout << '\n' <<"CONGRATULATIONS! NEW LEVEL GAINED!" << '\n'<< std::endl;
+                    LvlUp();
+                }
+        }
 
     }
-
+    void PlayableCharacter::ShowStats()
+    {
+        std::cout << "LV: " << m_Lvl << '\n' << "HP: " << m_stats.hp - m_damage << "/" << m_stats.hp << '\n'<< "Attack: " << m_stats.str << '\n' << "Exp: " << m_stats.exp << std::endl;
+    }
+    void PlayableCharacter::LvlUp()
+    {
+        m_Lvl++;
+        m_stats.hp++;
+        m_stats.str+=(m_Lvl%2);
+        ShowStats();
+    }
 
     void PlayableCharacter::HandleEvents(SDL_Event& event)
     {
@@ -146,6 +168,9 @@ namespace Llama
                                 Order(MOVE, 'd', 0);
                             else
                                 m_translocation = std::make_pair(0,0);
+                    break;
+                    case SDLK_x:
+                        ShowStats();
                     break;
                     case SDLK_SPACE:
                         Order(ATTACK, 0, 0);
