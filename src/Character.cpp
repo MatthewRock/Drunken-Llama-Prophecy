@@ -24,7 +24,7 @@ namespace Llama
 
     std::pair<int, int> Character::GetAnimationOffset()
     {
-        return std::make_pair( ((m_translocation.first - ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
+        return std::make_pair( (m_tex.IsIdle()) ? 0 : ((m_translocation.first - ((m_translocation.second != 0) ? (m_position.second % 2) - 0.5 : 0) )  * 56  )* (m_tex.getAnimationLength() - m_tex.getFrame()) / m_tex.getAnimationLength()  , (m_tex.IsIdle()) ? 0 : (m_translocation.second * 41) * ( m_tex.getAnimationLength()- m_tex.getFrame()) / m_tex.getAnimationLength());
     }
 
     std::pair<int,int> Character::MoveQ()
@@ -103,6 +103,7 @@ namespace Llama
     }
     void Character::Attack(int x, int y)
     {
+        m_translocation = std::make_pair(0,0);
         m_tex.InitiateAnimation(AnimationHandler::ATTACK_ANIM);
     }
 }

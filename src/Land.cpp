@@ -48,6 +48,11 @@ namespace Llama
             }
             ++i;
         }
+        for (auto &it : m_Monsters)
+        {
+            if((it->GetPosition().first - x < 11) && (it->GetPosition().first - x > -11) && (it->GetPosition().second - y < 11) && (it->GetPosition().second - y > -11) )
+                it->Draw(x, y, offsetx, offsety);
+        }
     }
     std::pair<int,int> Land::CheckCollision(SDL_Event& event, int offsetx, int offsety)
     {
@@ -124,5 +129,34 @@ namespace Llama
     void Land::PrintMap(std::ostream& stream)
     {
         m_Graph.PrintGraph(stream);
+    }
+    void Land::InsertMonster(MonsterType mtype, int x, int y, Window& win)
+    {
+
+        switch(mtype)
+        {
+            case MON_BLACK:
+                m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterBL.png", win, x, y, 5, 1, 1, 4)));
+            break;
+            case MON_ORANGE:
+                m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterO.png", win, x, y, 2, 1, 1, 1)));
+            break;
+        }
+    }
+    void Land::FishAI(int x, int y)
+    {
+        for(auto & it : m_Monsters)
+        {
+            if((it->GetPosition().first - x < 11) && (it->GetPosition().first - x > -11) && (it->GetPosition().second - y < 11) && (it->GetPosition().second - y > -11) )
+                if((it->GetPosition().first - x <= 1) && (it->GetPosition().first - x >= -1) && (it->GetPosition().second - y <= 1) && (it->GetPosition().second - y >= -1) )
+                {
+                    it->Order(Character::ATTACK, it->GetPosition().first-x, it->GetPosition().second-y);
+                }
+                else
+                {
+                    auto coords = m_Graph.AStarPrim(m_Graph.CoordsToIndex(it->GetPosition().first, it->GetPosition().second), m_Graph.CoordsToIndex(x,y)).front();
+                    it->Order(Character::MOVE, coords.first, coords.second);
+                }
+        }
     }
 }

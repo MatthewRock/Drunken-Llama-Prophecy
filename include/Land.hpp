@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "PlayableCharacter.hpp"
 #include "Monster.hpp"
+#include "Window.hpp"
 #include <fstream>
 #include <vector>
 
@@ -43,10 +44,12 @@ namespace Llama
             void MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character);
             inline void Resize(int x, int y) { m_Graph.Resize(x,y); }
             void PrintMap(std::ostream& stream);
+            void InsertMonster(MonsterType, int, int, Window&);
+            void FishAI(int x, int y);
         protected:
 
         private:
-            std::vector<Monster> m_Monsters;
+            std::vector<std::unique_ptr<Monster> > m_Monsters;
             Manager<HexType, Texture> m_HexTextureManager;
             Graph m_Graph;
             ///Stores screen coordinates for hexes. 0 indexes are off screen, 1 are first visible
