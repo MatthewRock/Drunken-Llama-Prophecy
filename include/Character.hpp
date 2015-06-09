@@ -32,6 +32,7 @@ namespace Llama
             void Damage(int dmg)    { m_damage += dmg/m_stats.def; }
             bool IsDead()    {return (m_stats.hp - m_damage <= 0); }
             void Die();
+            void Heal()     {   m_damage -= (m_damage == 0) ? 0: 1;}
 
             Character() = default;
             Character(const char* filename, Window& win, int x, int y, int health, int attack, int defence, int experience) : m_tex(filename, win, 63, 63), m_stats(health, attack, defence, experience), m_damage(0)

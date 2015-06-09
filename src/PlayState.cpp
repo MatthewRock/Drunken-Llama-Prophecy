@@ -143,6 +143,8 @@ namespace Llama
                 m_Character.Damage(m_Map.FishAI(m_Character.GetPosition().first, m_Character.GetPosition().second));
                 if(m_Character.IsDead())
                     ChangeStateDestructively(new MenuState(m_engine));
+                if(m_Map.GetHexType(m_Character.GetPosition().first, m_Character.GetPosition().second) == HEX_MAGIC)
+                    m_Character.Heal();
 
             }
             m_Logic.ProcessTurn();

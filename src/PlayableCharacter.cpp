@@ -48,7 +48,7 @@ namespace Llama
     }
     void PlayableCharacter::Attack(int x, int y)
     {
-        Character::Attack(GetPosition().first -x + ((GetPosition().second % 2 == 0) ? -1 : 0), 0);
+        Character::Attack(x - GetPosition().first + ((GetPosition().second % 2 == 0) ? -1 : 0), 0);
         m_map->DamageMonster(x, y, m_stats.str);
 
     }

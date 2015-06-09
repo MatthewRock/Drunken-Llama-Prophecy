@@ -11,6 +11,7 @@ namespace Llama
         public:
             void Order(Orders, int, int);
             void Draw(int x, int y, int offsetx = 0, int offsety = 0);
+            void Attack(int, int);
 
             Monster() = default;
             Monster(const char*, Window&, int, int, int, int, int, int);
