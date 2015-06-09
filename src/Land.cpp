@@ -132,15 +132,17 @@ namespace Llama
     }
     void Land::InsertMonster(MonsterType mtype, int x, int y, Window& win)
     {
-
-        switch(mtype)
+        if(IsPassable(x, y))
         {
-            case MON_BLACK:
-                m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterBL.png", win, x, y, 5, 1, 1, 4)));
-            break;
-            case MON_ORANGE:
-                m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterO.png", win, x, y, 2, 1, 1, 1)));
-            break;
+            switch(mtype)
+            {
+                case MON_BLACK:
+                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterBL.png", win, x, y, 5, 1, 1, 4)));
+                break;
+                case MON_ORANGE:
+                    m_Monsters.push_back(std::unique_ptr<Monster>(new Monster("media/CharSprites/MonsterO.png", win, x, y, 2, 1, 1, 1)));
+                break;
+            }
         }
     }
     int Land::FishAI(int x, int y)

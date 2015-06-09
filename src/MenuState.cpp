@@ -90,7 +90,7 @@ namespace Llama
                 ChangeState(new CreditsState(m_engine));
                 break;
             case OPTION_LOADGAME:
-                ChangeStateDestructively(new PlayState(m_engine, "media/SavedMap.map.save"));
+                ChangeStateDestructively(new PlayState(m_engine, "media/SavedMap.map.save3"));
             break;
             case OPTION_EXIT:
                 Close();

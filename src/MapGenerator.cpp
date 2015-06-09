@@ -7,7 +7,7 @@ namespace Llama
     {
         m_engine = eng;
         m_MapSize = 40;
-        m_EditorPosX = m_EditorPosY = 20;
+        m_EditorPosX = m_EditorPosY = 10;
         m_CurrentHex = HexType::HEX_DIRT;//Equal to zero, but oh well, -fpermissive forbids me to put zero.
         m_Map.InsertTexture(HEX_DIRT,   new Texture("media/Tile/tileDirt_tile.png", *m_win));
         m_Map.InsertTexture(HEX_AUTUMN, new Texture("media/Tile/tileAutumn_tile.png", *m_win));

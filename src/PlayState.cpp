@@ -62,7 +62,7 @@ namespace Llama
                         });
         m_Logic.ProcessTurn();
     }
-    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 24, 16, m_Logic, m_Map)
+    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 14, 14, m_Logic, m_Map)
     {
         m_engine = eng;
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
@@ -79,7 +79,14 @@ namespace Llama
         m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
 
         m_musIterator = m_MusicManager.Beginning();
-        m_Map.InsertMonster(MON_ORANGE, 2, 1, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 20, 20, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 40, 30, *m_win);
+        for (int i = 1; i < 10; i++)
+            for(int j = 1; j < 10; j++)
+                m_Map.InsertMonster(((i+j) % 4 == 0 ? MON_BLACK : MON_ORANGE), 10*i+40, 5*j, *m_win);
+
+
+
         m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
 
         m_Logic.AddRule([](SDL_Event& event)
