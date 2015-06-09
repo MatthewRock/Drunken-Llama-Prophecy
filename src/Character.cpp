@@ -21,6 +21,11 @@ namespace Llama
         m_position.second = y;
     }
 
+    void Character::Die()
+    {
+        m_tex.InitiateAnimation(AnimationHandler::DIE);
+    }
+
 
     std::pair<int, int> Character::GetAnimationOffset()
     {
@@ -104,6 +109,9 @@ namespace Llama
     void Character::Attack(int x, int y)
     {
         m_translocation = std::make_pair(0,0);
-        m_tex.InitiateAnimation(AnimationHandler::ATTACK_ANIM);
+        if(x < 0)
+            m_tex.InitiateAnimation(AnimationHandler::ATTACK_LEFT);
+        else
+            m_tex.InitiateAnimation(AnimationHandler::ATTACK_RIGHT);
     }
 }

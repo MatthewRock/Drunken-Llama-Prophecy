@@ -9,7 +9,7 @@ namespace Llama
 {
 // TODO (malice#1#): Change this from magic number to some actual map size
 
-    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic)
+    PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic, m_Map)
     {
         m_engine = eng;
 
@@ -43,7 +43,8 @@ namespace Llama
         m_Map.InsertHex(24,26,HEX_MAGIC);
         for(int x = 20; x < 29; ++x)
             m_Map.InsertHex(x,27,HEX_LAVA);
-        m_Map.InsertMonster(MON_BLACK, 20, 20, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 50, 50, *m_win);
+        m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
         m_Logic.AddRule([](SDL_Event& event)
                         {
                             if(event.type == SDL_KEYDOWN)
@@ -61,7 +62,7 @@ namespace Llama
                         });
         m_Logic.ProcessTurn();
     }
-    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic)
+    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic, m_Map)
     {
         m_engine = eng;
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
@@ -78,7 +79,8 @@ namespace Llama
         m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
 
         m_musIterator = m_MusicManager.Beginning();
-        m_Map.InsertMonster(MON_BLACK, 20, 20, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 50, 50, *m_win);
+        m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
 
         m_Logic.AddRule([](SDL_Event& event)
                 {
@@ -136,8 +138,11 @@ namespace Llama
         {
             if(m_Character.IsIdle())
             {
+                if(m_Character.IsDead())
+                    ChangeStateDestructively(new MenuState(m_engine));
                 m_Character.Execute();
-                m_Map.FishAI(m_Character.GetPosition().first, m_Character.GetPosition().second);
+                m_Character.Damage(m_Map.FishAI(m_Character.GetPosition().first, m_Character.GetPosition().second));
+
             }
             m_Logic.ProcessTurn();
         }

@@ -21,13 +21,18 @@ namespace Llama
 
     void AnimationHandler::InitiateAnimation(Animations a)
     {
-        if(a == ATTACK_ANIM)
+        switch(a)
         {
-            m_currentAnim = (m_currentAnim == WALK_LEFT || m_currentAnim == ATTACK_LEFT) ? ATTACK_LEFT : ATTACK_RIGHT;
-            m_rect.y = 64;
+            case ATTACK_ANIM:
+                m_currentAnim = (m_currentAnim == WALK_LEFT || m_currentAnim == ATTACK_LEFT) ? ATTACK_LEFT : ATTACK_RIGHT;
+            case ATTACK_LEFT:
+            case ATTACK_RIGHT:
+                m_rect.y = 64;
+            break;
+            default:
+                m_currentAnim = a;
+            break;
         }
-        else
-            m_currentAnim = a;
         m_idle = false;
 
     }

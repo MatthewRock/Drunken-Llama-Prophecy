@@ -1,7 +1,7 @@
 #include "PlayableCharacter.hpp"
 namespace Llama
 {
-    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic) : Character(filename, win, x, y, 10, 1, 1, 0)
+    PlayableCharacter::PlayableCharacter(std::string n, const char* filename, Window& win, int x, int y, GameLogic& logic, Land& land) : Character(filename, win, x, y, 10, 1, 1, 0), m_map(&land)
     {
         m_translocation = std::make_pair(0, 0);
         Setname(n);
@@ -46,7 +46,12 @@ namespace Llama
             m_ordersQueue.pop();
         }
     }
+    void PlayableCharacter::Attack(int x, int y)
+    {
+        Character::Attack(GetPosition().first -x,0);
+        m_map->DamageMonster(x, y, m_stats.str);
 
+    }
 
 
     void PlayableCharacter::HandleEvents(SDL_Event& event)
@@ -63,36 +68,54 @@ namespace Llama
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_q:
-                        //Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, -1 );
-                        Order(MOVE, 'q', 0);
+                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second-1))
+                            Order(ATTACK,GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second-1);
+                        else
+                            Order(MOVE, 'q', 0);
                     break;
                     case SDLK_w:
-                        //Order(MOVE, 0, -1);
-                        Order(MOVE, 'w',0);
+                        if(m_map->IsThereMonster(GetPosition().first , GetPosition().second-1))
+                            Order(ATTACK, GetPosition().first , GetPosition().second-1);
+                        else
+                            Order(MOVE, 'w',0);
                     break;
                     case SDLK_e:
-                        //Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, -1);
-                        Order(MOVE, 'e',0);
+                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second-1))
+                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second-1);
+                        else
+                            Order(MOVE, 'e',0);
                     break;
                     case SDLK_z:
-                       // Order(MOVE, (GetPosition().second % 2 == 1) ? -1 : 0, 1);
-                       Order(MOVE, 'z',0);
+                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second+1))
+                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second+1);
+                        else
+                            Order(MOVE, 'z',0);
                     break;
                     case SDLK_c:
+                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second+1))
+                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second+1);
+                        else
                        // Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, 1 );
-                       Order(MOVE, 'c',0);
+                        Order(MOVE, 'c',0);
                     break;
                     case SDLK_s:
                         //Order(MOVE, 0, 1);
-                        Order(MOVE, 's',0);
+                        if(m_map->IsThereMonster(GetPosition().first, GetPosition().second+1))
+                            Order(ATTACK,GetPosition().first, GetPosition().second+1);
+                        else
+                            Order(MOVE, 's',0);
                     break;
                     case SDLK_a:
-                      //  Order(MOVE, -1, 0);
-                      Order(MOVE, 'a',0);
+                        if(m_map->IsThereMonster(GetPosition().first-1, GetPosition().second))
+                            Order(ATTACK,GetPosition().first-1, GetPosition().second);
+                        else
+                            Order(MOVE, 'a',0);
                     break;
                     case SDLK_d:
-                      //  Order(MOVE, 1, 0);
-                      Order(MOVE, 'd',0);
+                        if(m_map->IsThereMonster(GetPosition().first+1, GetPosition().second))
+                            Order(ATTACK,GetPosition().first+1, GetPosition().second);
+                        else
+                            Order(MOVE, 'd',0);
                     break;
                     case SDLK_SPACE:
                         Order(ATTACK, 0, 0);

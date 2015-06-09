@@ -24,23 +24,27 @@ namespace Llama
             ///\param Two ints. X and Y components of translocation vector
             void Move(int, int);
             ///\brief Attacks(for now only animation) in specified direction(for now only right/left)
-            void Attack(int, int);
+            virtual void Attack(int, int);
             bool IsIdle()                           {   return m_tex.IsIdle();}
             void Teleport(int,int);
             std::pair<int, int> GetAnimationOffset();
+            Stats GetStats() {return m_stats;}
+            void Damage(int dmg)    { m_damage += dmg/m_stats.def; }
+            bool IsDead()    {return (m_stats.hp - m_damage <= 0); }
+            void Die();
 
             Character() = default;
-            Character(const char* filename, Window& win, int x, int y, int health, int attack, int defence, int experience) : m_tex(filename, win, 63, 63), m_stats(health, attack, defence, experience)
+            Character(const char* filename, Window& win, int x, int y, int health, int attack, int defence, int experience) : m_tex(filename, win, 63, 63), m_stats(health, attack, defence, experience), m_damage(0)
             {
                 m_position = std::make_pair(x,y);
             }
             ~Character() = default;
         protected:
-
             std::pair<int, int> m_translocation;
             void OrderExecutor(std::tuple<Orders, int, int>);
             AnimationHandler m_tex;
             Stats           m_stats;
+            int             m_damage;
             std::pair<int, int> m_position;
             //Rage corner
             std::pair<int, int> MoveQ();

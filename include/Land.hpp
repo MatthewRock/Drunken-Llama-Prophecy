@@ -5,7 +5,7 @@
 #include "Manager.hpp"
 #include "Graph.hpp"
 #include "Camera.hpp"
-#include "PlayableCharacter.hpp"
+#include "Character.hpp"
 #include "Monster.hpp"
 #include "Window.hpp"
 #include <fstream>
@@ -41,11 +41,14 @@ namespace Llama
             void InsertHex(int x, int y, HexType type);
             void DrawInProximity(int x, int y, int offsetx, int offsety);
             std::pair<int,int> CheckCollision(SDL_Event& event, int offsetx, int offsety);
-            void MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character);
+            void MoveCharacterAccordingly(SDL_Event& event, Character& character);
             inline void Resize(int x, int y) { m_Graph.Resize(x,y); }
             void PrintMap(std::ostream& stream);
             void InsertMonster(MonsterType, int, int, Window&);
-            void FishAI(int x, int y);
+            ///\brief Controls NPCs according to given position of main character. Returns number of attacks performed by NPCs.
+            int FishAI(int x, int y);
+            bool    IsThereMonster(int x, int y);
+            void DamageMonster(int x, int y, int str);
         protected:
 
         private:

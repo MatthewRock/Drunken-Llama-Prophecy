@@ -86,7 +86,7 @@ namespace Llama
 
         return std::make_pair(x,y);
     }
-    void Land::MoveCharacterAccordingly(SDL_Event& event, PlayableCharacter& character)
+    void Land::MoveCharacterAccordingly(SDL_Event& event, Character& character)
     {
         //Get distance to every hex's middle
         int distances[20][20];
@@ -143,20 +143,53 @@ namespace Llama
             break;
         }
     }
-    void Land::FishAI(int x, int y)
+    int Land::FishAI(int x, int y)
+    {
+        int dmg = 0;
+        auto die = m_Monsters.begin();
+        bool deathflag = false;
+        for(auto it = m_Monsters.begin();it !=  m_Monsters.end(); it++)
+        {
+            if((*it)->IsDead())
+            {
+                die = it;
+                deathflag = true;
+            }
+            else
+                if(((*it)->GetPosition().first - x < 11) && ((*it)->GetPosition().first - x > -11) && ((*it)->GetPosition().second - y < 11) && ((*it)->GetPosition().second - y > -11) )
+                    if(((*it)->GetPosition().first - x <= 1) && ((*it)->GetPosition().first - x >= -1) && ((*it)->GetPosition().second - y <= 1) && ((*it)->GetPosition().second - y >= -1) )
+                    {
+                        (*it)->Order(Character::ATTACK, (*it)->GetPosition().first-x, (*it)->GetPosition().second-y);
+                        dmg++;
+                    }
+                    else
+                    {
+                        auto coords = m_Graph.AStarPrim(m_Graph.CoordsToIndex((*it)->GetPosition().first, (*it)->GetPosition().second), m_Graph.CoordsToIndex(x,y)).front();
+                        (*it)->Order(Character::MOVE, coords.first, coords.second);
+                    }
+        }
+        if(deathflag)
+        {
+            m_Monsters.erase(die);
+            deathflag = false;
+        }
+        return dmg;
+    }
+    bool Land::IsThereMonster(int x, int y)
     {
         for(auto & it : m_Monsters)
-        {
-            if((it->GetPosition().first - x < 11) && (it->GetPosition().first - x > -11) && (it->GetPosition().second - y < 11) && (it->GetPosition().second - y > -11) )
-                if((it->GetPosition().first - x <= 1) && (it->GetPosition().first - x >= -1) && (it->GetPosition().second - y <= 1) && (it->GetPosition().second - y >= -1) )
-                {
-                    it->Order(Character::ATTACK, it->GetPosition().first-x, it->GetPosition().second-y);
-                }
-                else
-                {
-                    auto coords = m_Graph.AStarPrim(m_Graph.CoordsToIndex(it->GetPosition().first, it->GetPosition().second), m_Graph.CoordsToIndex(x,y)).front();
-                    it->Order(Character::MOVE, coords.first, coords.second);
-                }
-        }
+            {
+                if(it->GetPosition().first == x && it->GetPosition().second == y)
+                    return true;
+            }
+        return false;
+    }
+    void Land::DamageMonster(int x, int y, int str)
+    {
+        for(auto & it : m_Monsters)
+            {
+                if(it->GetPosition().first == x && it->GetPosition().second == y)
+                    it->Damage(str);
+            }
     }
 }
