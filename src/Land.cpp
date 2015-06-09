@@ -159,7 +159,7 @@ namespace Llama
                 if(((*it)->GetPosition().first - x < 11) && ((*it)->GetPosition().first - x > -11) && ((*it)->GetPosition().second - y < 11) && ((*it)->GetPosition().second - y > -11) )
                     if(((*it)->GetPosition().first - x <= 1) && ((*it)->GetPosition().first - x >= -1) && ((*it)->GetPosition().second - y <= 1) && ((*it)->GetPosition().second - y >= -1) )
                     {
-                        (*it)->Order(Character::ATTACK, (*it)->GetPosition().first-x, (*it)->GetPosition().second-y);
+                        (*it)->Order(Character::ATTACK, x,y);
                         dmg++;
                     }
                     else

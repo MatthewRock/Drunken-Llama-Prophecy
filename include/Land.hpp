@@ -50,6 +50,7 @@ namespace Llama
             bool    IsThereMonster(int x, int y);
             void DamageMonster(int x, int y, int str);
             bool IsPassable(int x, int y) { return m_Graph.IsPassable(x, y);}
+            HexType GetHexType(int x, int y) { return m_Graph.GetHexType(x,y); }
         protected:
 
         private:
