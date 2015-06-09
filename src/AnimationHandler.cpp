@@ -6,7 +6,7 @@ namespace Llama
     {
         //ctor
     }
-    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_idle(true), m_framecounter(0), m_win(&win), m_currentAnim(0)
+    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_health("media/healthbar.png", win), m_idle(true), m_framecounter(0), m_win(&win), m_currentAnim(0)
     {
         m_rect.x = 0;
         m_rect.y = 0;
@@ -21,24 +21,16 @@ namespace Llama
 
     void AnimationHandler::InitiateAnimation(Animations a)
     {
-        switch(a)
-        {
-            case ATTACK_ANIM:
-                m_currentAnim = (m_currentAnim == WALK_LEFT || m_currentAnim == ATTACK_LEFT) ? ATTACK_LEFT : ATTACK_RIGHT;
-            case ATTACK_LEFT:
-            case ATTACK_RIGHT:
-            case DIE:
+        if( a == ATTACK_LEFT || a == ATTACK_RIGHT || DIE || ATTACK_ANIM)
                 m_rect.y = 64;
-            break;
-            default:
-                m_currentAnim = a;
-            break;
-        }
+
+
+        m_currentAnim = a;
         m_idle = false;
 
     }
 
-    void AnimationHandler::Draw(std::pair<int,int> coords, int offsetx, int offsety)
+    void AnimationHandler::Draw(std::pair<int,int> coords, int health, int offsetx, int offsety)
     {   // 56 - hexWidth, 82 - hexHeight
 
         SDL_Rect dest;
@@ -74,6 +66,11 @@ namespace Llama
             SDL_RenderCopyEx(m_win->getRenderer(), (m_tex), &m_rect, &dest, 0, NULL, SDL_FLIP_HORIZONTAL);
         else
             SDL_RenderCopy(m_win->getRenderer(), (m_tex), &m_rect, &dest);
+        dest.x+=8;
+        dest.y+=48;
+        dest.w = health;
+        dest.h = 4;
+        SDL_RenderCopy(m_win->getRenderer(), (m_health), NULL, &dest);
 
     }
 }

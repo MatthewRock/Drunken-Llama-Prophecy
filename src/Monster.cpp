@@ -15,6 +15,6 @@ namespace Llama
     }
     void Monster::Draw(int x, int y, int offsetx, int offsety)
     {
-        m_tex.Draw(std::make_pair(m_position.first - x + (((m_position.second % 2 == 1) && (y % 2 == 0)  )? 8 : 9), m_position.second - y + 9), offsetx - GetAnimationOffset().first, offsety - GetAnimationOffset().second);
+        m_tex.Draw(std::make_pair(m_position.first - x + (((m_position.second % 2 == 1) && (y % 2 == 0)  )? 8 : 9), m_position.second - y + 9), (m_stats.hp - m_damage)*48/m_stats.hp ,offsetx - GetAnimationOffset().first, offsety - GetAnimationOffset().second);
     }
 }

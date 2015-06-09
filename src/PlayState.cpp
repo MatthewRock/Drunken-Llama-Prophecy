@@ -79,7 +79,7 @@ namespace Llama
         m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
 
         m_musIterator = m_MusicManager.Beginning();
-        m_Map.InsertMonster(MON_ORANGE, 20, 20, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 2, 1, *m_win);
         m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
 
         m_Logic.AddRule([](SDL_Event& event)
