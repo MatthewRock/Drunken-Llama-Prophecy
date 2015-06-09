@@ -103,7 +103,8 @@ namespace Llama
     void PlayState::HandleEvents(SDL_Event& event)
     {
         m_Logic.ProcessInput(event);
-        m_Character.HandleEvents(event);
+        if(!m_Character.IsDead())
+            m_Character.HandleEvents(event);
         if(event.type == SDL_KEYDOWN)
         {
             switch(event.key.keysym.sym)
@@ -138,10 +139,10 @@ namespace Llama
         {
             if(m_Character.IsIdle())
             {
-                if(m_Character.IsDead())
-                    ChangeStateDestructively(new MenuState(m_engine));
                 m_Character.Execute();
                 m_Character.Damage(m_Map.FishAI(m_Character.GetPosition().first, m_Character.GetPosition().second));
+                if(m_Character.IsDead())
+                    ChangeStateDestructively(new MenuState(m_engine));
 
             }
             m_Logic.ProcessTurn();
