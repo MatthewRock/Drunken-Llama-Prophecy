@@ -68,54 +68,84 @@ namespace Llama
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_q:
-                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second-1))
-                            Order(ATTACK,GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second-1);
+                        m_translocation = MoveQ();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'q', 0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'q', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_w:
-                        if(m_map->IsThereMonster(GetPosition().first , GetPosition().second-1))
-                            Order(ATTACK, GetPosition().first , GetPosition().second-1);
+                        m_translocation = MoveW();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'w',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'w', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_e:
-                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second-1))
-                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second-1);
+                        m_translocation = MoveE();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'e',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'e', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_z:
-                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second+1))
-                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 1) ? -1 : 0), GetPosition().second+1);
+                        m_translocation = MoveZ();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'z',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'z', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_c:
-                        if(m_map->IsThereMonster(GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second+1))
-                            Order(ATTACK, GetPosition().first + ((GetPosition().second % 2 == 0) ? 1 : 0), GetPosition().second+1);
+                        m_translocation = MoveC();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                       // Order(MOVE, (GetPosition().second % 2 == 0) ? 1 : 0, 1 );
-                        Order(MOVE, 'c',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'c', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_s:
-                        //Order(MOVE, 0, 1);
-                        if(m_map->IsThereMonster(GetPosition().first, GetPosition().second+1))
-                            Order(ATTACK,GetPosition().first, GetPosition().second+1);
+                        m_translocation = MoveS();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 's',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 's', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_a:
-                        if(m_map->IsThereMonster(GetPosition().first-1, GetPosition().second))
-                            Order(ATTACK,GetPosition().first-1, GetPosition().second);
+                        m_translocation = MoveA();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'a',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'a', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_d:
-                        if(m_map->IsThereMonster(GetPosition().first+1, GetPosition().second))
-                            Order(ATTACK,GetPosition().first+1, GetPosition().second);
+                        m_translocation = MoveD();
+                        if(m_map->IsThereMonster(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                            Order(ATTACK, GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second);
                         else
-                            Order(MOVE, 'd',0);
+                            if(m_map->IsPassable(GetPosition().first + m_translocation.first, GetPosition().second+m_translocation.second))
+                                Order(MOVE, 'd', 0);
+                            else
+                                m_translocation = std::make_pair(0,0);
                     break;
                     case SDLK_SPACE:
                         Order(ATTACK, 0, 0);

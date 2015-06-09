@@ -43,7 +43,7 @@ namespace Llama
         m_Map.InsertHex(24,26,HEX_MAGIC);
         for(int x = 20; x < 29; ++x)
             m_Map.InsertHex(x,27,HEX_LAVA);
-        m_Map.InsertMonster(MON_ORANGE, 50, 50, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 20, 20, *m_win);
         m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
         m_Logic.AddRule([](SDL_Event& event)
                         {
@@ -79,7 +79,7 @@ namespace Llama
         m_Map.InsertTexture(HEX_LAVA,   new Texture("media/Tile/tileLava_tile.png", *m_win));
 
         m_musIterator = m_MusicManager.Beginning();
-        m_Map.InsertMonster(MON_ORANGE, 50, 50, *m_win);
+        m_Map.InsertMonster(MON_ORANGE, 20, 20, *m_win);
         m_Map.InsertMonster(MON_BLACK, 30, 70, *m_win);
 
         m_Logic.AddRule([](SDL_Event& event)

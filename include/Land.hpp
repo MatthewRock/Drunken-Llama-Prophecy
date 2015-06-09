@@ -49,6 +49,7 @@ namespace Llama
             int FishAI(int x, int y);
             bool    IsThereMonster(int x, int y);
             void DamageMonster(int x, int y, int str);
+            bool IsPassable(int x, int y) { return m_Graph.IsPassable(x, y);}
         protected:
 
         private:

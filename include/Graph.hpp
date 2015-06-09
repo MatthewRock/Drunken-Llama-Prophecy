@@ -27,7 +27,7 @@ namespace Llama
             void InsertHex(int x, int y, HexType type);
             /// \return Type of hex at x,y.
             HexType GetHexType(int x, int y) { return m_Hexes[CoordsToIndex(x,y)].type; };
-
+            bool IsPassable(int x, int y)   {return m_Hexes[CoordsToIndex(x, y)].Passable();}
             /// \return Stack with path(bottom tile is goal, top first one to go). Stack is empty when no path can be found.
             std::stack<Index> AStar(Index startIndex, Index goalIndex);
 
