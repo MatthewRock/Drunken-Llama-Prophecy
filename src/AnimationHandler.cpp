@@ -6,7 +6,7 @@ namespace Llama
     {
         //ctor
     }
-    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_tex(filename, win), m_health("media/healthbar.png", win), m_idle(true), m_framecounter(0), m_win(&win), m_currentAnim(0)
+    AnimationHandler::AnimationHandler(const char* filename, Window& win, int w, int h) : m_win(&win), m_currentAnim(0), m_tex(filename, win), m_health("media/healthbar.png", win), m_framecounter(0), m_idle(true)
     {
         m_rect.x = 0;
         m_rect.y = 0;

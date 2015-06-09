@@ -62,7 +62,7 @@ namespace Llama
                         });
         m_Logic.ProcessTurn();
     }
-    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic, m_Map)
+    PlayState::PlayState(GameEngine* eng, std::string pathname) : m_win(eng->GetWindowPointer()), m_Map(pathname), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 24, 16, m_Logic, m_Map)
     {
         m_engine = eng;
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));

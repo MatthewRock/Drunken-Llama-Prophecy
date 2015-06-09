@@ -153,17 +153,18 @@ namespace Llama
         {
             tab[i%m_Width][i/m_Width] = m_Hexes[i];
         }
-        std::vector<Hex> newHexes;
-        newHexes.resize(newWidth * newHeight);
+        std::vector<Hex> emptyToTrash;
+        std::swap(emptyToTrash, m_Hexes);
+        m_Hexes.resize(newWidth * newHeight);
 
         /*Change width so that CoordsToIndex will work correctly. Do not remove!
       */m_Width = newWidth;
         m_Height = newHeight;
-        for(unsigned x = 0; x < m_Width; ++x)
+        for(unsigned x = 0; x < oldWidth; ++x)
         {
-            for(unsigned y = 0; y < m_Height; ++y)
+            for(unsigned y = 0; y < oldHeight; ++y)
             {
-                newHexes[CoordsToIndex(x,y)] = tab[x][y];
+                m_Hexes[CoordsToIndex(x,y)] = tab[x][y];
             }
         }
     }
