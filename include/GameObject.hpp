@@ -1,20 +1,20 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+
 #include <string>
-namespace Llama
+
+class GameObject
 {
-    class GameObject
-    {
-        public:
-            GameObject();
-            virtual ~GameObject();
+    public:
+        GameObject() = default;
+        virtual ~GameObject() = default;
 
 
-            std::string Getname() { return m_name; }
-            void Setname(std::string val) { m_name = val; }
-        protected:
-        private:
-            std::string m_name;
-    };
-}
+        std::string Getname() { return m_name; }
+        void Setname(std::string val) { m_name = val; }
+    protected:
+    private:
+        std::string m_name;
+};
+
 #endif // GAMEOBJECT_H

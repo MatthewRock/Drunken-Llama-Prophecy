@@ -9,29 +9,27 @@
 #include "Sounds.hpp"
 #include "Land.hpp"
 #include "GameLogic.hpp"
-namespace Llama
+
+class PlayState : public GameState
 {
-    class PlayState : public GameState
-    {
-        public:
-            PlayState(GameEngine* eng);
-            PlayState(GameEngine* eng, std::string pathname);
-            ~PlayState() = default;
-            void Pause(){GameState::Pause();};
-            void Resume(){GameState::Resume();};
+    public:
+        PlayState(GameEngine* eng);
+        PlayState(GameEngine* eng, std::string pathname);
+        ~PlayState() = default;
+        void Pause(){GameState::Pause();};
+        void Resume(){GameState::Resume();};
 
-            void HandleEvents(SDL_Event& event);
-            void Update();
-            void Draw();
-        protected:
-        private:
-            Window* m_win; // Non-owning Window ptr.
-            Manager<int,Sounds::BGM> m_MusicManager;
-            GameLogic m_Logic;
+        void HandleEvents(SDL_Event& event);
+        void Update();
+        void Draw();
+    protected:
+    private:
+        Window* m_win; // Non-owning Window ptr.
+        Manager<int,Sounds::BGM> m_MusicManager;
+        GameLogic m_Logic;
 
-            Land m_Map;
-            PlayableCharacter m_Character;
-            decltype(m_MusicManager.Beginning()) m_musIterator;
-    };
-}
+        Land m_Map;
+        PlayableCharacter m_Character;
+        decltype(m_MusicManager.Beginning()) m_musIterator;
+};
 #endif // PLAYSTATE_HPP

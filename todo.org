@@ -1,0 +1,23 @@
+* TO-DO LIST:
+
+** General engine related things
+*** TODO Change my logger for Boost::Log
+*** TODO Change PauseState from single class to something that can be customized, e.g. with Lua.
+    
+*** TODO Separate Button class from MenuState file to separate one.
+** Core related
+
+*** TODO Load Initializer flags from .ini file.
+*** TODO Improve timer.hpp
+*** TODO Improve Sounds. Remove stringstream, maybe initialize it in Initializer, etc.
+** Gameplay related
+
+** Decoupling
+
+** Features
+
+** Bugs to fix
+
+** Miscellaneous
+
+*** TODO Add some serious documentation, remove shitcomments, add good ones.

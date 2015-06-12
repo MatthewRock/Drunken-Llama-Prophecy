@@ -12,25 +12,22 @@
 #include <utility> // std::pair
 #include "Command.hpp" // Template for command Pattern classes
 
-namespace Llama
+//List of commands that can be used and sent in the World.
+class World : public GameState
 {
-    //List of commands that can be used and sent in the World.
-    class World : public GameState
-    {
-        public:
-            World();
-            void Pause();
-            void Resume();
-            void Update(GameEngine* eng);
-            void Draw();
-            void HandleEvents(SDL_Event& event);
+    public:
+        World();
+        void Pause();
+        void Resume();
+        void Update(GameEngine* eng);
+        void Draw();
+        void HandleEvents(SDL_Event& event);
 
-        protected:
-        private:
-            std::unique_ptr<Command> m_command;
+    protected:
+    private:
+        std::unique_ptr<Command> m_command;
 
-            // This vector will simulate 2D-array that will be extensible.
+        // This vector will simulate 2D-array that will be extensible.
 //            std::map<std::pair<int, int>, Place> m_map;
-    };
-}
+};
 #endif // WORLD_HPP
