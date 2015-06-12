@@ -17,7 +17,7 @@ namespace Llama
     class GameEngine : private Initializer
     {
         public:
-            GameEngine();
+            GameEngine(std::string WinName);
             ~GameEngine() = default;
 
             inline void Run()

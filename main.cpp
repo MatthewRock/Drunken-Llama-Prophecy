@@ -9,7 +9,7 @@ using namespace Llama;
 
 int main(int argc, char* args[])
 {
-    GameEngine DrunkenLlamaProphecy;
+    GameEngine DrunkenLlamaProphecy("Drunken Llama Prophecy v.0.7");
     DrunkenLlamaProphecy.Run();
 
     return 0;

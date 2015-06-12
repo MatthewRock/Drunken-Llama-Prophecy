@@ -7,14 +7,14 @@
 
 namespace Llama
 {
-// TODO (malice#1#): Change this from magic number to some actual map size
-
     PlayState::PlayState(GameEngine* eng) : m_win(eng->GetWindowPointer()), m_Map(100, 100), m_Character("Pszemek","media/CharSprites/mon3_sprite_base.png", *m_win, 25, 25, m_Logic, m_Map)
     {
         m_engine = eng;
 
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
-
+        m_MusicManager.Insert(1, new Sounds::BGM("media/gamemusic2.ogg"));
+        m_MusicManager.Insert(2, new Sounds::BGM("media/gamemusic3.ogg"));
+//        m_MusicManager.Insert(3, new Sounds::BGM("media/gamemusic4.ogg"));
         m_Map.InsertTexture(HEX_DIRT,   new Texture("media/Tile/tileDirt_tile.png", *m_win));
         m_Map.InsertTexture(HEX_AUTUMN, new Texture("media/Tile/tileAutumn_tile.png", *m_win));
         m_Map.InsertTexture(HEX_MAGIC,  new Texture("media/Tile/tileMagic_tile.png", *m_win));
@@ -66,6 +66,9 @@ namespace Llama
     {
         m_engine = eng;
         m_MusicManager.Insert(0, new Sounds::BGM("media/gamemusic.ogg"));
+        m_MusicManager.Insert(1, new Sounds::BGM("media/gamemusic2.ogg"));
+        m_MusicManager.Insert(2, new Sounds::BGM("media/gamemusic3.ogg"));
+        //m_MusicManager.Insert(3, new Sounds::BGM("media/gamemusic4.mp3"));
 
         m_Map.InsertTexture(HEX_DIRT,   new Texture("media/Tile/tileDirt_tile.png", *m_win));
         m_Map.InsertTexture(HEX_AUTUMN, new Texture("media/Tile/tileAutumn_tile.png", *m_win));

@@ -4,10 +4,10 @@
 #include "Sounds.hpp"
 namespace Llama
 {
-    GameEngine::GameEngine()
+    GameEngine::GameEngine(std::string winName)
     {
         m_running = true;
-        m_win.Init("Drunken Llama Prophecy v.0.7", 1024, 768);
+        m_win.Init(winName.c_str(), 1024, 768);
         Printable::SetWindowDimensions(1024, 768);
         m_states.emplace_back(new MenuState(this));
     }
