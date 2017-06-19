@@ -1,4 +1,5 @@
 #include "Logger.hpp"
+#include "Config.hpp"
 #include "Timer.hpp"
 
 namespace Llama
@@ -11,7 +12,7 @@ namespace Llama
         if(!m_instance)
         {
             m_instance = new Logger;
-            Logger::Get()->log.open("log/GameLog.log");
+            Logger::Get()->log.open(Config::Get().getLoggerPath());
         }
         return m_instance;
     }
